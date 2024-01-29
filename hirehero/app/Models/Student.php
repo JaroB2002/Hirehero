@@ -21,13 +21,17 @@ class Student extends Model
         'opleiding',
         'password',
         'role',
-        /*'interesse',
+        'interesse',
         'interesse2',
         'desinteresse1',
         'desinteresse2',
         'stageBegin',
         'stageEinde',
-        'cv'*/
+        'cv',
+        'remember_token',
+        'persoonlijkheid',
+        
+
     ];
 
     protected $hidden = [
@@ -61,6 +65,8 @@ class Student extends Model
         return $this->prefix . $this->telefoonnummer;
 
     }
+
+    //Persoonlijkheid moet minstens
 
 /*
     public static function saveFormdata($data) {

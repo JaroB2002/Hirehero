@@ -22,18 +22,20 @@ return new class extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('role');
             $table->string('password');
-            /*$table->string('interesse');
+            $table->string('interesse');
             $table->string('interesse2');
             $table->string('desinteresse1');
             $table->string('desinteresse2');
             $table->string('stageBegin');
             $table->string('stageEinde');
-            $table->string('cv');*/
+            $table->string('cv');
+            $table->string('persoonlijkheid');
             $table->rememberToken();
             $table->timestamps();
 
 
         });
+
     }
 
     /**

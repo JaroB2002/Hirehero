@@ -20,14 +20,14 @@
                     <h2 class="mt-6 text-center text-3xl font-bold tracking-tight text-gray-900">Nog enkele vraagjes</h2>
                     <p class="mt-2 text-center text-sm text-gray-600"> We hebben nog wat info nodig om jouw profiel zo geoptimaliseerd mogelijk op maat te maken.</p>
                   </div>
-                  <form class="mt-8 space-y-6" action="/student/info" method="POST">
+                  <form class="mt-8 space-y-6" action="/student/update" method="POST">
                     @csrf
                     <input type="hidden" name="remember" value="true">
                     <div class="grid grid-cols-2 gap-4">
                       <div>
                         <label for="interesse1" class="sr-only">Wat vind je interessant?</label>
-                        <input id="interesse1" name="interesse1" type="text" autocomplete="interesse" required class="relative block w-full rounded-md border-0 py-1.5 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:z-10 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" placeholder="Interesse">
-                        <x-input-error :messages="$errors->get('interesse1')" class="mt-2" />
+                        <input id="interesse1" name="interesse" type="text" autocomplete="interesse" required class="relative block w-full rounded-md border-0 py-1.5 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:z-10 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" placeholder="Interesse">
+                        <x-input-error :messages="$errors->get('interesse')" class="mt-2" />
                       </div>
                       <div>
                         <label for="interesse2" class="sr-only">Wat vind je interessant?</label>
@@ -52,19 +52,19 @@
                       <div>
                         <label for="stageBegin" class="sr-only">Wanneer begint je stage?</label>
                         <input id="stageBegin" name="stageBegin" type="date" autocomplete="datum" required class="relative block w-full rounded-md border-0 py-1.5 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:z-10 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" >
-                        <x-input-error :messages="$errors->get('opleiding')" class="mt-2" />
+                        <x-input-error :messages="$errors->get('stageBegin')" class="mt-2" />
     
                       </div>
                       <div>
                         <label for="stageEinde" class="sr-only">Wanneer eindigt je stage?</label>
                         <input id="stageEinde" name="stageEinde" type="date" autocomplete="datum" required class="relative block w-full rounded-md border-0 py-1.5 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:z-10 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" >
-                        <x-input-error :messages="$errors->get('opleiding')" class="mt-2" />
+                        <x-input-error :messages="$errors->get('stageEinde')" class="mt-2" />
     
                       </div>
                       <div>
                         <label for="cv" class="sr-only">Upload hier je cv</label>
                         <input id="cv" name="cv" type="file" class="relative block w-full rounded-md border-0 py-1.5 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:z-10 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
-                        <x-input-error :messages="$errors->get('opleiding')" class="mt-2" />
+                        <x-input-error :messages="$errors->get('cv')" class="mt-2" />
     
                       </div>
                      

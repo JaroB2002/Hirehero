@@ -31,8 +31,10 @@ Route::get('/volgende', [SelectieController::class, 'volgende'])->name('volgende
 //Hier komen de routes van studenten
 Route::get('/student', [StudentRegisterController::class, 'create'])->name('student.pagina');
 Route::post('/student', [StudentRegisterController::class, 'store']);
-Route::get('/student/info', [StudentRegisterController::class, 'info'])->name('student.info');
-Route::post('/student/info', [StudentRegisterController::class, 'infoStore']);
+Route::get('/student/update', [StudentRegisterController::class, 'edit'])->name('student.update');
+Route::post('/student/update', [StudentRegisterController::class, 'update']);
+Route::get('/student/persoonlijk', [StudentRegisterController::class, 'persoonlijk'])->name('student.persoonlijk');
+Route::post('/student/persoonlijk', [StudentRegisterController::class, 'storePersoonlijk']);
 
 //Routes voor bedrijven
 
