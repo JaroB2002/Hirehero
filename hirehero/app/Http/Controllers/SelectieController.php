@@ -43,9 +43,9 @@ class SelectieController extends Controller
             //Stuur de gebruiker door naar de juiste pagina
 
             if($selectedValue == 'student') {
-                return redirect()->route('student.pagina');
+                return redirect()->route('student.create');
             } else {
-                return redirect()->route('bedrijf.pagina');
+                return redirect()->route('bedrijf.create');
             }
         } else {
             //Stuur de gebruiker terug naar de vorige pagina

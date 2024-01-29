@@ -1,12 +1,19 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\BedrijfRegister;
-use App\Http\Controllers\StudentRegister;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SelectieController;
 use App\Http\Controllers\BedrijfRegisterController;
 use App\Http\Controllers\StudentRegisterController;
+use App\Http\Controllers\Auth\RegisteredUserController;
+use App\Http\Controllers\Auth\AuthenticatedSessionController;
+use App\Http\Controllers\Auth\ConfirmablePasswordController;
+use App\Http\Controllers\Auth\EmailVerificationNotificationController;
+use App\Http\Controllers\Auth\EmailVerificationPromptController;
+use App\Http\Controllers\Auth\NewPasswordController;
+use App\Http\Controllers\Auth\PasswordController;
+use App\Http\Controllers\Auth\PasswordResetLinkController;
+use App\Http\Controllers\Auth\VerifyEmailController;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,17 +36,30 @@ Route::post('/process', [SelectieController::class, 'process'])->name('selectie.
 Route::get('/volgende', [SelectieController::class, 'volgende'])->name('volgende.pagina');
 
 //Hier komen de routes van studenten
-Route::get('/student', [StudentRegisterController::class, 'create'])->name('student.pagina');
-Route::post('/student', [StudentRegisterController::class, 'store']);
-Route::get('/student/update', [StudentRegisterController::class, 'edit'])->name('student.update');
-Route::post('/student/update', [StudentRegisterController::class, 'update']);
-Route::get('/student/persoonlijk', [StudentRegisterController::class, 'persoonlijk'])->name('student.persoonlijk');
-Route::post('/student/persoonlijk', [StudentRegisterController::class, 'storePersoonlijk']);
+
+Route::get('/student', [RegisteredUserController::class,'createStudent'])->name('student.create');
+Route::post('/student', [RegisteredUserController::class, 'storeStudent']);
+Route::get('/student/update', [RegisteredUserController::class, 'editStudent'])->name('student.update');
+Route::post('/student/update', [RegisteredUserController::class, 'updateStudent']);
+Route::get('/student/persoonlijk', [RegisteredUserController::class, 'persoonlijkStudent'])->name('student.persoonlijk');
+Route::post('/student/persoonlijk', [RegisteredUserController::class, 'storePersoonlijkStudent']);
+/*Route::get('verify-email', EmailVerificationPromptController::class)
+->name('verification.notice');
+Route::get('verify-email/{id}/{hash}', VerifyEmailController::class)
+->middleware(['signed', 'throttle:6,1'])
+->name('verification.verify');
+
+Route::post('email/verification-notification', [EmailVerificationNotificationController::class, 'store'])
+->middleware('throttle:6,1')
+->name('verification.send');*/
+
+
+
 
 //Routes voor bedrijven
 
-Route::get('/bedrijf', [BedrijfRegisterController::class, 'create'])->name('bedrijf.pagina');
-Route::post('/bedrijf', [BedrijfRegisterController::class, 'store']);
+Route::get('/bedrijf', [RegisteredUserController::class, 'createCompany'])->name('bedrijf.create');
+Route::post('/bedrijf', [RegisteredUserController::class, 'storeCompany']);
 
 
 

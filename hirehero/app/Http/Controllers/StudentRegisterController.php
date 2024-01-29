@@ -1,11 +1,14 @@
 <?php
 
-namespace App\Http\Controllers;
+/*namespace App\Http\Controllers;
 
-use App\Models\Student;
+use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Password;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Auth\Events\Registered;
+
 
 class StudentRegisterController extends Controller
 {
@@ -29,7 +32,7 @@ class StudentRegisterController extends Controller
 
             'voornaam' => ['required', 'string', 'max:255', 'regex:/^[a-zA-Z]+$/u' ],
             'familienaam' => ['required', 'string', 'max:255', 'regex:/^[a-zA-Z]+$/u'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:'.Student::class],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:'.User::class],
             'telefoonnummer' => ['string','max:255', 'regex:/^[0-9]+$/u' ],
             'school' => ['required', 'string', 'max:255'],
             'opleiding' => ['required', 'string', 'max:255'],
@@ -50,12 +53,6 @@ class StudentRegisterController extends Controller
         return redirect()->route('student.update');
 
         
-
-
-        
-
-
-
     }
     //
 
@@ -134,6 +131,6 @@ class StudentRegisterController extends Controller
 
         //Sla het in de databank op
 
-        Student::create($data);
+        User::create($data);
     }
-}
+}*/
