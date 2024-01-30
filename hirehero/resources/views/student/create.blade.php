@@ -15,30 +15,30 @@
       <div class="grid grid-cols-2 gap-4">
       <div>
           <x-input-label for="voornaam" class="sr-only" />
-          <x-text-input id="name" class="relative block w-full rounded-md border-0 py-1.5 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:z-10 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" type="text" name="voornaam" :value="old('voornaam')" required autofocus autocomplete="name" placeholder="Voornaam"/>
+          <x-text-input id="name" class="relative block w-full rounded-md border-0 py-1.5 pl-2 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:z-10 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" type="text" name="voornaam" :value="old('voornaam')" required autofocus autocomplete="name" placeholder="Voornaam"/>
           <x-input-error :messages="$errors->get('voornaam')" class="mt-2" />
       </div>
       <div>
           <x-input-label for="familienaam" class="sr-only"/>
-          <x-text-input id="familienaam" class="relative block w-full rounded-md border-0 py-1.5 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:z-10 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" type="text" name="familienaam" :value="old('familienaam')" required autofocus autocomplete="name" placeholder="Familienaam"/>
+          <x-text-input id="familienaam" class="relative block w-full rounded-md border-0 py-1.5 pl-2 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:z-10 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" type="text" name="familienaam" :value="old('familienaam')" required autofocus autocomplete="name" placeholder="Familienaam"/>
           <x-input-error :messages="$errors->get('voornaam')" class="mt-2" />
       </div>
 
       <!-- Email Address -->
       <div>
           <x-input-label for="email"  class="sr-only"/>
-          <x-text-input id="email" class="relative block w-full rounded-md border-0 py-1.5 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:z-10 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" type="email" name="email" :value="old('email')" required autocomplete="email" placeholder="E-mail"/>
+          <x-text-input id="email" class="relative block w-full rounded-md border-0 py-1.5 pl-2 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:z-10 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" type="email" name="email" :value="old('email')" required autocomplete="email" placeholder="E-mail"/>
           <x-input-error :messages="$errors->get('email')" class="mt-2" />
       </div>
       <div>
           <label for="school" class="sr-only"></label>
-          <input id="school" name="school" type="text" autocomplete="school" required class="relative block w-full rounded-md border-0 py-1.5 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:z-10 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" placeholder="Naam van je school">
+          <input id="school" name="school" type="text" autocomplete="school" required class="relative block pl-2 w-full rounded-md border-0 py-1.5 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:z-10 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" placeholder="Naam van je school">
           <x-input-error :messages="$errors->get('school')" class="mt-2" />
 
         </div>
         <div>
           <label for="opleiding" class="sr-only">Opleiding</label>
-          <input id="opleiding" name="opleiding" type="text" autocomplete="opleiding" required class="relative block w-full rounded-md border-0 py-1.5 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:z-10 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" placeholder="Opleiding">
+          <input id="opleiding" name="opleiding" type="text" autocomplete="opleiding" required class="relative block w-full pl-2 rounded-md border-0 py-1.5 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:z-10 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" placeholder="Opleiding">
           <x-input-error :messages="$errors->get('opleiding')" class="mt-2" />
 
         </div>
@@ -48,7 +48,7 @@
               <option value="+32">+32</option>
               <option value="+31">+31</option>
           </select>
-          <input id="telefoonnummer" name="telefoonnummer" type="tel" autocomplete="telefoon" class="relative block w-full rounded-md border-0 py-1.5 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:z-10 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" placeholder="Telefoonnummer" minlength="9" maxlength="9">
+          <input id="telefoonnummer" name="telefoonnummer" type="tel" autocomplete="telefoon" class="relative block w-full  pl-2 rounded-md border-0 py-1.5 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:z-10 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" placeholder="Telefoonnummer" minlength="9" maxlength="9">
           <x-input-error :messages="$errors->get('telefoonnummer')" class="mt-2" />
 
         </div>
@@ -60,7 +60,7 @@
       <div class="">
           <x-input-label for="password" class="sr-only"/>
 
-          <x-text-input id="password" class="relative block w-full rounded-md border-0 py-1.5 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:z-10 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+          <x-text-input id="password" class="relative block w-full rounded-md border-0 py-1.5 pl-2 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:z-10 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                           type="password"
                           name="password"
                           required autocomplete="new-password" placeholder="Wachtwoord"/>
@@ -72,7 +72,7 @@
       <div >
           <x-input-label for="password_confirmation"  />
 
-          <x-text-input id="password_confirmation" class="relative block w-full rounded-md border-0 py-1.5 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:z-10 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+          <x-text-input id="password_confirmation" class="relative block w-full rounded-md border-0 py-1.5 pl-2 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:z-10 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                           type="password"
                           name="password_confirmation" required autocomplete="new-password" placeholder="Bevestig wachtwoord"/>
 
@@ -85,7 +85,7 @@
 
       <div class="flex flex-col items-center justify-end mt-4">
          
-          <x-selectie.button class="ms-4">
+          <x-selectie.button>
               Registreer 
           </x-selectie.button>
           <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('login') }}">

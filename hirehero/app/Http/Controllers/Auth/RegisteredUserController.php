@@ -85,10 +85,12 @@ class RegisteredUserController extends Controller
         //valideer het formulier
 
         $attributes = request()->validate([
-            'interesse' => ['required', 'string', 'max:255'],
-            'interesse2' => ['required', 'string', 'max:255'],
-            'desinteresse1' => ['required', 'string', 'max:255'],
-            'desinteresse2' => ['required', 'string', 'max:255'],
+            //Interesse en desinteresse mogen niet hetzelfde zijn
+
+            'interesse' => ['required', 'string', 'max:255', 'different:desinteresse1', 'different:desinteresse2, different:interesse2'],
+            'interesse2' => ['required', 'string', 'max:255', 'different:desinteresse1', 'different:desinteresse2, different:interesse'],
+            'desinteresse1' => ['required', 'string', 'max:255', 'different:interesse', 'different:interesse2, different:desinteresse2'],
+            'desinteresse2' => ['required', 'string', 'max:255', 'different:interesse', 'different:interesse2, different:desinteresse1'],
             'stageBegin' => ['required', 'date', 'max:255', 'after:today'],
             'stageEinde' => ['required', 'date', 'max:255', 'after:stageBegin'],
             'cv' => [ 'string', 'max:255', 'mimes:pdf,doc,docx', 'max:2048', 'nullable']
