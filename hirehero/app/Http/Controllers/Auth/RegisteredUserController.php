@@ -93,8 +93,14 @@ class RegisteredUserController extends Controller
             'desinteresse2' => ['required', 'string', 'max:255', 'different:interesse', 'different:interesse2, different:desinteresse1'],
             'stageBegin' => ['required', 'date', 'max:255', 'after:today'],
             'stageEinde' => ['required', 'date', 'max:255', 'after:stageBegin'],
-            'cv' => [ 'string', 'max:255', 'mimes:pdf,doc,docx', 'max:2048', 'nullable']
+            'cv' => ['nullable', 'file', 'mimes:pdf,doc,docx', 'max:2048']
         ]);
+
+        $attributes['cv'] = request()->file('cv')->store('cv');
+
+
+
+
         session(['step2_data' => $attributes]);
 
 
@@ -117,7 +123,7 @@ class RegisteredUserController extends Controller
 
         //auth()->login($student);
 
-        return redirect()->route('student.persoonlijk');
+        return redirect()->route('student.persoonlijk')->with('success', 'Uw account is aangemaakt!');
 
     }
 

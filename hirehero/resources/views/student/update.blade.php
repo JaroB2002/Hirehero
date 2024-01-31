@@ -20,7 +20,7 @@
                     <h2 class="mt-6 text-center text-3xl font-bold tracking-tight text-gray-900">Nog enkele vraagjes</h2>
                     <p class="mt-2 text-center text-sm text-gray-600"> We hebben nog wat info nodig om jouw profiel zo geoptimaliseerd mogelijk op maat te maken.</p>
                   </div>
-                  <form class="mt-8 space-y-6" action="{{ route('student.update') }}" method="POST">
+                  <form class="mt-8 space-y-6" action="{{ route('student.update') }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     <input type="hidden" name="remember" value="true">
                     <div class="grid grid-cols-2 gap-4">
