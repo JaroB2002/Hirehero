@@ -94,6 +94,7 @@ class RegisteredUserController extends Controller
             'stageBegin' => ['required', 'date', 'max:255', 'after:today'],
             'stageEinde' => ['required', 'date', 'max:255', 'after:stageBegin'],
             'cv' => ['nullable', 'file', 'mimes:pdf,doc,docx', 'max:2048']
+            //max 2048 betekend 2mb
         ]);
 
         $attributes['cv'] = request()->file('cv')->store('cv');
@@ -164,7 +165,7 @@ class RegisteredUserController extends Controller
 
         //Auth::login($user);
 
-        return redirect(RouteServiceProvider::HOME);
+        return redirect(RouteServiceProvider::STUDENT);
 
 
     }
@@ -219,7 +220,7 @@ class RegisteredUserController extends Controller
 
         //Auth::login($user);
 
-        return redirect(RouteServiceProvider::HOME);
+        return redirect(RouteServiceProvider::BEDRIJF);
 
 
     }

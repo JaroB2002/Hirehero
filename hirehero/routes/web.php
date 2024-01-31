@@ -1,19 +1,20 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\BedrijfController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SelectieController;
+use App\Http\Controllers\Auth\PasswordController;
 use App\Http\Controllers\BedrijfRegisterController;
 use App\Http\Controllers\StudentRegisterController;
-use App\Http\Controllers\Auth\RegisteredUserController;
-use App\Http\Controllers\Auth\AuthenticatedSessionController;
-use App\Http\Controllers\Auth\ConfirmablePasswordController;
-use App\Http\Controllers\Auth\EmailVerificationNotificationController;
-use App\Http\Controllers\Auth\EmailVerificationPromptController;
 use App\Http\Controllers\Auth\NewPasswordController;
-use App\Http\Controllers\Auth\PasswordController;
-use App\Http\Controllers\Auth\PasswordResetLinkController;
 use App\Http\Controllers\Auth\VerifyEmailController;
+use App\Http\Controllers\Auth\RegisteredUserController;
+use App\Http\Controllers\Auth\PasswordResetLinkController;
+use App\Http\Controllers\Auth\ConfirmablePasswordController;
+use App\Http\Controllers\Auth\AuthenticatedSessionController;
+use App\Http\Controllers\Auth\EmailVerificationPromptController;
+use App\Http\Controllers\Auth\EmailVerificationNotificationController;
 
 /*
 |--------------------------------------------------------------------------
@@ -61,7 +62,9 @@ Route::post('email/verification-notification', [EmailVerificationNotificationCon
 Route::get('/bedrijf', [RegisteredUserController::class, 'createCompany'])->name('bedrijf.create');
 Route::post('/bedrijf', [RegisteredUserController::class, 'storeCompany']);
 
-
+Route::middleware('auth', 'verified')->group(function () {
+ Route::get('bedrijf/index', [BedrijfController::class, 'index'])->name('bedrijf.index');
+});
 
 
 
