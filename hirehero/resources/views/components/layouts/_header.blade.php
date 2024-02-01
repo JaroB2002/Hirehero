@@ -1,4 +1,4 @@
-<header class="bg-lightBlue w-screen absolute mt-16 z-0 py-8 flex flex-row md:-ml-48  md:max-w-[1400px] lg:ml-64 lg:max-w-[1800px]">
+<header class="bg-lightBlue absolute mt-20 z-0 w-screen flex py-4 md:ml-48 md:w-[1200px] lg:ml-64 lg:w-screen">
     <div class="px-4 mt-2 mr-4 md:ml-16">
         <img src="/images/backIcon.svg" alt="">
     </div>
