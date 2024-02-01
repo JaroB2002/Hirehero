@@ -16,13 +16,37 @@ class VerifyEmailController extends Controller
     public function __invoke(EmailVerificationRequest $request): RedirectResponse
     {
         if ($request->user()->hasVerifiedEmail()) {
-            return redirect()->intended(RouteServiceProvider::HOME.'?verified=1');
+
+            //Kijk naar de role van de user en redirect naar de juiste pagina
+
+            if ($request->user()->role == 'student') {
+                return redirect()->intended(RouteServiceProvider::STUDENT.'?verified=1');
+            } elseif ($request->user()->role == 'bedrijf') {
+                return redirect()->intended(RouteServiceProvider::BEDRIJF.'?verified=1');
+            } elseif ($request->user()->role == 'employee') {
+                return redirect()->intended(RouteServiceProvider::EMPLOYEE.'?verified=1');
+            } elseif ($request->user()->role == 'admin') {
+                return redirect()->intended(RouteServiceProvider::ADMIN.'?verified=1');
+            }
+            //return redirect()->intended(RouteServiceProvider::HOME.'?verified=1');
         }
 
         if ($request->user()->markEmailAsVerified()) {
             event(new Verified($request->user()));
         }
 
-        return redirect()->intended(RouteServiceProvider::HOME.'?verified=1');
+        //Kijk naar de role van de user en redirect naar de juiste pagina
+
+        if ($request->user()->role == 'student') {
+            return redirect()->intended(RouteServiceProvider::STUDENT.'?verified=1');
+        } elseif ($request->user()->role == 'bedrijf') {
+            return redirect()->intended(RouteServiceProvider::BEDRIJF.'?verified=1');
+        } elseif ($request->user()->role == 'employee') {
+            return redirect()->intended(RouteServiceProvider::EMPLOYEE.'?verified=1');
+        } elseif ($request->user()->role == 'admin') {
+            return redirect()->intended(RouteServiceProvider::ADMIN.'?verified=1');
+        }
+
+        //return redirect()->intended(RouteServiceProvider::HOME.'?verified=1');
     }
 }

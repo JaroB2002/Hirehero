@@ -1,4 +1,4 @@
-<x-app-layout>
+<x-selectie._layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
             {{ __('Dashboard') }}
@@ -11,7 +11,16 @@
                 <div class="p-6 text-gray-900">
                     {{ __("You're logged in!") }}
                 </div>
+
+                <div class="p-6 bg-white border-b border-gray-200">
+                   
+                  <form action="{{route('logout')}}" x-data="{}" method="POST">
+                    @csrf
+                    <button type="submit">logout</button>
+                
+                
+                </form>
             </div>
         </div>
     </div>
-</x-app-layout>
+</x-selectie._layout>

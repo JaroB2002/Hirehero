@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BedrijfController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\StudentController;
 use App\Http\Controllers\SelectieController;
 use App\Http\Controllers\Auth\PasswordController;
 use App\Http\Controllers\BedrijfRegisterController;
@@ -64,6 +65,10 @@ Route::post('/bedrijf', [RegisteredUserController::class, 'storeCompany']);
 
 Route::middleware('auth', 'verified')->group(function () {
  Route::get('bedrijf/index', [BedrijfController::class, 'index'])->name('bedrijf.index');
+});
+
+Route::middleware('auth', 'verified')->group(function(){
+    Route::get('student/index',[StudentController::class,'index'])->name('student.index');
 });
 
 
