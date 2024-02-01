@@ -1,5 +1,5 @@
 
-<nav id="nav" class="sm:w-[272px]  h-max sm:mt-48 pt-8 sm:absolute md:absolute md:hidden md:mt-16 md:w-1/2 md:h-screen lg:flex lg:flex-col lg:w-1/5 max-w-[272px] bg-[rgb(233,235,253)] lg:pt-8 ">
+<nav id="nav" class="w-[272px] hidden h-max z-10 absolute mt-16 pt-8  md:absolute md:hidden md:mt-24 md:w-1/2 md:h-screen lg:mt-0 lg:flex lg:flex-col lg:w-1/5 max-w-[272px] bg-[rgb(233,235,253)] lg:pt-8 ">
 
    
 
@@ -25,7 +25,7 @@
 
 <div class="ml-4 mt-24">
 <div class="ml-0 md:block mb-24">
-<a href="" class="flex flex-row my-2 bg-purple w-40 py-2 font-bold rounded-xl text-white"><img src="/images/addIcon.svg" alt="" class="ml-2 mr-2">Plaats vacature</a>
+<a href="" class="flex flex-row my-2 bg-purple w-40 py-2 font-bold rounded-xl text-white lg:hidden"><img src="/images/addIcon.svg" alt="" class="ml-2 mr-2">Plaats vacature</a>
 </div>
 
 </div>

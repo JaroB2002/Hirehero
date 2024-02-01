@@ -15,7 +15,7 @@
   const nav = document.getElementById('nav');
 
   hamburger.addEventListener('click', () => {
-    nav.classList.toggle('md:hidden');
+    nav.classList.toggle('hidden');
     //Een korte animatie wanneer de navigatie open en dicht gaat
     nav.classList.toggle('animate-slide');
 

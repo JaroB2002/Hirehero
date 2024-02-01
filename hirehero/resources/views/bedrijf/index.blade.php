@@ -4,9 +4,6 @@
         
     </x-layouts.horizontalNav>
 
-
-
-
 <x-layouts.navigation>
 
     <div>
@@ -17,5 +14,12 @@
 
 
 </x-layouts.navigation>
+
+<x-layouts._header>
+    {{--Naam van de pagina--}}
+    <h1 class="font-epilogue font-bold text-2xl">Dashboard</h1>
+    {{--Beschrijving van de pagina--}}  
+    <p class="ml-16 mt-1 md:ml-80  lg:left-1/2 lg:absolute">Home / Dashboard </p>
+</x-layouts._header>   
 
 </x-selectie._layout>
