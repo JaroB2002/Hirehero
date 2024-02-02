@@ -13,7 +13,7 @@
                 <h2 class="mt-6 text-center text-3xl font-bold tracking-tight text-gray-900">Kies 5 woorden</h2>
               </div>
         <div>
-            <form action="/student/persoonlijk" method="Post" class="mt-8">
+            <form action="{{route('student.create3')}}" method="Post" class="mt-8">
                 @csrf
 
                 <div class="grid grid-cols-2 gap-x-4 gap-y-2 md:grid md:grid-cols-2 lg:grid-cols-2">

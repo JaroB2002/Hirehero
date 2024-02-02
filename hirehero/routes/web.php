@@ -60,8 +60,8 @@ Route::post('email/verification-notification', [EmailVerificationNotificationCon
 
 //Routes voor bedrijven
 
-Route::get('/bedrijf', [RegisteredUserController::class, 'createCompany'])->name('bedrijf.create');
-Route::post('/bedrijf', [RegisteredUserController::class, 'storeCompany']);
+Route::get('/bedrijf', [RegisteredUserController::class, 'create'])->name('bedrijf.create');
+Route::post('/bedrijf', [RegisteredUserController::class, 'store']);
 
 Route::middleware('auth', 'verified')->group(function () {
  Route::get('bedrijf/index', [BedrijfController::class, 'index'])->name('bedrijf.index');

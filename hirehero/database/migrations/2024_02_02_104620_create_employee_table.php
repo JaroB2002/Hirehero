@@ -11,25 +11,26 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('employees', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id')->constrained();
+            $table->foreignId('company_id')->constrained();
             $table->string('voornaam');
             $table->string('familienaam');
             $table->string('telefoonnummer')->nullable();
-            $table->string('email')->unique();
-            $table->timestamp('email_verified_at')->nullable();
-            $table->string('role');
+            $table->string('email');
+            $table->string('functie');
             $table->string('password');
-            $table->rememberToken();
+            $table->string('profile_picture')->nullable();
             $table->timestamps();
         });
     }
-    
+
     /**
      * Reverse the migrations.
      */
     public function down(): void
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('employee');
     }
 };

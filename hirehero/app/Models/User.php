@@ -23,21 +23,8 @@ class User extends Authenticatable implements MustVerifyEmail
         'familienaam',
         'email',
         'telefoonnummer',
-        'school',
-        'opleiding',
-        'password',
         'role',
-        'interesse',
-        'interesse2',
-        'desinteresse1',
-        'desinteresse2',
-        'stageBegin',
-        'stageEinde',
-        'cv',
-        'remember_token',
-        'persoonlijkheid',
-        'bedrijfnaam',
-        'employees'
+        'password',
 
     ];
 
@@ -60,4 +47,19 @@ class User extends Authenticatable implements MustVerifyEmail
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    public function student()
+    {
+        return $this->hasOne(Student::class);
+    }
+
+    public function employee()
+    {
+        return $this->hasOne(Employee::class);
+    }
+
+    public function company()
+    {
+        return $this->hasOne(Company::class);
+    }
 }
