@@ -4,7 +4,9 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BedrijfController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\StudentController;
+use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\SelectieController;
+use App\Http\Controllers\VacatureController;
 use App\Http\Controllers\Auth\PasswordController;
 use App\Http\Controllers\BedrijfRegisterController;
 use App\Http\Controllers\StudentRegisterController;
@@ -64,7 +66,19 @@ Route::get('/bedrijf', [RegisteredUserController::class, 'create'])->name('bedri
 Route::post('/bedrijf', [RegisteredUserController::class, 'store']);
 
 Route::middleware('auth', 'verified')->group(function () {
+    //De route index is voor het weergeven van het dashboard van het bedrijf
  Route::get('bedrijf/index', [BedrijfController::class, 'index'])->name('bedrijf.index');
+    //De route create is voor het weergeven van het formulier om een nieuwe medewerker toe te voegen
+    Route::get('bedrijf/team', [BedrijfController::class, 'create'])->name('bedrijf.team');
+    //De route store is voor het verwerken van het formulier om een nieuwe medewerker toe te voegen
+    Route::post('bedrijf/team', [BedrijfController::class, 'storeEmployee'])->name('bedrijf.store');
+    //De route show is voor het weergeven van het team van het bedrijf
+    Route::get('bedrijf/show', [BedrijfController::class, 'show'])->name('bedrijf.show');
+    //Route::get('employee/', [EmployeeController::class, 'index'])->name('employee.index');
+    //Routes voor vacatures
+    Route::get('bedrijf/vacature', [VacatureController::class, 'index'])->name('vacature.index');
+    Route::post('bedrijf/vacature', [VacatureController::class, 'store'])->name('vacature.store');
+    Route::get('bedrijf/vacature/create', [VacatureController::class, 'create'])->name('vacature.create');
 });
 
 Route::middleware('auth', 'verified')->group(function(){

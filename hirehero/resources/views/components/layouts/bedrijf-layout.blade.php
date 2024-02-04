@@ -4,7 +4,11 @@
     </x-layouts.navigation>
 
     <x-layouts.horizontalNav imgsrc="logo.png">
-        <p class="text-base font-epilogue">{{Auth::user()->bedrijfnaam}}</p>
+        <p class="text-base font-epilogue">{{--Bekijk de bedrijfnaam in de session--}} 
+
+            {{session('companyName')}}
+
+        </p>
     </x-layouts.horizontalNav>
 
     <x-layouts._header>
@@ -15,5 +19,6 @@
 
     </x-layouts._header>
 
+    {{$slot}}
 
-</x-selectie._layout>
+</x-selectie._layout>   

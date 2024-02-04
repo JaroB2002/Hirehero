@@ -7,6 +7,7 @@ use App\Models\User;
 use App\Models\Company;
 
 use App\Models\Student;
+use App\Models\Employee;
 use Illuminate\View\View;
 use Illuminate\Validation\Rule;
 use Illuminate\Validation\Rules;
@@ -83,7 +84,9 @@ class RegisteredUserController extends Controller
 
                 //stuur de student door naar de volgende pagina
                 return redirect()->route('student.create2');
-            } else {
+            } 
+            
+            else {
                 
                 //Krijg data uit de session
 

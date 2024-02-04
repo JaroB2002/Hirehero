@@ -15,13 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained();
             $table->foreignId('company_id')->constrained();
-            $table->string('voornaam');
-            $table->string('familienaam');
-            $table->string('telefoonnummer')->nullable();
-            $table->string('email');
             $table->string('functie');
-            $table->string('password');
-            $table->string('profile_picture')->nullable();
             $table->timestamps();
         });
     }

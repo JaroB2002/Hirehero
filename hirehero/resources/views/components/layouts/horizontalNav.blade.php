@@ -19,7 +19,7 @@
 <div class="flex flex-row ml-32 md:ml-64 lg:absolute lg:left-1/2">
 <img class="" src="/images/meldingIcon.svg" width="24" alt="">
 <div class="ml-8 hidden md:hidden lg:flex">
-<a href="" class="flex flex-row my-2 bg-purple w-40 py-2 font-bold rounded-xl text-white"><img src="/images/addIcon.svg" alt="" class="ml-2 mr-2">Plaats vacature</a>
+<a href="" class="flex flex-row my-2 bg-purple w-40 py-2 font-bold rounded-xl text-white"><img src="/images/addIcon.svg" alt="{{route('vacature.create')}}" class="ml-2 mr-2">Plaats vacature</a>
 
 </div>
 </div>
