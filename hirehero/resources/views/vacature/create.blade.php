@@ -64,6 +64,7 @@
                 <x-input-error :messages="$errors->get('description')" class="mt-2" />
 
             </div>
+            <input type="hidden" name="status" value="Live">
 
             <div>
                 <label for="sollicitatieType">Video CV</label>

@@ -79,6 +79,25 @@ Route::middleware('auth', 'verified')->group(function () {
     Route::get('bedrijf/vacature', [VacatureController::class, 'index'])->name('vacature.index');
     Route::post('bedrijf/vacature', [VacatureController::class, 'store'])->name('vacature.store');
     Route::get('bedrijf/vacature/create', [VacatureController::class, 'create'])->name('vacature.create');
+    //Pas de vacature status aan
+    Route::patch('bedrijf/vacature', [VacatureController::class, 'updateStatus'])->name('vacature.status');
+    //Bekijk de vollledige vacature
+    Route::get('bedrijf/vacature/{vacature:id}', [VacatureController::class, 'show']);
+    Route::get('bedrijf/vacature/{vacature:id}/edit', [VacatureController::class, 'edit']);
+    Route::put('bedrijf/vacature/{vacature:id}/edit', [VacatureController::class, 'update']);
+    Route::delete('bedrijf/vacature/{vacature:id}/destroy', [VacatureController::class, 'destroyVacature']);
+    Route::get('bedrijf/vacature/{vacature:id}/destroy', [VacatureController::class, 'destroy']);
+
+    //edit de gehele vacature
+
+    //welke soorten routes zijn er allemaal?
+    //get, post, put, patch, delete
+    //get is voor het weergeven van een pagina
+    //post is voor het verwerken van een formulier
+    //put is voor het updaten van een resource
+    //patch is voor het updaten van een resource
+    //Het verschil tussen put en patch is dat put alle velden van een resource update en patch alleen de velden die je wilt updaten
+    //delete is voor het verwijderen van een resource
 });
 
 Route::middleware('auth', 'verified')->group(function(){

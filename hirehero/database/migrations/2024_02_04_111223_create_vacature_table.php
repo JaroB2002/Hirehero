@@ -24,7 +24,7 @@ return new class extends Migration
             $table->integer('aantalPlaatsen');
             //Persoon kan aanduiden wat voor sollicitatie ze ontvangen. Of een videoCV verplicht, optioneel of niet.
             $table->string('sollicitatieType');
-            $table->string('status')->default('live');
+            $table->string('status');
 
             $table->timestamps();
         });

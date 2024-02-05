@@ -87,7 +87,7 @@ class VacatureController extends Controller
             'aantalPlaatsen' => $request->get('aantalPlaatsen'),
             'sollicitatieType' => $request->get('sollicitatieType'),
             'company_id' => $company_id,
-            'status' => 'live' 
+            'status' => $request->get('status')
         ]);
 
         $vacature->save();
@@ -100,20 +100,74 @@ class VacatureController extends Controller
         return view('vacature.show', ['vacature' => $vacature]);
     }
 
-    public function edit($id)
+    public function updateStatus()
+
     {
+        //je kan de id uit het formulier halen
+
+        $id = request('vacature_id');
+
+        //Zoek de vacature op basis van de id
+
         $vacature = Vacature::find($id);
-        //Wanneer de status van de vacature aangepast wordt, wordt de status ook aangepast, ook zonder dat de knop gedruk wordt.
-        if($vacature->status == "live")
-        {
-            $vacature->status = "closed";
-            $vacature->save();
-        }
-        else
-        {
-            $vacature->status = "live";
-            $vacature->save();
-        }
-        return view('vacature.edit', ['vacature' => $vacature]);
+
+        ///Kijk wat er wordt meegegeven in de request
+        $status = request('status');
+        //Update de status van de vacature
+
+        $vacature->update([
+            'status' => $status
+        ]);
+
+
+        return redirect(route('vacature.index'))->with('success', 'Vacature status is aangepast');
+
+        
     }
+
+    public function edit($id) {
+        $vacature = Vacature::find($id);
+        return view('vacature.edit', ['vacature' => $vacature]);
+    }  
+
+    public function update($id) {
+        //Zoek de vacature op basis van de id
+       $vacature = Vacature::find($id);
+         //Update de vacature
+        $vacature->update([
+            'title' => request('title'),
+            'description' => request('description'),
+            'minimumSkills' => request('minimumSkills'),
+            'nicetoHaveSkills' => request('nicetoHaveSkills'),
+            'persoonlijkheid' => request('persoonlijkheid'),
+            'categorie' => request('categorie'),
+            'aantalPlaatsen' => request('aantalPlaatsen'),
+            'sollicitatieType' => request('sollicitatieType'),
+            'status' => request('status') 
+        ]);
+
+        return redirect(route('vacature.index'))->with('success', 'Vacature is aangepast');
+
+
+        
+    }
+
+    public function destroy($id) {
+        //Zoek de vacature op basis van de id
+        $vacature = Vacature::find($id);
+        //Verwijder de vacature
+        //toon een kleine pop up om te vragen of de gebruiker zeker weet dat hij de vacature wilt verwijderen
+        return view('vacature.destroy', ['vacature' => $vacature]);
+
+    }
+
+    public function destroyVacature($id) {
+        //Zoek de vacature op basis van de id
+        $vacature = Vacature::find($id);
+        //Verwijder de vacature
+        $vacature->delete();
+        return redirect(route('vacature.index'))->with('success', 'Vacature is verwijderd');
+    }
+
+    
 }
