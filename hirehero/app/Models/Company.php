@@ -15,6 +15,19 @@ class Company extends Model
         'employees',
         'telefoonnummer',
         'email',
+        'website',
+        'adres',
+        'postcode',
+        'plaats',
+        'land',
+        'oprichtingsdatum',
+        'sector',
+        'activiteiten',
+        'x',
+        'facebook',
+        'linkedin',
+        'instagram'
+        
 
    
     ];
@@ -28,6 +41,10 @@ class Company extends Model
     {
         return $this->hasMany(Vacature::class);
     }
+
+    protected $casts = [
+        'oprichtingsdatum' => 'datetime',
+    ];
 
     
 

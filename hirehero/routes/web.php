@@ -18,6 +18,7 @@ use App\Http\Controllers\Auth\ConfirmablePasswordController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Auth\EmailVerificationPromptController;
 use App\Http\Controllers\Auth\EmailVerificationNotificationController;
+use App\Http\Controllers\BedrijfsProfielController;
 
 /*
 |--------------------------------------------------------------------------
@@ -87,6 +88,11 @@ Route::middleware('auth', 'verified')->group(function () {
     Route::put('bedrijf/vacature/{vacature:id}/edit', [VacatureController::class, 'update']);
     Route::delete('bedrijf/vacature/{vacature:id}/destroy', [VacatureController::class, 'destroyVacature']);
     Route::get('bedrijf/vacature/{vacature:id}/destroy', [VacatureController::class, 'destroy']);
+
+    //Bedrijfsprofiel
+    Route::get('bedrijf/profiel', [BedrijfsProfielController::class, 'index'])->name('bedrijf.profiel');
+    Route::get('bedrijf/profiel/edit', [BedrijfsProfielController::class, 'edit'])->name('bedrijf.profielEdit');
+    Route::patch('bedrijf/profiel/edit', [BedrijfsProfielController::class, 'update'])->name('bedrijf.profielUpdate');
 
     //edit de gehele vacature
 
