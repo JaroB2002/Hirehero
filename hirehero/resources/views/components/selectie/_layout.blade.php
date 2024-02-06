@@ -2,30 +2,30 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          colors: {
-            clifford: '#da373d',
-          }
-        }
-      }
-    }
-  </script>
-  <style type="text/tailwindcss">
-    @layer utilities {
-      .content-auto {
-        content-visibility: auto;
-      }
-    }
-  </style>
+  @vite('resources/css/app.css')
   
-  <link rel="stylesheet" href="css/login.css">
-  <script src="https://cdn.tailwindcss.com?plugins=forms,typography,aspect-ratio,line-clamp"></script>
 </head>
-<body>
+<body class="bg-white overflow-x-hidden">
 {{$slot}}
+
+<script>
+
+  //Klik op de hamburger icon om de navigatie te openen
+  const hamburger = document.getElementById('horizontalNav');
+  const nav = document.getElementById('nav');
+
+  hamburger.addEventListener('click', () => {
+    nav.classList.toggle('hidden');
+    //Een korte animatie wanneer de navigatie open en dicht gaat
+    nav.classList.toggle('animate-slide');
+
+
+  })
+
+
+
+
+
+</script>
 </body>
 </html>
