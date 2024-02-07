@@ -132,28 +132,20 @@ class BedrijfsProfielController extends Controller
 
 
 
+        $companyData = $request->validate($this->Companyrules());
 
-
-        $company->update([
-            'oprichtingsdatum' => request('oprichtingsdatum'),
-            'adres' => request('adres'),
-            'postcode' => request('postcode'),
-            'plaats' => request('plaats'),
-            'land' => request('land'),
-            'website' => request('website'),
-            'sector' => request('sector'),
-            'x' => request('x'),
-            'facebook' => request('facebook'),
-            'linkedin' => request('linkedin'),
-            'instagram' => request('instagram')
-        ]);
+        $company->update($companyData);
 
         //Telefoonnummer en email van bedrijf kunnen ook aangepast worden
 
-        $company->user->update([
-            'telefoonnummer' => request('telefoonnummer'),
-            'email' => request('email')
-        ]);
+        $userData = $request->validate($this->Userrules());
+
+
+        $company->user->update($userData);
+
+
+
+       
 
 
         //De info bedrijfVoorstelling, doel, skills, gallery, projects, company_id moeten in de tabel company_profiles
@@ -163,17 +155,12 @@ class BedrijfsProfielController extends Controller
 
         //dit moet in de tabel company_profiles
 
-         if($bedrijfsprofiel) {
-            $bedrijfsprofiel->update([
+        $bedrijfsProfielData = $request->validate($this->CompanyProfilrules());
 
-                
-                'company_id' => $company_id,
-                'bedrijfVoorstelling' => request('bedrijfVoorstelling'),
-                'doel' => request('doel'),
-                'skills' => request('skills'),
-                'gallery' => request('gallery'),
-                'projects' => request('projects'),
-            ]);
+
+
+         if($bedrijfsprofiel) {
+            $bedrijfsprofiel->update($bedrijfsProfielData);
         } else {
             CompanyProfile::create([
                 'company_id' => $company_id,
@@ -192,6 +179,41 @@ class BedrijfsProfielController extends Controller
         return redirect()->route('bedrijf.profiel');
 
 
+    }
+
+    public function Companyrules() {
+        return [
+
+            'oprichtingsdatum' => 'sometimes|date',
+            'adres' => 'sometimes|string|max:255',
+            'postcode' => 'sometimes|string|max:255',
+            'plaats' => 'sometimes|string|max:255',
+            'land' => 'sometimes|string|max:255',
+            'website' => 'sometimes|string|max:255',
+            'sector' => 'sometimes|string|max:255',
+            'x' => 'sometimes|string|max:255',
+            'facebook' => 'sometimes|string|max:255',
+            'linkedin' => 'sometimes|string|max:255',
+            'instagram' => 'sometimes|string|max:255',
+            
+        ];
+    }
+
+    public function CompanyProfilrules() {
+        return [
+            'bedrijfsVoorstelling' => 'sometimes|string|max:255',
+            'doel' => 'sometimes|string|max:255',
+            'skills' => 'sometimes|string|max:255',
+            'gallery' => 'sometimes|string|max:255',
+            'projects' => 'sometimes|string|max:255'
+        ];
+    }
+
+    public function Userrules() {
+        return [
+            'telefoonnummer' => 'sometimes|string|max:255',
+            'email' => 'sometimes|string|max:255'
+        ];
     }
 
 
