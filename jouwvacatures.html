@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<script src="https://cdn.tailwindcss.com?plugins=forms,typography,aspect-ratio,line-clamp"></script>
+
+<html :class="{ 'theme-dark': dark }" x-data="data()" lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hirehero Dashboard - Vacatures</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../css/dashboard.css">
+  </head>
+  <body>
+     
+        <main class="h-full pb-16 overflow-y-auto">
+          <div class="container px-6 mx-auto grid">
+            <h2
+              class="my-6 text-2xl font-semibold text-gray-700 dark:text-gray-200"
+            >
+              Jouw vacatures
+            </h2>
+  
+            <h2
+            class="my-6 text-1xl text-gray-700 dark:text-gray-200"
+          >
+          Hier kan je al je gemaakte vacatures bekijken
+          </h2>
+           
+            <div class="w-full overflow-hidden rounded-lg shadow-xs">
+              <div class="w-full overflow-x-auto">
+                <table class="w-full whitespace-no-wrap">
+                  <thead>
+                    <tr
+                      class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800"
+                    >
+                      <th class="px-4 py-3">Rol</th>
+                      <th class="px-4 py-3">Status sollicatie</th>
+                      <th class="px-4 py-3">Publicatiedatum</th>
+                      <th class="px-4 py-3">Einddatum</th>
+                      <th class="px-4 py-3">Sollicitanten</th>
+                      <th class="px-4 py-3">Acties</th>
+
+                    </tr>
+                  </thead>
+                  <tbody
+                    class="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800"
+                  >
+                  <tr class="text-gray-700 dark:text-gray-400" style="background-color: #C4E4F7;">
+                    <td class="px-4 py-3">
+                        <div class="flex items-center text-sm">   
+                        
+                          </div>
+                          <div>
+                            <p class="font-semibold">UX/UI Designer</p>
+
+                          </div>
+                        </div>
+                      </td>
+                      <td class="px-4 py-3 text-xs">
+                        <span
+                          class="px-2 py-1 font-semibold leading-tight text-green-700 bg-green-100 rounded-full dark:bg-green-700 dark:text-green-100"
+                        >
+                          Live
+                        </span>
+                      </td>
+                      <td class="px-4 py-3 text-sm">
+                        07/02/2024
+                      </td>
+
+                      <td class="px-4 py-3 text-sm">
+                        07/5/2024
+                      </td>
+                      <td class="px-4 py-3 text-sm">
+                        <span
+                        class="px-2 py-1 font-medium leading-tight text-blue-600 bg-blue-100 rounded-full dark:bg-blue-700 dark:text-blue-100"
+                      >
+                      26
+                      </span>                      
+                    </td>
+                    <td class="px-4 py-3 text-sm">
+                        <div style="display: flex; align-items: center;">
+                            <img src="eye.svg" alt="Oogicoon" style="margin-right: 5px;">
+                            <img src="trash-2.svg" alt="Prullenbakicoon" style="margin-left: 5px;">
+                        </div>
+                    </td>
+                    </tr>
+
+                    <tr class="text-gray-700 dark:text-gray-400">
+                      <td class="px-4 py-3">
+                        <div class="flex items-center text-sm">
+                         
+                          <div>
+                            <p class="font-semibold">Digital Creative</p>
+
+                          </div>
+                        </div>
+                      </td>
+                      <td class="px-4 py-3 text-xs">
+                        <span
+                        class="px-2 py-1 font-semibold leading-tight text-green-700 bg-green-100 rounded-full dark:bg-green-700 dark:text-green-100"
+                      >
+                        Live
+                      </span>
+                      </td>
+                      <td class="px-4 py-3 text-sm">
+                        07/02/2024
+                      </td>
+    
+                      <td class="px-4 py-3 text-sm">
+                        07/03/2024
+                      </td>
+                      <td class="px-4 py-3 text-sm">
+                        <span
+                        class="px-2 py-1 font-medium leading-tight text-blue-600 bg-blue-100 rounded-full dark:bg-blue-700 dark:text-blue-100"
+                      >
+                        90
+                      </span>                      
+                    </td>
+                    <td class="px-4 py-3 text-sm">
+                        <div style="display: flex; align-items: center;">
+                            <img src="eye.svg" alt="Oogicoon" style="margin-right: 5px;">
+                            <img src="trash-2.svg" alt="Prullenbakicoon" style="margin-left: 5px;">
+                        </div>
+                    </td>
+                    
+                    </tr>
+
+                    <tr class="text-gray-700 dark:text-gray-400" style="background-color: #C4E4F7;">
+                        <td class="px-4 py-3">
+                        <div class="flex items-center text-sm">
+
+                          <div>
+                            <p class="font-semibold">Backend developer</p>
+
+                          </div>
+                        </div>
+                      </td>
+                      <td class="px-4 py-3 text-xs">
+                        <span
+                        class="px-2 py-1 font-semibold leading-tight text-green-700 bg-green-100 rounded-full dark:bg-green-700 dark:text-green-100"
+                      >
+                        Live
+                      </span>
+                      </td>
+                      <td class="px-4 py-3 text-sm">
+                        07/02/2024
+                      </td>
+     
+                      <td class="px-4 py-3 text-sm">
+                        07/03/2024
+                      </td>
+                      <td class="px-4 py-3 text-sm">
+                        <span
+                        class="px-2 py-1 font-medium leading-tight text-blue-600 bg-blue-100 rounded-full dark:bg-blue-700 dark:text-blue-100"
+                      >
+                        45
+                      </span>                      
+                    </td>
+                    <td class="px-4 py-3 text-sm">
+                        <div style="display: flex; align-items: center;">
+                            <img src="eye.svg" alt="Oogicoon" style="margin-right: 5px;">
+                            <img src="trash-2.svg" alt="Prullenbakicoon" style="margin-left: 5px;">
+                        </div>
+                    </td>
+                    </tr>
+
+                    <tr class="text-gray-700 dark:text-gray-400">
+                      <td class="px-4 py-3">
+                        <div class="flex items-center text-sm">
+
+                          <div>
+                            <p class="font-semibold">Frontend webdeveloper</p>
+
+                          </div>
+                        </div>
+                      </td>
+                      <td class="px-4 py-3 text-xs">
+                        <span
+                          class="px-2 py-1 font-semibold leading-tight text-red-700 bg-red-100 rounded-full dark:text-red-100 dark:bg-red-700"
+                        >
+                          Gesloten
+                        </span>
+                      </td>
+                      <td class="px-4 py-3 text-sm">
+                        16/09/2023
+                      </td>
+
+                      <td class="px-4 py-3 text-sm">
+                        19/12/2023
+                      </td>
+                      
+                      <td class="px-4 py-3 text-sm">
+                        <span
+                        class="px-2 py-1 font-medium leading-tight text-blue-600 bg-blue-100 rounded-full dark:bg-blue-700 dark:text-blue-100"
+                      >
+                      64
+                      </span>                      
+                    </td>
+                    <td class="px-4 py-3 text-sm">
+                        <div style="display: flex; align-items: center;">
+                            <img src="eye.svg" alt="Oogicoon" style="margin-right: 5px;">
+                            <img src="trash-2.svg" alt="Prullenbakicoon" style="margin-left: 5px;">
+                        </div>
+                    </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <div
+                class="grid px-4 py-3 text-xs font-semibold tracking-wide text-gray-500 uppercase border-t dark:border-gray-700 bg-gray-50 sm:grid-cols-9 dark:text-gray-400 dark:bg-gray-800"
+              >
+                <span class="flex items-center col-span-3">
+                  Showing 21-30 of 100
+                </span>
+                <span class="col-span-2"></span>
+                <!-- Pagination -->
+                <span class="flex col-span-4 mt-2 sm:mt-auto sm:justify-end">
+                  <nav aria-label="Table navigation">
+                    <ul class="inline-flex items-center">
+                      <li>
+                        <button
+                          class="px-3 py-1 rounded-md rounded-l-lg focus:outline-none focus:shadow-outline-purple"
+                          aria-label="Previous"
+                        >
+                          <svg
+                            aria-hidden="true"
+                            class="w-4 h-4 fill-current"
+                            viewBox="0 0 20 20"
+                          >
+                            <path
+                              d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z"
+                              clip-rule="evenodd"
+                              fill-rule="evenodd"
+                            ></path>
+                          </svg>
+                        </button>
+                      </li>
+                      <li>
+                        <button
+                          class="px-3 py-1 rounded-md focus:outline-none focus:shadow-outline-purple"
+                        >
+                          1
+                        </button>
+                      </li>
+                      <li>
+                        <button
+                          class="px-3 py-1 rounded-md focus:outline-none focus:shadow-outline-purple"
+                        >
+                          2
+                        </button>
+                      </li>
+                      <li>
+                        <button
+                          class="px-3 py-1 text-white transition-colors duration-150 bg-purple-600 border border-r-0 border-purple-600 rounded-md focus:outline-none focus:shadow-outline-purple"
+                        >
+                          3
+                        </button>
+                      </li>
+                      <li>
+                        <button
+                          class="px-3 py-1 rounded-md focus:outline-none focus:shadow-outline-purple"
+                        >
+                          4
+                        </button>
+                      </li>
+                      <li>
+                        <span class="px-3 py-1">...</span>
+                      </li>
+                      <li>
+                        <button
+                          class="px-3 py-1 rounded-md focus:outline-none focus:shadow-outline-purple"
+                        >
+                          8
+                        </button>
+                      </li>
+                      <li>
+                        <button
+                          class="px-3 py-1 rounded-md focus:outline-none focus:shadow-outline-purple"
+                        >
+                          9
+                        </button>
+                      </li>
+                      <li>
+                        <button
+                          class="px-3 py-1 rounded-md rounded-r-lg focus:outline-none focus:shadow-outline-purple"
+                          aria-label="Next"
+                        >
+                          <svg
+                            class="w-4 h-4 fill-current"
+                            aria-hidden="true"
+                            viewBox="0 0 20 20"
+                          >
+                            <path
+                              d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
+                              clip-rule="evenodd"
+                              fill-rule="evenodd"
+                            ></path>
+                          </svg>
+                        </button>
+                      </li>
+                    </ul>
+                  </nav>
+                </span>
+              </div>
+            </div>
+        </main>
+      </div>
+    </div>
+  </body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+<style>
+    tr.text-gray-700:hover,
+    tr.dark\:text-gray-400:hover {
+      background-color: #97CAF9 !important; /* Kleur voor hover */
+    }
+    
+    </style>
