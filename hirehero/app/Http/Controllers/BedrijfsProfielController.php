@@ -34,7 +34,14 @@ class BedrijfsProfielController extends Controller
             $employee->voornaam = $employee->user->voornaam;
             $employee->familienaam = $employee->user->familienaam;
             $employee->email = $employee->user->email;
+
+
         }
+
+        //krijg de email en telefoonnummer van het bedrijf
+
+        $company->email = $company->user->email;
+        $company->telefoonnummer = $company->user->telefoonnummer;
 
 
 
@@ -82,6 +89,9 @@ class BedrijfsProfielController extends Controller
             $employee->familienaam = $employee->user->familienaam;
             $employee->email = $employee->user->email;
         }
+
+        //Krijg het telefoonnummer, email van company
+        
 
 
 
@@ -136,6 +146,13 @@ class BedrijfsProfielController extends Controller
             'facebook' => request('facebook'),
             'linkedin' => request('linkedin'),
             'instagram' => request('instagram')
+        ]);
+
+        //Telefoonnummer en email van bedrijf kunnen ook aangepast worden
+
+        $company->user->update([
+            'telefoonnummer' => request('telefoonnummer'),
+            'email' => request('email')
         ]);
 
 

@@ -1,98 +1,84 @@
-<x-selectie._layout>
+<div class="container mx-auto px-4">
+    <div class="mb-8">
+      <h1 class="text-3xl font-bold mb-4">Bedrijfsvoorstelling</h1>
+      <p class="text-gray-700">Maak kennis met ons jong en hip bedrijf</p>
+    </div>
+    
+    <div class="embed-responsive embed-responsive-21by9 relative w-full overflow-hidden" style="padding-top: 42.857143%">
+      <iframe class="embed-responsive-item absolute bottom-0 left-0 right-0 top-0 h-full w-full" src="https://www.youtube.com/embed/vlDzYIIOYmM?enablejsapi=1&amp;origin=https%3A%2F%2Fmdbootstrap.com" allowfullscreen="" data-gtm-yt-inspected-2340190_699="true" id="240632615"></iframe>
+    </div>
+  </div>
+<script src="https://cdn.tailwindcss.com?plugins=forms,typography,aspect-ratio,line-clamp"></script>
 
-    <header class="container mx-auto px-4">
-        <h1 class="font-bolder font-epiilogue text-4xl">{{$company->bedrijfnaam}}</h1>
-        <form action={{route('bedrijf.profielUpdate')}} method="POST">
-            @csrf
-            @method('PATCH')
-        <a href="{{$company->website}}">{{$company->bedrijfnaam}} website</a>
-        <div>
-            <img src="" alt="Logo van het bedrijf {{$company->bedrijfnaam}}">
+<section class="py-16">
+    <script src="https://cdn.tailwindcss.com?plugins=forms,typography,aspect-ratio,line-clamp"></script>
 
+    <div class="container px-4 mx-auto">
+    
+      <div class="flex flex-wrap mb-32 -mx-8">
+        <div class="w-full lg:w-1/2 px-8">
+          <h2 class="text-3xl lg:text-5xl font-bold font-heading mb-20 max-w-xs lg:max-w-lg">Sfeerbeelden</h2>
+          <img class="rounded-3xl w-full mb-8" src="picture2.png" alt="">
+          <img class="rounded-3xl w-full mb-8" src="picture5.png" alt="">
         </div>
-        <p>Oprichtings datum: {{$company->oprichtingsdatum ? $company->oprichtingsdatum->format('d-m-Y') : 'Hier komt de datum'}}</p>
-        <p>Aantal werknemers: {{$company->employees}}</p>
-        <p>Locatie: {{$company->plaats}}</p>
-        <p>Sector: {{$company->sector}}</p>
-
-    </header>
-
-    <main>
-
-        <div class="container mx-auto px-4">
-            <div class="mb-8">
-                <h1 class="text-3xl font-bold mb-4">Bedrijfsvoorstelling</h1>
-                <p class="text-gray-700"><span><input type="text" name="bedrijfVoorstelling" placeholder="{{$bedrijfsprofiel->bedrijfVoorstelling}}" value="{{$bedrijfsprofiel->bedrijfVoorstelling}}"></span></p>
-            </div>
-            <div class="embed-responsive embed-responsive-21by9 relative w-full overflow-hidden" style="padding-top: 42.857143%">
-                <iframe class="embed-responsive-item absolute bottom-0 left-0 right-0 top-0 h-full w-full" src="https://www.youtube.com/embed/vlDzYIIOYmM?enablejsapi=1&amp;origin=https%3A%2F%2Fmdbootstrap.com" allowfullscreen="" data-gtm-yt-inspected-2340190_699="true" id="240632615"></iframe>
-            </div>
+        <div class="w-full lg:w-1/2 px-8">
+          <img class="rounded-3xl w-full mb-24" src="picture3.png" alt="">
+          <p class="text-gray-600 text-lg mb-10">Ontdek de toekomst met Innovatech Solutions. Ons team van visionaire tech-experts ontwerpt grensverleggende oplossingen voor de moderne wereld. </p>
+          <p class="text-gray-600 text-lg">Van sprankelende stadsgezichten doordrenkt met slimme technologie tot aan krachtige, levensreddende innovaties in de gezondheidszorg. Bij Innovatech smeden we de toekomst met technologie.</p>
         </div>
-        <script src="https://cdn.tailwindcss.com?plugins=forms,typography,aspect-ratio,line-clamp"></script>
-        <section class="py-16">
-            <script src="https://cdn.tailwindcss.com?plugins=forms,typography,aspect-ratio,line-clamp"></script>
-            <div class="container px-4 mx-auto">
-                <div class="flex flex-wrap mb-32 -mx-8">
-                    <div class="w-full lg:w-1/2 px-8">
-                        <h2 class="text-3xl lg:text-5xl font-bold font-heading mb-20 max-w-xs lg:max-w-lg">Sfeerbeelden</h2>
-                        <img class="rounded-3xl w-full mb-8" src="/images/picture2.png" alt="">
-                        <img class="rounded-3xl w-full mb-8" src="/images/picture5.png" alt="">
-                    </div>
-                    <div class="w-full lg:w-1/2 px-8">
-                        <img class="rounded-3xl w-full mb-24" src="/images/picture3.png" alt="">
-                        <p class="text-gray-600 text-lg mb-10">Ontdek de toekomst met Innovatech Solutions. Ons team van visionaire tech-experts ontwerpt grensverleggende oplossingen voor de moderne wereld. </p>
-                        <p class="text-gray-600 text-lg">Van sprankelende stadsgezichten doordrenkt met slimme technologie tot aan krachtige, levensreddende innovaties in de gezondheidszorg. Bij Innovatech smeden we de toekomst met technologie.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
+      </div>
+     
+        
+      </div>
+    </div>
+  </section>
 
-        <section class="relative py-20 md:py-32 overflow-hidden">
-            <script src="https://cdn.tailwindcss.com?plugins=forms,typography,aspect-ratio,line-clamp"></script>
-            <img class="absolute top-0 left-0" src="saturn-assets/images/contact/light-left-blue.png" alt="">
+  <section class="relative py-20 md:py-32 overflow-hidden">
+    <script src="https://cdn.tailwindcss.com?plugins=forms,typography,aspect-ratio,line-clamp"></script>
+    <img class="absolute top-0 left-0" src="saturn-assets/images/contact/light-left-blue.png" alt="">
     <img class="absolute bottom-0 right-0 -mb-20" src="saturn-assets/images/contact/light-orange-right.png" alt="">
     <div class="relative container px-4 mx-auto">
       <div class="max-w-7xl mx-auto">
-        <div class="max-w-2xl 1text-center mx-auto mb-20">
+        <div class="max-w-2xl text-center mx-auto mb-20">
           <span class="inline-block py-1 px-3 mb-4 text-xs font-semibold text-orange-900 bg-orange-50 rounded-full">READY TO SUPPORT US</span>
           <h1 class="font-heading text-5xl xs:text-6xl font-bold text-gray-900 mb-4">
             <span>Let’s stay</span>
             <span class="font-serif italic">connected</span>
           </h1>
-          <p class="text-xl text-gray-500 font-semibold"><input type="text" name="doel" value="{{$bedrijfsprofiel->doel}}" placeholder="{{$bedrijfsprofiel->doel}}"></p>
+          <p class="text-xl text-gray-500 font-semibold">We help people to grow their business using saturn ui library with professional and powerfull solution.</p>
         </div>
         <div class="xs:max-w-sm lg:max-w-none mx-auto">
           <div class="flex flex-wrap items-center -mx-4 mb-18">
             <div class="w-full lg:w-1/3 px-4 mb-12 lg:mb-0">
               <div class="flex items-center lg:justify-center">
                 <div class="flex flex-shrink-0 mr-5 sm:mr-8 items-center justify-center p-1 w-16 sm:w-20 h-16 sm:h-20 rounded-full bg-blue-200">
-                  <img src="/images/icon-phone.svg" alt="">
+                  <img src="icon-phone.svg" alt="">
                 </div>
                 <div>
                   <span class="text-lg text-gray-500">Phone</span>
-                  <span class="block text-lg font-semibold text-gray-900"><input type="tel" name="telefoonnummer" value="{{$company->telefoonnummer}}"></span>
+                  <span class="block text-lg font-semibold text-gray-900">+1 891 4937</span>
                 </div>
               </div>
             </div>
             <div class="w-full lg:w-1/3 px-4 mb-12 lg:mb-0">
               <div class="flex items-center lg:justify-center">
                 <div class="flex flex-shrink-0 mr-5 sm:mr-8 items-center justify-center p-1 w-16 sm:w-20 h-16 sm:h-20 rounded-full bg-yellow-200">
-                  <img src="/images/icon-email.svg" alt="">
+                  <img src="icon-email.svg" alt="">
                 </div>
                 <div>
                   <span class="text-lg text-gray-500">Email</span>
-                  <span class="block text-lg font-semibold text-gray-900"><input type="email" name="email" placeholder="{{$company->email}}" value="{{$company->email}}"></span>
+                  <span class="block text-lg font-semibold text-gray-900">hello@yourdomain.com</span>
                 </div>
               </div>
             </div>
             <div class="w-full lg:w-1/3 px-4">
               <div class="flex items-center lg:justify-center">
                 <div class="flex flex-shrink-0 mr-5 sm:mr-8 items-center justify-center p-1 w-16 sm:w-20 h-16 sm:h-20 rounded-full bg-green-200">
-                  <img class="h-8" src="/images/icon-location.svg" alt="">
+                  <img class="h-8" src="icon-location.svg" alt="">
                 </div>
                 <div>
                   <span class="text-lg text-gray-500">Office</span>
-                  <span class="block text-lg font-semibold text-gray-900"><input type="text" name="plaats" placeholder="{{$company->plaats}}" value="{{$company->plaats}}"></span>
+                  <span class="block text-lg font-semibold text-gray-900">Herentals</span>
                 </div>
               </div>
             </div>
@@ -178,134 +164,333 @@
 </div>
 
 <section class="relative py-20 md:py-24 bg-gray-100 overflow-hidden">
-    <script src="https://cdn.tailwindcss.com?plugins=forms,typography,aspect-ratio,line-clamp"></script>
-  
-    <img class="absolute top-0 left-0" src="/images/light-blue.png" alt="">
-    <img class="absolute bottom-0 right-0" src="/images/light-orange.png" alt="">
-    <div class="relative container px-4 mx-auto">
-      <div class="max-w-md md:max-w-2xl mx-auto xl:max-w-7xl">
-        <div class="flex flex-wrap mb-20 -mx-4 items-center">
-          <div class="w-full xl:w-1/2 px-4">
-            <div>
-              <h1 class="font-heading text-5xl xs:text-6xl md:text-7xl font-bold text-gray-900 mb-8">
-                <span>Get to know our amazing</span>
-                <span class="font-serif italic">Team</span>
-              </h1>
+  <script src="https://cdn.tailwindcss.com?plugins=forms,typography,aspect-ratio,line-clamp"></script>
+
+  <img class="absolute top-0 left-0" src="light-blue.png" alt="">
+  <img class="absolute bottom-0 right-0" src="light-orange.png" alt="">
+  <div class="relative container px-4 mx-auto">
+    <div class="max-w-md md:max-w-2xl mx-auto xl:max-w-7xl">
+      <div class="flex flex-wrap mb-20 -mx-4 items-center">
+        <div class="w-full xl:w-1/2 px-4">
+          <div>
+            <h1 class="font-heading text-5xl xs:text-6xl md:text-7xl font-bold text-gray-900 mb-8">
+              <span>Get to know our amazing</span>
+              <span class="font-serif italic">Team</span>
+            </h1>
+          </div>
+        </div>
+      </div>
+      <div class="flex flex-wrap -mx-4 -mb-12">
+        <div class="w-full md:w-1/2 xl:w-1/4 px-4 mb-12">
+          <div class="max-w-xs md:max-w-none mx-auto">
+            <div class="flex flex-col items-center">
+              <img class="block h-48 w-48" src="circle-team-members1.png" alt="">
+              <div class="inline-flex -mt-6 mb-5 items-center justify-center py-3 px-5 bg-white rounded-full">
+                <a class="inline-block mr-3 p-1 hover:bg-orange-100 rounded-md" href="#">
+                  <img src="icon-facebook.svg" alt="">
+                </a>
+                <a class="inline-block mr-3 p-1 hover:bg-orange-100 rounded-md" href="#">
+                  <img src="icon-linkedin.svg" alt="">
+                </a>
+                <a class="inline-block mr-3 p-1 hover:bg-orange-100 rounded-md" href="#">
+                  <img src="icon-instagram.svg" alt="">
+                </a>
+                <a class="inline-block p-1 hover:bg-orange-100 rounded-md" href="#">
+                  <img src="icon-twitter.svg" alt="">
+                </a>
+              </div>
+              <h5 class="text-2xl font-bold">Volledige naam 1</h5>
+              <span class="text-sm text-gray-500">CEO & CO-Founder</span>
             </div>
           </div>
         </div>
-        <div class="flex flex-wrap -mx-4 -mb-12">
-            @foreach($employees as $teamlid)
-          <div class="w-full md:w-1/2 xl:w-1/4 px-4 mb-12">
-            <div class="max-w-xs md:max-w-none mx-auto">
-              <div class="flex flex-col items-center">
-                <img class="block h-48 w-48" src="/images/circle-team-members1.png" alt="">
-                <div class="inline-flex -mt-6 mb-5 items-center justify-center py-3 px-5 bg-white rounded-full">
-                  <a class="inline-block mr-3 p-1 hover:bg-orange-100 rounded-md" href="#">
-                    <img src="/images/icon-facebook.svg" alt="">
-                  </a>
-                  <a class="inline-block mr-3 p-1 hover:bg-orange-100 rounded-md" href="#">
-                    <img src="/images/icon-linkedin.svg" alt="">
-                  </a>
-                  <a class="inline-block mr-3 p-1 hover:bg-orange-100 rounded-md" href="#">
-                    <img src="/images/icon-instagram.svg" alt="">
-                  </a>
-                  <a class="inline-block p-1 hover:bg-orange-100 rounded-md" href="#">
-                    <img src="/images/icon-twitter.svg" alt="">
-                  </a>
+        <div class="w-full md:w-1/2 xl:w-1/4 px-4 mb-12">
+          <div class="max-w-xs md:max-w-none mx-auto">
+            <div class="flex flex-col items-center">
+              <img class="block h-48 w-48" src="circle-team-members2.png" alt="">
+              <div class="inline-flex -mt-6 mb-5 items-center justify-center py-3 px-5 bg-white rounded-full">
+                <a class="inline-block mr-3 p-1 hover:bg-orange-100 rounded-md" href="#">
+                  <img src="icon-facebook.svg" alt="">
+                </a>
+                <a class="inline-block mr-3 p-1 hover:bg-orange-100 rounded-md" href="#">
+                  <img src="icon-linkedin.svg" alt="">
+                </a>
+                <a class="inline-block mr-3 p-1 hover:bg-orange-100 rounded-md" href="#">
+                  <img src="icon-instagram.svg" alt="">
+                </a>
+                <a class="inline-block p-1 hover:bg-orange-100 rounded-md" href="#">
+                  <img src="icon-twitter.svg" alt="">
+                </a>
+              </div>
+              <h5 class="text-2xl font-bold">Volledige naam 2</h5>
+              <span class="text-sm text-gray-500">Functie</span>
+            </div>
+          </div>
+        </div>
+        <div class="w-full md:w-1/2 xl:w-1/4 px-4 mb-12">
+          <div class="max-w-xs md:max-w-none mx-auto">
+            <div class="flex flex-col items-center">
+              <img class="block h-48 w-48" src="circle-team-members3.png" alt="">
+              <div class="inline-flex -mt-6 mb-5 items-center justify-center py-3 px-5 bg-white rounded-full">
+                <a class="inline-block mr-3 p-1 hover:bg-orange-100 rounded-md" href="#">
+                  <img src="icon-facebook.svg" alt="">
+                </a>
+                <a class="inline-block mr-3 p-1 hover:bg-orange-100 rounded-md" href="#">
+                  <img src="icon-linkedin.svg" alt="">
+                </a>
+                <a class="inline-block mr-3 p-1 hover:bg-orange-100 rounded-md" href="#">
+                  <img src="icon-instagram.svg" alt="">
+                </a>
+                <a class="inline-block p-1 hover:bg-orange-100 rounded-md" href="#">
+                  <img src="icon-twitter.svg" alt="">
+                </a>
+              </div>
+              <h5 class="text-2xl font-bold">Volledige naam 3</h5>
+              <span class="text-sm text-gray-500">Functie</span>
+            </div>
+          </div>
+        </div>
+        <div class="w-full md:w-1/2 xl:w-1/4 px-4 mb-12">
+          <div class="max-w-xs md:max-w-none mx-auto">
+            <div class="flex flex-col items-center">
+              <img class="block h-48 w-48" src="circle-team-members4.png" alt="">
+              <div class="inline-flex -mt-6 mb-5 items-center justify-center py-3 px-5 bg-white rounded-full">
+                <a class="inline-block mr-3 p-1 hover:bg-orange-100 rounded-md" href="#">
+                  <img src="icon-facebook.svg" alt="">
+                </a>
+                <a class="inline-block mr-3 p-1 hover:bg-orange-100 rounded-md" href="#">
+                  <img src="icon-linkedin.svg" alt="">
+                </a>
+                <a class="inline-block mr-3 p-1 hover:bg-orange-100 rounded-md" href="#">
+                  <img src="icon-instagram.svg" alt="">
+                </a>
+                <a class="inline-block p-1 hover:bg-orange-100 rounded-md" href="#">
+                  <img src="icon-twitter.svg" alt="">
+                </a>
+              </div>
+              <h5 class="text-2xl font-bold">Volledige naam 4</h5>
+              <span class="text-sm text-gray-500">Functie</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="mt-20 text-center">
+        <a class="relative group inline-block py-4 px-6 text-orange-50 font-semibold bg-orange-900 rounded-full overflow-hidden" href="#">
+          <div class="absolute top-0 right-full w-full h-full bg-gray-900 transform group-hover:translate-x-full group-hover:scale-102 transition duration-500"></div>
+          <div class="relative flex items-center justify-center">
+            <span class="mr-4">Bekijk alle teamleden</span>
+            <span>
+              <svg width="8" height="12" viewbox="0 0 8 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M6.83 5.28999L2.59 1.04999C2.49704 0.956266 2.38644 0.881872 2.26458 0.831103C2.14272 0.780334 2.01202 0.754196 1.88 0.754196C1.74799 0.754196 1.61729 0.780334 1.49543 0.831103C1.37357 0.881872 1.26297 0.956266 1.17 1.04999C0.983753 1.23736 0.879211 1.49081 0.879211 1.75499C0.879211 2.01918 0.983753 2.27263 1.17 2.45999L4.71 5.99999L1.17 9.53999C0.983753 9.72736 0.879211 9.98081 0.879211 10.245C0.879211 10.5092 0.983753 10.7626 1.17 10.95C1.26344 11.0427 1.37426 11.116 1.4961 11.1658C1.61794 11.2155 1.7484 11.2408 1.88 11.24C2.01161 11.2408 2.14207 11.2155 2.26391 11.1658C2.38575 11.116 2.49656 11.0427 2.59 10.95L6.83 6.70999C6.92373 6.61703 6.99813 6.50643 7.04889 6.38457C7.09966 6.26271 7.1258 6.13201 7.1258 5.99999C7.1258 5.86798 7.09966 5.73728 7.04889 5.61542C6.99813 5.49356 6.92373 5.38296 6.83 5.28999Z" fill="currentColor"></path>
+              </svg>
+            </span>
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+
+
+
+
+<section class="py-24 bg-blueGray-50 overflow-hidden">
+  <div class="container px-4 mx-auto">
+    <div class="md:max-w-6xl mx-auto">
+      <div class="flex flex-wrap -m-3.5 mb-10">
+        <div class="w-full md:w-1/3 p-3.5">
+          <a href="#">
+            <div class="relative p-6 h-full bg-white border hover:border-gray-300 rounded-xl">
+              <img class="absolute left-0 top-0" src="gradient.svg" alt="">
+              <div class="relative z-10 flex flex-col justify-between h-full">
+                <div class="mb-24 flex-1">
+                  <h3 class="mb-2 text-lg font-bold font-heading leading-snug">UX Designer</h3>
+                  <p class="text-sm text-gray-500 font-medium">
+                    <span>IO Digital</span>
+                    <span class="px-2">•</span>
+                    <span>Herentals</span>
+                  </p>
                 </div>
-                <h5 class="text-2xl font-bold">{{$teamlid->voornaam}}</h5>
-                <span class="text-sm text-gray-500">{{$teamlid->functie}}</span>
+                <div class="flex-1">
+                  <img src="brand-medium.png" alt="">
+                </div>
               </div>
             </div>
-          </div>
-            @endforeach
+          </a>
         </div>
-        <div class="mt-20 text-center">
-          <a class="relative group inline-block py-4 px-6 text-orange-50 font-semibold bg-orange-900 rounded-full overflow-hidden" href="#">
-            <div class="absolute top-0 right-full w-full h-full bg-gray-900 transform group-hover:translate-x-full group-hover:scale-102 transition duration-500"></div>
-            <div class="relative flex items-center justify-center">
-              <span class="mr-4">Bekijk alle teamleden</span>
-              <span>
-                <svg width="8" height="12" viewbox="0 0 8 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M6.83 5.28999L2.59 1.04999C2.49704 0.956266 2.38644 0.881872 2.26458 0.831103C2.14272 0.780334 2.01202 0.754196 1.88 0.754196C1.74799 0.754196 1.61729 0.780334 1.49543 0.831103C1.37357 0.881872 1.26297 0.956266 1.17 1.04999C0.983753 1.23736 0.879211 1.49081 0.879211 1.75499C0.879211 2.01918 0.983753 2.27263 1.17 2.45999L4.71 5.99999L1.17 9.53999C0.983753 9.72736 0.879211 9.98081 0.879211 10.245C0.879211 10.5092 0.983753 10.7626 1.17 10.95C1.26344 11.0427 1.37426 11.116 1.4961 11.1658C1.61794 11.2155 1.7484 11.2408 1.88 11.24C2.01161 11.2408 2.14207 11.2155 2.26391 11.1658C2.38575 11.116 2.49656 11.0427 2.59 10.95L6.83 6.70999C6.92373 6.61703 6.99813 6.50643 7.04889 6.38457C7.09966 6.26271 7.1258 6.13201 7.1258 5.99999C7.1258 5.86798 7.09966 5.73728 7.04889 5.61542C6.99813 5.49356 6.92373 5.38296 6.83 5.28999Z" fill="currentColor"></path>
-                </svg>
-              </span>
+        <div class="w-full md:w-1/3 p-3.5">
+          <a href="#">
+            <div class="relative p-6 h-full bg-white border hover:border-gray-300 rounded-xl">
+              <img class="absolute left-0 top-0" src="gradient.svg" alt="">
+              <div class="relative z-10 flex flex-col justify-between h-full">
+                <div class="mb-24 flex-1">
+                  <h3 class="mb-2 text-lg font-bold font-heading leading-snug">Digital Creative</h3>
+                  <p class="text-sm text-gray-500 font-medium">
+                    <span>IO Digital</span>
+                    <span class="px-2">•</span>
+                    <span>Herentals</span>
+                  </p>
+                </div>
+                <div class="flex-1">
+                  <img src="brand-medium2.png" alt="">
+                </div>
+              </div>
+            </div>
+          </a>
+        </div>
+        <div class="w-full md:w-1/3 p-3.5">
+          <a href="#">
+            <div class="relative p-6 h-full bg-white border hover:border-gray-300 rounded-xl">
+              <img class="absolute left-0 top-0" src="gradient.svg" alt="">
+              <div class="relative z-10 flex flex-col justify-between h-full">
+                <div class="mb-24 flex-1">
+                  <h3 class="mb-2 text-lg font-bold font-heading leading-snug">JS Developer</h3>
+                  <p class="text-sm text-gray-500 font-medium">
+                    <span>IO Digital</span>
+                    <span class="px-2">•</span>
+                    <span>Gent/remote</span>
+                  </p>
+                </div>
+                <div class="flex-1">
+                  <img src="brand-medium3.png" alt="">
+                </div>
+              </div>
+            </div>
+          </a>
+        </div>
+        <div class="w-full md:w-1/3 p-3.5">
+          <a href="#">
+            <div class="relative p-6 h-full bg-white border hover:border-gray-300 rounded-xl">
+              <img class="absolute left-0 top-0" src="gradient.svg" alt="">
+              <div class="relative z-10 flex flex-col justify-between h-full">
+                <div class="mb-24 flex-1">
+                  <h3 class="mb-2 text-lg font-bold font-heading leading-snug">Senior Software Developer</h3>
+                  <p class="text-sm text-gray-500 font-medium">
+                    <span>IO Digital</span>
+                    <span class="px-2">•</span>
+                    <span>Antwerpen</span>
+                  </p>
+                </div>
+                <div class="flex-1">
+                  <img src="brand-medium4.png" alt="">
+                </div>
+              </div>
+            </div>
+          </a>
+        </div>
+        <div class="w-full md:w-1/3 p-3.5">
+          <a href="#">
+            <div class="relative p-6 h-full bg-white border hover:border-gray-300 rounded-xl shadow-9xl">
+              <img class="absolute left-0 top-0" src="gradient.svg" alt="">
+              <div class="relative z-10 flex flex-col justify-between h-full">
+                <div class="mb-24 flex-1">
+                  <h3 class="mb-2 text-lg font-bold font-heading leading-snug">Digital Product Designer</h3>
+                  <p class="text-sm text-gray-500 font-medium">
+                    <span>IO Digital</span>
+                    <span class="px-2">•</span>
+                    <span>Amsterdam</span>
+                  </p>
+                </div>
+                <div class="flex-1">
+                  <img src="brand-medium5.png" alt="">
+                </div>
+              </div>
+            </div>
+          </a>
+        </div>
+        <div class="w-full md:w-1/3 p-3.5">
+          <a href="#">
+            <div class="relative p-6 h-full bg-white border hover:border-gray-300 rounded-xl">
+              <img class="absolute left-0 top-0" src="gradient.svg" alt="">
+              <div class="relative z-10 flex flex-col justify-between h-full">
+                <div class="mb-24 flex-1">
+                  <h3 class="mb-2 text-lg font-bold font-heading leading-snug">Full-Stack Developer</h3>
+                  <p class="text-sm text-gray-500 font-medium">
+                    <span>IO Digital</span>
+                    <span class="px-2">•</span>
+                    <span>Sofia (remote)</span>
+                  </p>
+                </div>
+                <div class="flex-1">
+                  <img src="brand-medium6.png" alt="">
+                </div>
+              </div>
             </div>
           </a>
         </div>
       </div>
+      <a class="flex justify-center items-center text-center font-semibold text-indigo-600 hover:text-indigo-700 leading-normal" href="#">
+        <span class="mr-2.5">Bekijk alle 13 jobs</span>
+        <svg width="17" height="16" viewbox="0 0 17 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M9.83333 3.33337L14.5 8.00004M14.5 8.00004L9.83333 12.6667M14.5 8.00004L2.5 8.00004" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+        </svg>
+      </a>
     </div>
-  </section>
-  
-  
-  <section class="py-24 bg-blueGray-50 overflow-hidden">
-    <div class="container px-4 mx-auto">
-      <div class="md:max-w-6xl mx-auto">
-        <div class="flex flex-wrap -m-3.5 mb-10">
-            @foreach($vacatures as $vacature)
-          <div class="w-full md:w-1/3 p-3.5">
-            <a href="#">
-              <div class="relative p-6 h-full bg-white border hover:border-gray-300 rounded-xl">
-                <img class="absolute left-0 top-0" src="/images/gradient.svg" alt="">
-                <div class="relative z-10 flex flex-col justify-between h-full">
-                  <div class="mb-24 flex-1">
-                    <h3 class="mb-2 text-lg font-bold font-heading leading-snug">{{$vacature->title}}</h3>
-                    <p class="text-sm text-gray-500 font-medium">
-                      <span>{{$company->bedrijfnaam}}</span>
-                      <span class="px-2">•</span>
-                      <span>{{$company->plaats}}</span>
-                    </p>
-                  </div>
-                  <div class="flex-1">
-                    <img src="/images/brand-medium.png" alt="">
-                  </div>
-                </div>
-              </div>
-            </a>
-          </div>
-            @endforeach
-        </div>
-        <a class="flex justify-center items-center text-center font-semibold text-indigo-600 hover:text-indigo-700 leading-normal" href="#">
-          <span class="mr-2.5">Bekijk alle {{count($vacatures)}} jobs</span>
-          <svg width="17" height="16" viewbox="0 0 17 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M9.83333 3.33337L14.5 8.00004M14.5 8.00004L9.83333 12.6667M14.5 8.00004L2.5 8.00004" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
-          </svg>
-        </a>
-      </div>
+  </div>
+</section>
+
+
+
+
+
+
+
+
+
+
+<section class=""><script src="https://cdn.tailwindcss.com?plugins=forms,typography,aspect-ratio,line-clamp"></script>
+
+  <div class="container mx-auto px-4">
+    <div class="mb-8">
+    <!-- Responsive Google Map -->
+    <div class="relative h-0 overflow-hidden mb-6" style="padding-bottom: 56.25%;">
+      <iframe
+        class="absolute top-0 left-0 w-full h-96"
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3353.096656292789!2d-122.08217698485344!3d37.42205787981786!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x808fbc7b4be10725%3A0xf59d178a87b32f52!2sGolden%20Gate%20Bridge!5e0!3m2!1sen!2sus!4v1610035984427!5m2!1sen!2sus"
+        frameborder="0"
+        style="border:0;"
+        allowfullscreen=""
+        aria-hidden="false"
+        tabindex="0"
+      ></iframe>
     </div>
-  </section>
-  
-  <section class=""><script src="https://cdn.tailwindcss.com?plugins=forms,typography,aspect-ratio,line-clamp"></script>
+    </div>
+</section>
 
-    <div class="container mx-auto px-4">
-      <div class="mb-8">
-      <!-- Responsive Google Map -->
-      <div class="relative h-0 overflow-hidden mb-6" style="padding-bottom: 56.25%;">
-        <iframe
-          class="absolute top-0 left-0 w-full h-96"
-          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3353.096656292789!2d-122.08217698485344!3d37.42205787981786!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x808fbc7b4be10725%3A0xf59d178a87b32f52!2sGolden%20Gate%20Bridge!5e0!3m2!1sen!2sus!4v1610035984427!5m2!1sen!2sus"
-          frameborder="0"
-          style="border:0;"
-          allowfullscreen=""
-          aria-hidden="false"
-          tabindex="0"
-        ></iframe>
-      </div>
-      </div>
-  </section>
 
-<button type="submit">Sla wijzigingen op</button>
 
-</form>
-  <!--Reviews van stagiairs-->
-  <script src="https://cdn.tailwindcss.com?plugins=forms,typography,aspect-ratio,line-clamp"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script src="https://cdn.tailwindcss.com?plugins=forms,typography,aspect-ratio,line-clamp"></script>
 <section class="py-10 lg:py-16 bg-gray-100 font-poppins dark:bg-gray-800">
     <div class="max-w-6xl px-4 py-6 mx-auto lg:py-4 md:px-6">
         <div >
             <h2
                 class="px-2 pb-2 mb-8 text-lg font-semibold border-b border-gray-300 dark:text-gray-300 dark:border-gray-700">
-                Reviews van vorige stagiairs</h2>
+                Customer Reviews</h2>
             <div class="max-w-5xl px-4">
                 <div class="grid grid-cols-1 gap-6 md:grid-cols-3">
                     <div>
@@ -418,8 +603,6 @@
                 </div>
             </div>
         </div>
-
-        <!--Comments-->
         <div class="mt-10">
             <h2
                 class="px-2 pb-2 mb-8 text-lg font-semibold border-b border-gray-300 dark:text-gray-300 dark:border-gray-700">
@@ -653,11 +836,120 @@
         </div>
     </div>
 </section><script src="https://cdn.tailwindcss.com?plugins=forms,typography,aspect-ratio,line-clamp"></script>
-<section class="py-10 lg:py-4 bg-gray-100 font-poppins dark:bg-gray-800">
+<section class="py-10 lg:py-16 bg-gray-100 font-poppins dark:bg-gray-800">
     <div class="max-w-6xl px-4 py-6 mx-auto lg:py-4 md:px-6">
-       
-    <!--Reviews-->
-        <div class="mt-0">
+        <div >
+           
+            <div class="max-w-5xl px-4">
+                <div class="grid grid-cols-1 gap-6 md:grid-cols-3">
+                    <div>
+                        <ul class="flex items-center mt-4 mb-4">
+                            <li>
+                                <a href="#">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                        fill="currentColor"
+                                        class="w-4 mr-1 text-blue-500 dark:text-blue-400 bi bi-star-fill"
+                                        viewBox="0 0 16 16">
+                                        <path
+                                            d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z">
+                                        </path>
+                                    </svg>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                        fill="currentColor"
+                                        class="w-4 mr-1 text-blue-500 dark:text-blue-400 bi bi-star-fill"
+                                        viewBox="0 0 16 16">
+                                        <path
+                                            d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z">
+                                        </path>
+                                    </svg>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                        fill="currentColor"
+                                        class="w-4 mr-1 text-blue-500 dark:text-blue-400 bi bi-star-fill"
+                                        viewBox="0 0 16 16">
+                                        <path
+                                            d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z">
+                                        </path>
+                                    </svg>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                        fill="currentColor"
+                                        class="w-4 mr-1 text-blue-500 dark:text-blue-400 bi bi-star-fill"
+                                        viewBox="0 0 16 16">
+                                        <path
+                                            d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z">
+                                        </path>
+                                    </svg>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                        fill="currentColor"
+                                        class="w-4 mr-1 text-blue-500 dark:text-blue-400 bi bi-star-fill"
+                                        viewBox="0 0 16 16">
+                                        <path
+                                            d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z">
+                                        </path>
+                                    </svg>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                        fill="currentColor"
+                                        class="w-4 mr-1 text-blue-500 dark:text-blue-400 bi bi-star-fill"
+                                        viewBox="0 0 16 16">
+                                        <path
+                                            d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z">
+                                        </path>
+                                    </svg>
+                                </a>
+                            </li>
+                        </ul>
+                        <p class="text-sm dark:text-gray-400">Average Rating and percentage per views
+                        </p>
+                    </div>
+                    <div>
+                        <div class="flex items-center mb-2">
+                            <div class="w-full h-4 mr-2 bg-gray-200 rounded-full dark:bg-gray-700">
+                                <div class="h-4 bg-blue-500 rounded-full dark:bg-blue-400" style="width: 75%"></div>
+                            </div>
+                            <div class="flex justify-end text-base font-medium dark:text-gray-400">91% </div>
+                        </div>
+                        <div class="flex items-center mb-2">
+                            <div class="w-full h-4 mr-2 bg-gray-200 rounded-full dark:bg-gray-700">
+                                <div class="h-4 bg-blue-500 rounded-full dark:bg-blue-400" style="width: 45%"></div>
+                            </div>
+                            <div class="flex justify-end text-base font-medium dark:text-gray-400">45% </div>
+                        </div>
+                        <div class="flex items-center mb-2">
+                            <div class="w-full h-4 mr-2 bg-gray-200 rounded-full dark:bg-gray-700">
+                                <div class="h-4 bg-blue-500 rounded-full dark:bg-blue-400" style="width: 25%"></div>
+                            </div>
+                            <div class="flex justify-end text-base font-medium dark:text-gray-400">25% </div>
+                        </div>
+                        <div class="flex items-center mb-2 ">
+                            <div class="w-full h-4 mr-2 bg-gray-200 rounded-full dark:bg-gray-700">
+                                <div class="h-4 bg-blue-500 rounded-full dark:bg-blue-400" style="width: 14%"></div>
+                            </div>
+                            <div class="flex justify-end text-base font-medium dark:text-gray-400">14% </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="mt-10">
             <h2
                 class="px-2 pb-2 mb-8 text-lg font-semibold border-b border-gray-300 dark:text-gray-300 dark:border-gray-700">
                 Reviews</h2>
@@ -890,6 +1182,3 @@
         </div>
     </div>
 </section>
-
-
-</x-selectie._layout>
