@@ -3,12 +3,14 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BedrijfController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\SelectieController;
 use App\Http\Controllers\VacatureController;
 use App\Http\Controllers\Auth\PasswordController;
 use App\Http\Controllers\BedrijfRegisterController;
+use App\Http\Controllers\BedrijfsProfielController;
 use App\Http\Controllers\StudentRegisterController;
 use App\Http\Controllers\Auth\NewPasswordController;
 use App\Http\Controllers\Auth\VerifyEmailController;
@@ -18,7 +20,7 @@ use App\Http\Controllers\Auth\ConfirmablePasswordController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Auth\EmailVerificationPromptController;
 use App\Http\Controllers\Auth\EmailVerificationNotificationController;
-use App\Http\Controllers\BedrijfsProfielController;
+use App\Http\Controllers\NotFoundController;
 
 /*
 |--------------------------------------------------------------------------
@@ -94,6 +96,12 @@ Route::middleware('auth', 'verified')->group(function () {
     Route::get('bedrijf/profiel/edit', [BedrijfsProfielController::class, 'edit'])->name('bedrijf.profielEdit');
     Route::patch('bedrijf/profiel/edit', [BedrijfsProfielController::class, 'update'])->name('bedrijf.profielUpdate');
 
+    //Route voor projecten van het bedrijf
+    Route::get('bedrijf/project', [ProjectController::class, 'index'])->name('project.index');
+    Route::get('bedrijf/project/create', [ProjectController::class, 'create'])->name('project.create'); 
+    Route::post('bedrijf/project', [ProjectController::class, 'store'])->name('project.store');
+    Route::get('bedrijf/project/{projectName}', [ProjectController::class, 'show']);
+
     //edit de gehele vacature
 
     //welke soorten routes zijn er allemaal?
@@ -105,6 +113,9 @@ Route::middleware('auth', 'verified')->group(function () {
     //Het verschil tussen put en patch is dat put alle velden van een resource update en patch alleen de velden die je wilt updaten
     //delete is voor het verwijderen van een resource
 });
+
+Route::get('/not-found', [NotFoundController::class, 'index']);
+
 
 Route::middleware('auth', 'verified')->group(function(){
     Route::get('student/index',[StudentController::class,'index'])->name('student.index');

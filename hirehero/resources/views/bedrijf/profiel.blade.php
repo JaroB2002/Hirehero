@@ -25,24 +25,37 @@
                 <h1 class="text-3xl font-bold mb-4">Bedrijfsvoorstelling</h1>
                 <p class="text-gray-700">{{$bedrijfsprofiel->bedrijfVoorstelling ?? 'Typ hier iets leuk over je bedrijf'}}</p>
             </div>
+            @if($bedrijfsprofiel && $bedrijfsprofiel->bedrijfVideo)
+
             <div class="embed-responsive embed-responsive-21by9 relative w-full overflow-hidden" style="padding-top: 42.857143%">
-                <iframe class="embed-responsive-item absolute bottom-0 left-0 right-0 top-0 h-full w-full" src="https://www.youtube.com/embed/vlDzYIIOYmM?enablejsapi=1&amp;origin=https%3A%2F%2Fmdbootstrap.com" allowfullscreen="" data-gtm-yt-inspected-2340190_699="true" id="240632615"></iframe>
+                <iframe class="embed-responsive-item absolute bottom-0 left-0 right-0 top-0 h-full w-full" src="{{asset($bedrijfsprofiel->bedrijfVideo)}}" allowfullscreen="" data-gtm-yt-inspected-2340190_699="true" id="240632615"></iframe>
+              
             </div>
+            @else 
+
+            <div class="embed-responsive embed-responsive-21by9 relative w-full overflow-hidden" style="padding-top: 42.857143%">
+                <img class="embed-responsive-item absolute bottom-0 left-0 right-0 top-0 h-full w-full"  src='/images/gradient.svg' allowfullscreen="" data-gtm-yt-inspected-2340190_699="true" id="240632615">
+            </div>
+            @endif
+
+
         </div>
-        <script src="https://cdn.tailwindcss.com?plugins=forms,typography,aspect-ratio,line-clamp"></script>
+        <script src="https://cdn.tailwindcss.com?plugins=forms,typography,aspect-ratio,line-clamp"></script>    
         <section class="py-16">
             <script src="https://cdn.tailwindcss.com?plugins=forms,typography,aspect-ratio,line-clamp"></script>
             <div class="container px-4 mx-auto">
                 <div class="flex flex-wrap mb-32 -mx-8">
                     <div class="w-full lg:w-1/2 px-8">
                         <h2 class="text-3xl lg:text-5xl font-bold font-heading mb-20 max-w-xs lg:max-w-lg">Sfeerbeelden</h2>
-                        <img class="rounded-3xl w-full mb-8" src="/images/picture2.png" alt="">
-                        <img class="rounded-3xl w-full mb-8" src="/images/picture5.png" alt="">
+                        @foreach($galleries->slice(0,2) as $gallery)
+                        <img class="rounded-3xl w-full mb-8" src="{{ asset($gallery->image)}}" alt="">
+                        @endforeach
                     </div>
                     <div class="w-full lg:w-1/2 px-8">
-                        <img class="rounded-3xl w-full mb-24" src="/images/picture3.png" alt="">
-                        <p class="text-gray-600 text-lg mb-10">Ontdek de toekomst met Innovatech Solutions. Ons team van visionaire tech-experts ontwerpt grensverleggende oplossingen voor de moderne wereld. </p>
-                        <p class="text-gray-600 text-lg">Van sprankelende stadsgezichten doordrenkt met slimme technologie tot aan krachtige, levensreddende innovaties in de gezondheidszorg. Bij Innovatech smeden we de toekomst met technologie.</p>
+                        @if($galleries->count() >= 3)
+                        <img class="rounded-3xl w-full mb-24" src="{{asset($galleries[2]->image)}}" alt="">
+                        @endif
+                        <p class="text-gray-600 text-lg mb-10">{{$bedrijfBio = $bedrijfsprofiel->bio ?? 'Hier komt de bio van uw bedrijf.'}} </p>
                     </div>
                 </div>
             </div>
@@ -60,7 +73,7 @@
             <span>Let’s stay</span>
             <span class="font-serif italic">connected</span>
           </h1>
-          <p class="text-xl text-gray-500 font-semibold">{{$bedrijfsprofiel->doel}}</p>
+          <p class="text-xl text-gray-500 font-semibold">{{$bedrijfsprofiel->doel ?? "schrijf hier iets over je bedrijf"}}</p>
         </div>
         <div class="xs:max-w-sm lg:max-w-none mx-auto">
           <div class="flex flex-wrap items-center -mx-4 mb-18">
@@ -123,56 +136,59 @@
         </div>
 
         <div class="grid grid-cols-2 gap-4 sm:grid-cols-3 md:gap-6 xl:gap-8">
+            @php 
+            //projecten mogen niet meer dan 4 zijn, als het er toch meer zijn, dan worden die niet getoond, en verschijnt er een knop "meer" die naar de projecten pagina leidt
+
+            $maxProjects = 4;
+
+            $totalProjects = count($projects);
+
+
+            @endphp
+
+            @foreach($projects as $key => $project  )
+            @if($key < $maxProjects)
+            @if($loop->iteration == 1 || $loop->iteration == 4)
             <!-- image - start -->
-            <a href="#"
+            <!-- image - start -->
+            <a href="/bedrijf/projecten/{{$project->projectName}}"
                 class="group relative flex h-48 items-end overflow-hidden rounded-lg bg-gray-100 shadow-lg md:h-80">
-                <img src="https://images.unsplash.com/photo-1593508512255-86ab42a8e620?auto=format&q=75&fit=crop&w=600" loading="lazy" alt="Photo by Minh Pham" class="absolute inset-0 h-full w-full object-cover object-center transition duration-200 group-hover:scale-110" />
+                <img src="{{asset($project->thumbnail)}}" loading="lazy" alt="Photo by Minh Pham" class="absolute inset-0 h-full w-full object-cover object-center transition duration-200 group-hover:scale-110" />
 
                 <div
                     class="pointer-events-none absolute inset-0 bg-gradient-to-t from-gray-800 via-transparent to-transparent opacity-50">
                 </div>
 
-                <span class="relative ml-4 mb-3 inline-block text-sm text-white md:ml-5 md:text-lg">Project 1</span>
+                <span class="relative ml-4 mb-3 inline-block text-sm text-white md:ml-5 md:text-lg">{{$project->projectName}}</span>
             </a>
+
+        @else
+
             <!-- image - end -->
 
             <!-- image - start -->
-            <a href="#"
+            <a href="/bedrijf/projecten/{{$project->projectName}}"
                 class="group relative flex h-48 items-end overflow-hidden rounded-lg bg-gray-100 shadow-lg md:col-span-2 md:h-80">
-                <img src="https://images.unsplash.com/photo-1542759564-7ccbb6ac450a?auto=format&q=75&fit=crop&w=1000" loading="lazy" alt="Photo by Magicle" class="absolute inset-0 h-full w-full object-cover object-center transition duration-200 group-hover:scale-110" />
+                <img src="{{asset($project->thumbnail)}}" loading="lazy" alt="Photo by Magicle" class="absolute inset-0 h-full w-full object-cover object-center transition duration-200 group-hover:scale-110" />
 
                 <div
                     class="pointer-events-none absolute inset-0 bg-gradient-to-t from-gray-800 via-transparent to-transparent opacity-50">
                 </div>
 
-                <span class="relative ml-4 mb-3 inline-block text-sm text-white md:ml-5 md:text-lg">Project 2</span>
+                <span class="relative ml-4 mb-3 inline-block text-sm text-white md:ml-5 md:text-lg">{{$project->projectName}}</span>
             </a>
-            <!-- image - end -->
+        @endif
+        @endif
 
-            <!-- image - start -->
-            <a href="#"
-                class="group relative flex h-48 items-end overflow-hidden rounded-lg bg-gray-100 shadow-lg md:col-span-2 md:h-80">
-                <img src="https://images.unsplash.com/photo-1610465299996-30f240ac2b1c?auto=format&q=75&fit=crop&w=1000" loading="lazy" alt="Photo by Martin Sanchez" class="absolute inset-0 h-full w-full object-cover object-center transition duration-200 group-hover:scale-110" />
+        @if ($key == $maxProjects - 1 && $totalProjects > $maxProjects)
 
-                <div
-                    class="pointer-events-none absolute inset-0 bg-gradient-to-t from-gray-800 via-transparent to-transparent opacity-50">
-                </div>
+        <button><a href="/bedrijf/project">Bekijk alle projecten</a></button>
 
-                <span class="relative ml-4 mb-3 inline-block text-sm text-white md:ml-5 md:text-lg">Project 3</span>
-            </a>
-            <!-- image - end -->
+        @endif
+        @endforeach
+        
 
-            <!-- image - start -->
-            <a href="#"
-                class="group relative flex h-48 items-end overflow-hidden rounded-lg bg-gray-100 shadow-lg md:h-80">
-                <img src="https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&q=75&fit=crop&w=600" loading="lazy" alt="Photo by Lorenzo Herrera" class="absolute inset-0 h-full w-full object-cover object-center transition duration-200 group-hover:scale-110" />
-
-                <div
-                    class="pointer-events-none absolute inset-0 bg-gradient-to-t from-gray-800 via-transparent to-transparent opacity-50">
-                </div>
-
-                <span class="relative ml-4 mb-3 inline-block text-sm text-white md:ml-5 md:text-lg">Project 4</span>
-            </a>
+            
             <!-- image - end -->
         </div>
     </div>
@@ -200,7 +216,7 @@
           <div class="w-full md:w-1/2 xl:w-1/4 px-4 mb-12">
             <div class="max-w-xs md:max-w-none mx-auto">
               <div class="flex flex-col items-center">
-                <img class="block h-48 w-48" src="/images/circle-team-members1.png" alt="">
+                <img class="block h-48 w-48 rounded-full" src="{{asset($teamlid->profile_picture)}}" alt="">
                 <div class="inline-flex -mt-6 mb-5 items-center justify-center py-3 px-5 bg-white rounded-full">
                   <a class="inline-block mr-3 p-1 hover:bg-orange-100 rounded-md" href="#">
                     <img src="/images/icon-facebook.svg" alt="">

@@ -15,6 +15,8 @@ return new class extends Migration
             $table->id();
             $table->foreignId('company_id')->constrained();
             $table->string('bedrijfVoorstelling')->nullable();
+            $table->string('bedrijfVideo')->nullable();
+            $table->string('bio')->nullable();
             $table->string('doel')->nullable();
             $table->string('skills')->nullable();
             $table->string('gallery')->nullable();

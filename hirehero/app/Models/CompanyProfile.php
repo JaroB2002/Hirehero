@@ -12,6 +12,8 @@ class CompanyProfile extends Model
     protected $fillable = [
         'company_id',
         'bedrijfVoorstelling',
+        'bedrijfVideo',
+        'bio',
         'doel',
         'skills',
         'gallery',
@@ -21,6 +23,11 @@ class CompanyProfile extends Model
     public function company()
     {
         return $this->belongsTo(Company::class);
+    }
+
+    public function gallery()
+    {
+        return $this->hasMany(Gallerij::class);
     }
 
 

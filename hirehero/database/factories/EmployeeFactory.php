@@ -26,6 +26,7 @@ class EmployeeFactory extends Factory
 
             'user_id' => User::factory(),
             'company_id' => Company::factory(),
+            'profile_picture' => fake()->imageUrl(),
             'functie'=> fake()->randomElement(['developer', 'designer', 'manager', 'sales']),
             'created_at' => now(),
             'updated_at' => now(),
