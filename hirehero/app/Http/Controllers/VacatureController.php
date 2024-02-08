@@ -20,7 +20,7 @@ class VacatureController extends Controller
 
 
         return view('vacature.index', 
-        ['vacatures' => Vacature::all()]);
+        ['vacatures' => Vacature::orderBy('created_at', 'desc')->paginate(5)]);
     }
 
 

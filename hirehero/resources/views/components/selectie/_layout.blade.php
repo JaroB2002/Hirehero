@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+  <script src="https://cdn.tailwindcss.com?plugins=forms,typography,aspect-ratio,line-clamp"></script>
+
   <meta charset="UTF-8">
   @vite('resources/css/app.css')
   
