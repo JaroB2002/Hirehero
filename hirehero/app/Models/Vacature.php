@@ -21,7 +21,8 @@ class Vacature extends Model
         'categorie',
         'aantalPlaatsen',
         'sollicitatieType',
-        'status'
+        'status',
+        'endDate'
     ];
 
 
@@ -29,4 +30,8 @@ class Vacature extends Model
     {
         return $this->belongsTo(Company::class);
     }
+
+    protected $casts = [
+        'endDate' => 'datetime'
+    ];
 }

@@ -25,7 +25,7 @@ return new class extends Migration
             //Persoon kan aanduiden wat voor sollicitatie ze ontvangen. Of een videoCV verplicht, optioneel of niet.
             $table->string('sollicitatieType');
             $table->string('status');
-
+            $table->datetime('endDate');
             $table->timestamps();
         });
     }

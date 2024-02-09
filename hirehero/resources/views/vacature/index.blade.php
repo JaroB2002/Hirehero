@@ -83,7 +83,7 @@
                       </td>
 
                       <td class="px-4 py-3 text-sm">
-                        07/5/2024
+                        {{$vacature->endDate->format('d/m/Y')}}
                       </td>
                       <td class="px-4 py-3 text-sm">
                         <span
@@ -95,7 +95,7 @@
                     <td class="px-4 py-3 text-sm">
                         <div style="display: flex; align-items: center;">
                             <img src="/images/eye.svg" alt="Oogicoon" style="margin-right: 5px;">
-                            <img src="trash-2.svg" alt="Prullenbakicoon" style="margin-left: 5px;">
+                            <img src="/images/trash-2.svg" alt="Prullenbakicoon" style="margin-left: 5px;">
                         </div>
                     </td>
                     </tr>

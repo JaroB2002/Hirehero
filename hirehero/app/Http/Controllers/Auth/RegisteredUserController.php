@@ -12,6 +12,7 @@ use Illuminate\View\View;
 use Illuminate\Validation\Rule;
 use Illuminate\Validation\Rules;
 use App\Http\Controllers\Controller;
+use App\Models\CompanyProfile;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
@@ -97,7 +98,16 @@ class RegisteredUserController extends Controller
 
                 $companyData['user_id'] = $user->id;
 
-                Company::create($companyData);
+                $company = Company::create($companyData);
+                //Maak een bedrijfsprofiel aan
+
+                CompanyProfile::create([
+                    'company_id' => $company->id,
+                    'bedrijfVoorstelling'=> 'Vul hier een korte voorstelling van je bedrijf in',
+                    'bedrijfVideo'=> '',
+                    'bio'=> 'Vul hier een korte bio van je bedrijf in',
+                    'doel'=> 'Vul hier het doel van je bedrijf in',
+                ]);
 
                 event(new Registered($user));
 

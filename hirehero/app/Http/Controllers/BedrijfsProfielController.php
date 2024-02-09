@@ -18,20 +18,19 @@ class BedrijfsProfielController extends Controller
     //
     public function index() {
 
-        //Toon het bedrijfsprofiel van het ingelogde bedrijf
-        //Toon de teamleden van het bedrijf
-        //Toon de vacatures van het bedrijf
-
+        
+        //We nemen de company_id van de ingelogde gebruiker
         $company_id = Auth::user()->company->id;
         
+        //We nemen de informatie van het bedrijf op basis van de company_id
         $company = Company::find($company_id);
 
+        //We nemen de vacatures van het bedrijf op basis van de company_id
         $vacatures = Vacature::where('company_id', $company_id)->get();
-
+        //We nemen de werknemers van het bedrijf op basis van de company_id
         $employees = Employee::where('company_id', $company_id)->get();
 
         //Krijg de employee voornaam, familienaam en email uit tabel users
-
         foreach($employees as $employee) {
             $employee->voornaam = $employee->user->voornaam;
             $employee->familienaam = $employee->user->familienaam;
@@ -40,60 +39,51 @@ class BedrijfsProfielController extends Controller
 
         }
 
-        //Je kan de foto's van de gallerij van het bedrijf zien
-
-
+        //Je kan de foto's van de gallerij van het bedrijf zien op de bedrijfsprofiel pagina
         $galleries = Gallerij::where('company_profile_id', $company_id)->get();
 
+        //Elke foto van de gallerij wordt opgehaald
         foreach($galleries as $gallery) {
             $gallery->image = $gallery->image;
         }
 
-        //krijg de email en telefoonnummer van het bedrijf
+        //We nemen de laatste 3 foto's van de gallerij van het bedrijf op basis van de company_id
+        $galleries = Gallerij::where('company_profile_id', $company_id)->orderBy('created_at', 'desc')->take(3)->get();
 
+        
+        //We nemen de email en telefoonnummer van het bedrijf uit de tabel users
         $company->email = $company->user->email;
         $company->telefoonnummer = $company->user->telefoonnummer;
 
-
-
-        //Toon alles van bedrijfsprofiel
-
+        //We nemen de bedrijfsprofiel van het bedrijf op basis van de company_id
         $bedrijfsprofiel = CompanyProfile::where('company_id', $company_id)->first();
 
+        //We nemen de projecten van het bedrijf op basis van de company_id
         $projects = Project::where('company_id', $company_id)->get();
 
 
 
-
+        //We geven de informatie van het bedrijf, de vacatures, de werknemers, de bedrijfsprofiel, de gallerij en de projecten mee naar de view
         return view('bedrijf.profiel', compact('company', 'vacatures', 'employees', 'bedrijfsprofiel', 'galleries', 'projects'));
 
 
     }
 
-    public function store() {
-
-        //We hebben de bedrijfsId nodig van het ingelode bedrijf
-        $company_id = Auth::user()->company->id;
-        
-        //Dan de informatie zoals bedrijfsnaam, 
-
-
-
-
-
-
-
-    }
 
     public function edit() {
 
+        //De edit functie is voor het tonen van de bedrijfsprofiel edit pagina
 
-  $company_id = Auth::user()->company->id;
-        
+        //We nemen de company_id van de ingelogde gebruiker
+        $company_id = Auth::user()->company->id;
+
+        //We nemen de informatie van het bedrijf op basis van de company_id
         $company = Company::find($company_id);
 
+        //We nemen de vacatures van het bedrijf op basis van de company_id
         $vacatures = Vacature::where('company_id', $company_id)->get();
 
+        //We nemen de werknemers van het bedrijf op basis van de company_id
         $employees = Employee::where('company_id', $company_id)->get();
 
         //Krijg de employee voornaam, familienaam en email uit tabel users
@@ -104,6 +94,7 @@ class BedrijfsProfielController extends Controller
             $employee->email = $employee->user->email;
         }
 
+        //We nemen de bedrijfsprofiel van het bedrijf op basis van de company_id
         $bedrijfsprofiel = CompanyProfile::where('company_id', $company_id)->first();
 
         //Je kan de foto's van de gallerij van het bedrijf zien
@@ -117,6 +108,9 @@ class BedrijfsProfielController extends Controller
 
         $projects = Project::where('company_id', $company_id)->get();
 
+    
+        $company->email = $company->user->email;
+        $company->telefoonnummer = $company->user->telefoonnummer;
 
         
 
@@ -129,26 +123,22 @@ class BedrijfsProfielController extends Controller
 
     public function update(Request $request) {
 
-        
+        //De update functie is voor het updaten van de bedrijfsprofiel
 
 
-        //Kijk of de bedrijfsprofiel al bestaat
+        //Kijk of de bedrijfsprofiel al bestaat op basis van de company_id
         $company_id = Auth::user()->company->id;
 
-        //Voeg foto's toe aan de gallerij
-
-
+        //We nemen de bedrijfsprofiel van het bedrijf op basis van de company_id
         $bedrijfsprofiel = CompanyProfile::where('company_id', $company_id)->first();
 
-        
-
-
-
-        if ($request->hasFile('gallerij')) {
+    
+        //Kijk of er foto's zijn geüpload voor de gallerij
+        if ($request->hasFile('gallerij')) {    
             $galleries = $request->file('gallerij');
             $company_profile_id = $request->company_profile_id;
 
-
+            //Loop door elk bestand
             foreach ($galleries as $gallery) {
                 // Valideer elk geüploade bestand
                 $request->validate($this->Galleryrules());
@@ -156,7 +146,7 @@ class BedrijfsProfielController extends Controller
                 $galleryName = time() . '_' . $gallery->getClientOriginalName();
                 $gallery->move(public_path('gallerij'), $galleryName);
                 $galleryPath = 'gallerij/' . $galleryName;
-        
+                // Voeg elk bestand toe aan de tabel gallerij
                 Gallerij::create([
                     'company_profile_id' => $company_profile_id,
                     'image' => $galleryPath,
@@ -165,43 +155,29 @@ class BedrijfsProfielController extends Controller
     }
        
         
-
+        //We nemen de company_id van de ingelogde gebruiker en de informatie van het bedrijf op basis van de company_id
         $company = Company::find($company_id);
 
+        //Kijk of de companydata voldoet aan de validatieregels
         $companyData = $request->validate($this->Companyrules());
 
+
+        //Wanneer ze er aan voldoen, update de tabel company met de nieuwe data
         $company->update($companyData);
 
-        //Telefoonnummer en email van bedrijf kunnen ook aangepast worden
-
+        //Kijk of de userdata voldoet aan de validatieregels
         $userData = $request->validate($this->Userrules());
 
+        //Wanneer ze er aan voldoen, update de userdata
         $company->user->update($userData);
-
-      
-
-        
-
-
-
-
-        //Voeg foto's toe aan de gallerij        
-        
-        //De info bedrijfVoorstelling, doel, skills, gallery, projects, company_id moeten in de tabel company_profiles
-
        
 
-
-        //dit moet in de tabel company_profiles
-
+        //Kijk of de bedrijfsprofieldata voldoet aan de validatieregels
         $bedrijfsProfielData = $request->validate($this->CompanyProfilrules());
 
-        //bedrijfVideo
 
-
-
-        
-        if ($request->hasFile('bedrijfVideo')) {
+            //Kijk of er een video is geüpload
+            if ($request->hasFile('bedrijfVideo')) {
             $bedrijfVideo = $request->file('bedrijfVideo');
             $bedrijfVideoName = time() . '_' . $bedrijfVideo->getClientOriginalName();
             $bedrijfVideo->move(public_path('bedrijfVideos'), $bedrijfVideoName);
@@ -211,28 +187,21 @@ class BedrijfsProfielController extends Controller
         }
 
 
+        //Kijk of er een bedrijfsprofiel bestaat
          if($bedrijfsprofiel) {
+            //Wanneer het bestaat, update de tabel bedrijfsprofiel met de nieuwe data
             $bedrijfsprofiel->update($bedrijfsProfielData);
         } else {
-            CompanyProfile::create([
-                'company_id' => $company_id,
-                'bedrijfsVoorstelling'=>request('bedrijfVoorstelling'),
-                'bedrijfVideo'=>$bedrijfVideoPath,
-                'bio'=>request('bio'),
-                'doel'=>request('doel'),
-                'skills'=>request('skills'),
-                'projects'=>request('projects')
-
-               
-            ]);
+           //Toon dat er geen bedrijfsprofiel bestaat
+            return redirect()->route('bedrijf.profiel', ['bedrijfsprofiel' => $bedrijfsprofiel])->with('error', 'Er bestaat geen bedrijfsprofiel');
         }
-
-
         
+        //Toon dat de bedrijfsprofiel is geüpdatet, en stuur de gebruiker terug naar de bedrijfsprofiel pagina
         return redirect()->route('bedrijf.profiel');
 
 
     }
+
 
     public function Companyrules() {
         return [

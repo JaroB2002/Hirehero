@@ -31,6 +31,7 @@ class VacatureFactory extends Factory
             'categorie' => $this->faker->randomElement(['ICT', 'Techniek', 'Zorg', 'Onderwijs', 'Overig']),
             'aantalPlaatsen' => $this->faker->numberBetween(1, 10),
             'status' => $this->faker->randomElement(['live', 'verborgen', 'gesloten']),
+            'endDate' => $this->faker->dateTimeBetween('now', '+1 year')
         ];
     }
 }

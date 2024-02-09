@@ -1,19 +1,7 @@
 <x-selectie._layout>
-    <div id="errors" class="mb-8">
-
-        <div>
-            <h2>errors</h2>
-            @if($errors->any())
-            <div>
-                <ul>
-                    @foreach($errors->all() as $error)
-                    <li>{{$error}}</li>
-                    @endforeach
-                </ul>
-            </div>
-            @endif
-        
-        </div>
+    <x-errors.errorDisplay>
+    </x-errors.errorDisplay>
+ 
 
     <header class="container mx-auto px-4">
         <h1 class="font-bolder font-epiilogue text-4xl">{{$company->bedrijfnaam}}</h1>
@@ -23,7 +11,7 @@
         <input type="hidden" name="company_profile_id" value="{{$bedrijfsprofiel->id ?? null}}">
         <a href="{{$company->website}}">{{$company->bedrijfnaam}} website</a>
         <div>
-            <img src="" alt="Logo van het bedrijf {{$company->bedrijfnaam}}">
+            <img src="/images/logo.png" width="24" alt="Logo van het bedrijf {{$company->bedrijfnaam}}">
 
         </div>
         <p>Oprichtings datum: {{$company->oprichtingsdatum ? $company->oprichtingsdatum->format('d-m-Y') : 'Hier komt de datum'}}</p>
@@ -49,153 +37,11 @@
                 <img class="embed-responsive-item absolute bottom-0 left-0 right-0 top-0 h-full w-full" src='/images/gradient.svg' allowfullscreen="" data-gtm-yt-inspected-2340190_699="true" id="240632615">
             </div>
             @endif
-            <div class="bg-white p7 rounded w-9/12 mx-auto">
-                <script src="https://cdn.tailwindcss.com?plugins=forms,typography,aspect-ratio,line-clamp"></script>
+
+        <x-dropImage name="bedrijfVideo" accept=".png, .mp4, .jpg, .jpeg" >
+
+        </x-dropImage>
             
-                <div x-data="dataFileDnD()" class="relative flex flex-col p-4 text-gray-400 border border-gray-200 rounded">
-                    <div x-ref="dnd"
-                        class="relative flex flex-col text-gray-400 border border-gray-200 border-dashed rounded cursor-pointer">
-                        <input accept="*" type="file" 
-                            class="absolute inset-0 z-50 w-full h-full p-0 m-0 outline-none opacity-0 cursor-pointer"
-                            @change="addFiles($event)"
-                            @dragover="$refs.dnd.classList.add('border-blue-400'); $refs.dnd.classList.add('ring-4'); $refs.dnd.classList.add('ring-inset');"
-                            @dragleave="$refs.dnd.classList.remove('border-blue-400'); $refs.dnd.classList.remove('ring-4'); $refs.dnd.classList.remove('ring-inset');"
-                            @drop="$refs.dnd.classList.remove('border-blue-400'); $refs.dnd.classList.remove('ring-4'); $refs.dnd.classList.remove('ring-inset');"
-                            title="" name="bedrijfVideo" />
-                
-                        <div class="flex flex-col items-center justify-center py-10 text-center">
-                            <svg class="w-6 h-6 mr-1 text-current-50" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                            </svg>
-                            <p class="m-0">Drag your files here or click in this area.</p>
-                        </div>
-                    </div>
-                
-                    <template x-if="files.length > 0">
-                        <div class="grid grid-cols-2 gap-4 mt-4 md:grid-cols-6" @drop.prevent="drop($event)"
-                            @dragover.prevent="$event.dataTransfer.dropEffect = 'move'">
-                            <template x-for="(_, index) in Array.from({ length: files.length })">
-                                <div class="relative flex flex-col items-center overflow-hidden text-center bg-gray-100 border rounded cursor-move select-none"
-                                    style="padding-top: 100%;" @dragstart="dragstart($event)" @dragend="fileDragging = null"
-                                    :class="{'border-blue-600': fileDragging == index}" draggable="true" :data-index="index">
-                                    <button class="absolute top-0 right-0 z-50 p-1 bg-white rounded-bl focus:outline-none" type="button" @click="remove(index)">
-                                        <svg class="w-4 h-4 text-gray-700" xmlns="http://www.w3.org/2000/svg" fill="none"
-                                            viewBox="0 0 24 24" stroke="currentColor">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
-                                        </svg>
-                                    </button>
-                                    <template x-if="files[index].type.includes('audio/')">
-                                        <svg class="absolute w-12 h-12 text-gray-400 transform top-1/2 -translate-y-2/3"
-                                            xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3" />
-                                        </svg>
-                                    </template>
-                                    <template x-if="files[index].type.includes('application/') || files[index].type === ''">
-                                        <svg class="absolute w-12 h-12 text-gray-400 transform top-1/2 -translate-y-2/3"
-                                            xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
-                                        </svg>
-                                    </template>
-                                    <template x-if="files[index].type.includes('image/')">
-                                        <img class="absolute inset-0 z-0 object-cover w-full h-full border-4 border-white preview"
-                                            x-bind:src="loadFile(files[index])" />
-                                    </template>
-                                    <template x-if="files[index].type.includes('video/')">
-                                        <video
-                                            class="absolute inset-0 object-cover w-full h-full border-4 border-white pointer-events-none preview">
-                                            <fileDragging x-bind:src="loadFile(files[index])" type="video/mp4">
-                                        </video>
-                                    </template>
-                
-                                    <div class="absolute bottom-0 left-0 right-0 flex flex-col p-2 text-xs bg-white bg-opacity-50">
-                                        <span class="w-full font-bold text-gray-900 truncate"
-                                            x-text="files[index].name">Loading</span>
-                                        <span class="text-xs text-gray-900" x-text="humanFileSize(files[index].size)">...</span>
-                                    </div>
-                
-                                    <div class="absolute inset-0 z-40 transition-colors duration-300" @dragenter="dragenter($event)"
-                                        @dragleave="fileDropping = null"
-                                        :class="{'bg-blue-200 bg-opacity-80': fileDropping == index && fileDragging != index}">
-                                    </div>
-                                </div>
-                            </template>
-                        </div>
-                    </template>
-                </div>
-                </div>
-                
-                <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
-                <script src="https://unpkg.com/create-file-list"></script>
-                <script>
-                function dataFileDnD() {
-                    return {
-                        files: [],
-                        fileDragging: null,
-                        fileDropping: null,
-                        humanFileSize(size) {
-                            const i = Math.floor(Math.log(size) / Math.log(1024));
-                            return (
-                                (size / Math.pow(1024, i)).toFixed(2) * 1 +
-                                " " +
-                                ["B", "kB", "MB", "GB", "TB"][i]
-                            );
-                        },
-                        remove(index) {
-                            let files = [...this.files];
-                            files.splice(index, 1);
-                
-                            this.files = createFileList(files);
-                        },
-                        drop(e) {
-                            let removed, add;
-                            let files = [...this.files];
-                
-                            removed = files.splice(this.fileDragging, 1);
-                            files.splice(this.fileDropping, 0, ...removed);
-                
-                            this.files = createFileList(files);
-                
-                            this.fileDropping = null;
-                            this.fileDragging = null;
-                        },
-                        dragenter(e) {
-                            let targetElem = e.target.closest("[draggable]");
-                
-                            this.fileDropping = targetElem.getAttribute("data-index");
-                        },
-                        dragstart(e) {
-                            this.fileDragging = e.target
-                                .closest("[draggable]")
-                                .getAttribute("data-index");
-                            e.dataTransfer.effectAllowed = "move";
-                        },
-                        loadFile(file) {
-                            const preview = document.querySelectorAll(".preview");
-                            const blobUrl = URL.createObjectURL(file);
-                
-                            preview.forEach(elem => {
-                                elem.onload = () => {
-                                    URL.revokeObjectURL(elem.src); // free memory
-                                };
-                            });
-                
-                            return blobUrl;
-                        },
-                        addFiles(e) {
-                            const files = createFileList([...this.files], [...e.target.files]);
-                            this.files = files;
-                            this.form.formData.files = [...files];
-                        }
-                    };
-                }
-                </script>
-            
-        </div>
         <script src="https://cdn.tailwindcss.com?plugins=forms,typography,aspect-ratio,line-clamp"></script>
         <section class="py-16">
             <script src="https://cdn.tailwindcss.com?plugins=forms,typography,aspect-ratio,line-clamp"></script>
@@ -203,151 +49,9 @@
                 <div class="flex flex-wrap mb-32 -mx-8">
                     <div class="w-full lg:w-1/2 px-8">
                         <h2 class="text-3xl lg:text-5xl font-bold font-heading mb-20 max-w-xs lg:max-w-lg">Sfeerbeelden</h2>
-                        <div class="bg-white p7 rounded w-9/12 mx-auto">
-                            <script src="https://cdn.tailwindcss.com?plugins=forms,typography,aspect-ratio,line-clamp"></script>
-                        
-                            <div x-data="dataFileDnD()" class="relative flex flex-col p-4 text-gray-400 border border-gray-200 rounded">
-                                <div x-ref="dnd"
-                                    class="relative flex flex-col text-gray-400 border border-gray-200 border-dashed rounded cursor-pointer">
-                                    <input accept=".png, .jpeg, .jpg, .svg, .gif" type="file" multiple
-                                        class="absolute inset-0 z-50 w-full h-full p-0 m-0 outline-none opacity-0 cursor-pointer"
-                                        @change="addFiles($event)"
-                                        @dragover="$refs.dnd.classList.add('border-blue-400'); $refs.dnd.classList.add('ring-4'); $refs.dnd.classList.add('ring-inset');"
-                                        @dragleave="$refs.dnd.classList.remove('border-blue-400'); $refs.dnd.classList.remove('ring-4'); $refs.dnd.classList.remove('ring-inset');"
-                                        @drop="$refs.dnd.classList.remove('border-blue-400'); $refs.dnd.classList.remove('ring-4'); $refs.dnd.classList.remove('ring-inset');"
-                                        title="" name="gallerij[]" />
-                            
-                                    <div class="flex flex-col items-center justify-center py-10 text-center">
-                                        <svg class="w-6 h-6 mr-1 text-current-50" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                            stroke="currentColor">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                                        </svg>
-                                        <p class="m-0">Drag your files here or click in this area.</p>
-                                    </div>
-                                </div>
-                            
-                                <template x-if="files.length > 0">
-                                    <div class="grid grid-cols-2 gap-4 mt-4 md:grid-cols-6" @drop.prevent="drop($event)"
-                                        @dragover.prevent="$event.dataTransfer.dropEffect = 'move'">
-                                        <template x-for="(_, index) in Array.from({ length: files.length })">
-                                            <div class="relative flex flex-col items-center overflow-hidden text-center bg-gray-100 border rounded cursor-move select-none"
-                                                style="padding-top: 100%;" @dragstart="dragstart($event)" @dragend="fileDragging = null"
-                                                :class="{'border-blue-600': fileDragging == index}" draggable="true" :data-index="index">
-                                                <button class="absolute top-0 right-0 z-50 p-1 bg-white rounded-bl focus:outline-none" type="button" @click="remove(index)">
-                                                    <svg class="w-4 h-4 text-gray-700" xmlns="http://www.w3.org/2000/svg" fill="none"
-                                                        viewBox="0 0 24 24" stroke="currentColor">
-                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                            d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
-                                                    </svg>
-                                                </button>
-                                                <template x-if="files[index].type.includes('audio/')">
-                                                    <svg class="absolute w-12 h-12 text-gray-400 transform top-1/2 -translate-y-2/3"
-                                                        xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                            d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3" />
-                                                    </svg>
-                                                </template>
-                                                <template x-if="files[index].type.includes('application/') || files[index].type === ''">
-                                                    <svg class="absolute w-12 h-12 text-gray-400 transform top-1/2 -translate-y-2/3"
-                                                        xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                            d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
-                                                    </svg>
-                                                </template>
-                                                <template x-if="files[index].type.includes('image/')">
-                                                    <img class="absolute inset-0 z-0 object-cover w-full h-full border-4 border-white preview"
-                                                        x-bind:src="loadFile(files[index])" />
-                                                </template>
-                                                <template x-if="files[index].type.includes('video/')">
-                                                    <video
-                                                        class="absolute inset-0 object-cover w-full h-full border-4 border-white pointer-events-none preview">
-                                                        <fileDragging x-bind:src="loadFile(files[index])" type="video/mp4">
-                                                    </video>
-                                                </template>
-                            
-                                                <div class="absolute bottom-0 left-0 right-0 flex flex-col p-2 text-xs bg-white bg-opacity-50">
-                                                    <span class="w-full font-bold text-gray-900 truncate"
-                                                        x-text="files[index].name">Loading</span>
-                                                    <span class="text-xs text-gray-900" x-text="humanFileSize(files[index].size)">...</span>
-                                                </div>
-                            
-                                                <div class="absolute inset-0 z-40 transition-colors duration-300" @dragenter="dragenter($event)"
-                                                    @dragleave="fileDropping = null"
-                                                    :class="{'bg-blue-200 bg-opacity-80': fileDropping == index && fileDragging != index}">
-                                                </div>
-                                            </div>
-                                        </template>
-                                    </div>
-                                </template>
-                            </div>
-                            </div>
-                            
-                            <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
-                            <script src="https://unpkg.com/create-file-list"></script>
-                            <script>
-                            function dataFileDnD() {
-                                return {
-                                    files: [],
-                                    fileDragging: null,
-                                    fileDropping: null,
-                                    humanFileSize(size) {
-                                        const i = Math.floor(Math.log(size) / Math.log(1024));
-                                        return (
-                                            (size / Math.pow(1024, i)).toFixed(2) * 1 +
-                                            " " +
-                                            ["B", "kB", "MB", "GB", "TB"][i]
-                                        );
-                                    },
-                                    remove(index) {
-                                        let files = [...this.files];
-                                        files.splice(index, 1);
-                            
-                                        this.files = createFileList(files);
-                                    },
-                                    drop(e) {
-                                        let removed, add;
-                                        let files = [...this.files];
-                            
-                                        removed = files.splice(this.fileDragging, 1);
-                                        files.splice(this.fileDropping, 0, ...removed);
-                            
-                                        this.files = createFileList(files);
-                            
-                                        this.fileDropping = null;
-                                        this.fileDragging = null;
-                                    },
-                                    dragenter(e) {
-                                        let targetElem = e.target.closest("[draggable]");
-                            
-                                        this.fileDropping = targetElem.getAttribute("data-index");
-                                    },
-                                    dragstart(e) {
-                                        this.fileDragging = e.target
-                                            .closest("[draggable]")
-                                            .getAttribute("data-index");
-                                        e.dataTransfer.effectAllowed = "move";
-                                    },
-                                    loadFile(file) {
-                                        const preview = document.querySelectorAll(".preview");
-                                        const blobUrl = URL.createObjectURL(file);
-                            
-                                        preview.forEach(elem => {
-                                            elem.onload = () => {
-                                                URL.revokeObjectURL(elem.src); // free memory
-                                            };
-                                        });
-                            
-                                        return blobUrl;
-                                    },
-                                    addFiles(e) {
-                                        const files = createFileList([...this.files], [...e.target.files]);
-                                        this.files = files;
-                                        this.form.formData.files = [...files];
-                                    }
-                                };
-                            }
-                            </script>
+                        <x-dropImage name="gallerij" accept=".png, .jpg, .jpeg" multiple >
+
+                        </x-dropImage>
                         
                         @if ($bedrijfsprofiel)
                         @foreach($galleries->slice(0,2) as $gallery)
@@ -384,40 +88,24 @@
         </div>
         <div class="xs:max-w-sm lg:max-w-none mx-auto">
           <div class="flex flex-wrap items-center -mx-4 mb-18">
-            <div class="w-full lg:w-1/3 px-4 mb-12 lg:mb-0">
-              <div class="flex items-center lg:justify-center">
-                <div class="flex flex-shrink-0 mr-5 sm:mr-8 items-center justify-center p-1 w-16 sm:w-20 h-16 sm:h-20 rounded-full bg-blue-200">
-                  <img src="/images/icon-phone.svg" alt="">
-                </div>
-                <div>
-                  <span class="text-lg text-gray-500">Phone</span>
-                  <span class="block text-lg font-semibold text-gray-900"><input type="tel" name="telefoonnummer" value="{{$company->telefoonnummer}}"></span>
-                </div>
-              </div>
-            </div>
-            <div class="w-full lg:w-1/3 px-4 mb-12 lg:mb-0">
-              <div class="flex items-center lg:justify-center">
-                <div class="flex flex-shrink-0 mr-5 sm:mr-8 items-center justify-center p-1 w-16 sm:w-20 h-16 sm:h-20 rounded-full bg-yellow-200">
-                  <img src="/images/icon-email.svg" alt="">
-                </div>
-                <div>
-                  <span class="text-lg text-gray-500">Email</span>
-                  <span class="block text-lg font-semibold text-gray-900"><input type="email" name="email" placeholder="{{$company->email}}" value="{{$company->email}}"></span>
-                </div>
-              </div>
-            </div>
-            <div class="w-full lg:w-1/3 px-4">
-              <div class="flex items-center lg:justify-center">
-                <div class="flex flex-shrink-0 mr-5 sm:mr-8 items-center justify-center p-1 w-16 sm:w-20 h-16 sm:h-20 rounded-full bg-green-200">
-                  <img class="h-8" src="/images/icon-location.svg" alt="">
-                </div>
-                <div>
-                  <span class="text-lg text-gray-500">Office</span>
-                  <span class="block text-lg font-semibold text-gray-900"><input type="text" name="plaats" placeholder="{{$company->plaats}}" value="{{$company->plaats}}"></span>
-                </div>
-              </div>
-            </div>
-          </div>
+            <x-socials.companyIcons>
+                <x-slot name="src">icon-phone.svg</x-slot>
+                <x-slot name="title">Telefoon</x-slot>
+                <x-slot name="slot"><input type="tel" name="telefoonnummer" value="{{$company->telefoonnummer}}"></x-slot>
+            </x-socials.companyIcons>
+            <x-socials.companyIcons bgColor="bg-yellow-200">
+                <x-slot name="src">icon-email.svg</x-slot>
+                <x-slot name="title">E-mail</x-slot>
+                <x-slot name="slot"><input type="email" name="email" value="{{$company->email}}"></x-slot>
+            </x-socials.companyIcons>
+                <x-socials.companyIcons bgColor="bg-green-200">
+                <x-slot name="src">icon-location.svg</x-slot>
+                <x-slot name="title">Locatie</x-slot>
+                <x-slot name="slot">
+                    <input type="text" name="plaats" placeholder = "{{$company->plaats}}" value="{{$company->plaats}}">
+                </x-slot>
+
+            </x-socials.companyIcons>
         </div>
        
     </div>
@@ -476,7 +164,7 @@
             <!-- image - start -->
             <a href="/bedrijf/projecten/{{$project->projectName}}"
                 class="group relative flex h-48 items-end overflow-hidden rounded-lg bg-gray-100 shadow-lg md:col-span-2 md:h-80">
-                <img src="{{asset($project->thumbnail)}}" loading="lazy" alt="Photo by Magicle" class="absolute inset-0 h-full w-full object-cover object-center transition duration-200 group-hover:scale-110" />
+                <img src="{{asset($project->thumbnail)}}" loading="lazy" alt="Foto van {{$project->projectName}}" class="absolute inset-0 h-full w-full object-cover object-center transition duration-200 group-hover:scale-110" />
 
                 <div
                     class="pointer-events-none absolute inset-0 bg-gradient-to-t from-gray-800 via-transparent to-transparent opacity-50">
@@ -493,9 +181,6 @@
 
         @endif
         @endforeach
-        
-
-            
             <!-- image - end -->
         </div>
     </div>
@@ -518,32 +203,38 @@
             </div>
           </div>
         </div>
+        
         <div class="flex flex-wrap -mx-4 -mb-12">
-            @foreach($employees as $teamlid)
+            @php 
+
+            $maxEmployees = 8;
+
+            $totalEmployees = count($employees);
+
+
+            @endphp
+
+            @foreach($employees as $key => $teamlid)
+
+            @if($key < $maxEmployees)
           <div class="w-full md:w-1/2 xl:w-1/4 px-4 mb-12">
             <div class="max-w-xs md:max-w-none mx-auto">
               <div class="flex flex-col items-center">
                 <img class="block h-48 w-48 rounded-full" src="{{asset($teamlid->profile_picture)}}" alt="">
                 <div class="inline-flex -mt-6 mb-5 items-center justify-center py-3 px-5 bg-white rounded-full">
-                  <a class="inline-block mr-3 p-1 hover:bg-orange-100 rounded-md" href="#">
-                    <img src="/images/icon-facebook.svg" alt="">
-                  </a>
-                  <a class="inline-block mr-3 p-1 hover:bg-orange-100 rounded-md" href="#">
-                    <img src="/images/icon-linkedin.svg" alt="">
-                  </a>
-                  <a class="inline-block mr-3 p-1 hover:bg-orange-100 rounded-md" href="#">
-                    <img src="/images/icon-instagram.svg" alt="">
-                  </a>
-                  <a class="inline-block p-1 hover:bg-orange-100 rounded-md" href="#">
-                    <img src="/images/icon-twitter.svg" alt="">
-                  </a>
+                    <x-socials.socialMedia href="#" src="icon-facebook.svg"></x-socials.socialMedia>
+                    <x-socials.socialMedia href="#" src="icon-linkedin.svg"></x-socials.socialMedia>
+                    <x-socials.socialMedia href="#" src="icon-instagram.svg"></x-socials.socialMedia>
+                   <x-socials.socialMedia href="#" src="icon-twitter.svg"></x-socials.socialMedia>
                 </div>
                 <h5 class="text-2xl font-bold">{{$teamlid->voornaam}}</h5>
                 <span class="text-sm text-gray-500">{{$teamlid->functie}}</span>
               </div>
             </div>
           </div>
-            @endforeach
+          @endif
+
+          @endforeach
         </div>
         <div class="mt-20 text-center">
           <a class="relative group inline-block py-4 px-6 text-orange-50 font-semibold bg-orange-900 rounded-full overflow-hidden" href="#">
@@ -567,7 +258,18 @@
     <div class="container px-4 mx-auto">
       <div class="md:max-w-6xl mx-auto">
         <div class="flex flex-wrap -m-3.5 mb-10">
-            @foreach($vacatures as $vacature)
+            @php
+
+            $maxVacatures = 6;
+
+            $totalVacatures = count($vacatures);
+
+            @endphp
+
+
+
+            @foreach($vacatures as $key => $vacature)
+            @if($loop->iteration <= $maxVacatures)
           <div class="w-full md:w-1/3 p-3.5">
             <a href="#">
               <div class="relative p-6 h-full bg-white border hover:border-gray-300 rounded-xl">
@@ -588,6 +290,7 @@
               </div>
             </a>
           </div>
+          @endif
             @endforeach
         </div>
         <a class="flex justify-center items-center text-center font-semibold text-indigo-600 hover:text-indigo-700 leading-normal" href="#">
@@ -619,360 +322,39 @@
       </div>
   </section>
 
-<button type="submit">Sla wijzigingen op</button>
+  <button  type="submit" class="group relative flex w-full justify-center rounded-md bg-purple/70 px-3 py-2 text-sm font-bold font-epilogue text-white hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Sla wijzigingen op</button>
 
 </form>
   <!--Reviews van stagiairs-->
   <script src="https://cdn.tailwindcss.com?plugins=forms,typography,aspect-ratio,line-clamp"></script>
 <section class="py-10 lg:py-16 bg-gray-100 font-poppins dark:bg-gray-800">
     <div class="max-w-6xl px-4 py-6 mx-auto lg:py-4 md:px-6">
-        <div >
-            <h2
-                class="px-2 pb-2 mb-8 text-lg font-semibold border-b border-gray-300 dark:text-gray-300 dark:border-gray-700">
-                Reviews van vorige stagiairs</h2>
-            <div class="max-w-5xl px-4">
-                <div class="grid grid-cols-1 gap-6 md:grid-cols-3">
-                    <div>
-                        <span class="inline-block text-5xl font-bold text-blue-700 dark:text-gray-300">4.5</span>
-                        <span class="inline-block text-xl font-medium text-gray-700 dark:text-gray-400">
-                            /5</span>
-                        <ul class="flex items-center mt-4 mb-4">
-                            <li>
-                                <a href="#">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                        fill="currentColor"
-                                        class="w-4 mr-1 text-blue-500 dark:text-blue-400 bi bi-star-fill"
-                                        viewBox="0 0 16 16">
-                                        <path
-                                            d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z">
-                                        </path>
-                                    </svg>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                        fill="currentColor"
-                                        class="w-4 mr-1 text-blue-500 dark:text-blue-400 bi bi-star-fill"
-                                        viewBox="0 0 16 16">
-                                        <path
-                                            d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z">
-                                        </path>
-                                    </svg>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                        fill="currentColor"
-                                        class="w-4 mr-1 text-blue-500 dark:text-blue-400 bi bi-star-fill"
-                                        viewBox="0 0 16 16">
-                                        <path
-                                            d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z">
-                                        </path>
-                                    </svg>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                        fill="currentColor"
-                                        class="w-4 mr-1 text-blue-500 dark:text-blue-400 bi bi-star-fill"
-                                        viewBox="0 0 16 16">
-                                        <path
-                                            d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z">
-                                        </path>
-                                    </svg>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                        fill="currentColor"
-                                        class="w-4 mr-1 text-blue-500 dark:text-blue-400 bi bi-star-fill"
-                                        viewBox="0 0 16 16">
-                                        <path
-                                            d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z">
-                                        </path>
-                                    </svg>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                        fill="currentColor"
-                                        class="w-4 mr-1 text-blue-500 dark:text-blue-400 bi bi-star-fill"
-                                        viewBox="0 0 16 16">
-                                        <path
-                                            d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z">
-                                        </path>
-                                    </svg>
-                                </a>
-                            </li>
-                        </ul>
-                        <p class="text-sm dark:text-gray-400">Average Rating and percentage per views
-                        </p>
-                    </div>
-                    <div>
-                        <div class="flex items-center mb-2">
-                            <div class="w-full h-4 mr-2 bg-gray-200 rounded-full dark:bg-gray-700">
-                                <div class="h-4 bg-blue-500 rounded-full dark:bg-blue-400" style="width: 75%"></div>
-                            </div>
-                            <div class="flex justify-end text-base font-medium dark:text-gray-400">91% </div>
-                        </div>
-                        <div class="flex items-center mb-2">
-                            <div class="w-full h-4 mr-2 bg-gray-200 rounded-full dark:bg-gray-700">
-                                <div class="h-4 bg-blue-500 rounded-full dark:bg-blue-400" style="width: 45%"></div>
-                            </div>
-                            <div class="flex justify-end text-base font-medium dark:text-gray-400">45% </div>
-                        </div>
-                        <div class="flex items-center mb-2">
-                            <div class="w-full h-4 mr-2 bg-gray-200 rounded-full dark:bg-gray-700">
-                                <div class="h-4 bg-blue-500 rounded-full dark:bg-blue-400" style="width: 25%"></div>
-                            </div>
-                            <div class="flex justify-end text-base font-medium dark:text-gray-400">25% </div>
-                        </div>
-                        <div class="flex items-center mb-2 ">
-                            <div class="w-full h-4 mr-2 bg-gray-200 rounded-full dark:bg-gray-700">
-                                <div class="h-4 bg-blue-500 rounded-full dark:bg-blue-400" style="width: 14%"></div>
-                            </div>
-                            <div class="flex justify-end text-base font-medium dark:text-gray-400">14% </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
+        <x-reviews.average score="4.5" firstPercentage="91" secondPercentage="45" thirdPercentage="14" fourthPercentage="1">
+        </x-reviews.average>
+        
         <!--Comments-->
         <div class="mt-10">
             <h2
                 class="px-2 pb-2 mb-8 text-lg font-semibold border-b border-gray-300 dark:text-gray-300 dark:border-gray-700">
                 Comments</h2>
             <div class="max-w-5xl px-2">
-                <div
-                    class="p-3 mb-4 border border-gray-200 rounded-md bg-gray-50 lg:p-6 dark:bg-gray-700 dark:border-gray-700">
-                    <div class="md:block lg:flex">
-                        <img class="object-cover w-16 h-16 mr-4 rounded-full shadow"
-                            src="https://i.postimg.cc/rF6G0Dh9/pexels-emmy-e-2381069.jpg" alt="avatar">
-                        <div>
-                            <div class="flex flex-wrap items-center justify-between mb-1">
-                                <div class="mb-2 md:mb-0">
-                                    <h2 class="mb-1 text-lg font-semibold text-gray-900 dark:text-gray-400">
-                                        Richard David
-                                    </h2>
-                                    <p class="text-xs text-gray-600 dark:text-gray-400">Joined 12 SEP 2024. </p>
-                                </div>
-                                <div>
-                                    <ul class="flex items-center pb-1 mb-2">
-                                        <li>
-                                            <a href="#">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                                    fill="currentColor"
-                                                    class="w-4 mr-1 text-blue-500 dark:text-blue-400 bi bi-star-fill"
-                                                    viewBox="0 0 16 16">
-                                                    <path
-                                                        d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z">
-                                                    </path>
-                                                </svg>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="#">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                                    fill="currentColor"
-                                                    class="w-4 mr-1 text-blue-500 dark:text-blue-400 bi bi-star-fill"
-                                                    viewBox="0 0 16 16">
-                                                    <path
-                                                        d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z">
-                                                    </path>
-                                                </svg>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="#">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                                    fill="currentColor"
-                                                    class="w-4 mr-1 text-blue-500 dark:text-blue-400 bi bi-star-fill"
-                                                    viewBox="0 0 16 16">
-                                                    <path
-                                                        d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z">
-                                                    </path>
-                                                </svg>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="#">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                                    fill="currentColor"
-                                                    class="w-4 mr-1 text-blue-500 dark:text-blue-400 bi bi-star-fill"
-                                                    viewBox="0 0 16 16">
-                                                    <path
-                                                        d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z">
-                                                    </path>
-                                                </svg>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="#">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                                    fill="currentColor"
-                                                    class="w-4 mr-1 text-blue-500 dark:text-blue-400 bi bi-star-half"
-                                                    viewBox="0 0 16 16">
-                                                    <path
-                                                        d="M5.354 5.119 7.538.792A.516.516 0 0 1 8 .5c.183 0 .366.097.465.292l2.184 4.327 4.898.696A.537.537 0 0 1 16 6.32a.548.548 0 0 1-.17.445l-3.523 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256a.52.52 0 0 1-.146.05c-.342.06-.668-.254-.6-.642l.83-4.73L.173 6.765a.55.55 0 0 1-.172-.403.58.58 0 0 1 .085-.302.513.513 0 0 1 .37-.245l4.898-.696zM8 12.027a.5.5 0 0 1 .232.056l3.686 1.894-.694-3.957a.565.565 0 0 1 .162-.505l2.907-2.77-4.052-.576a.525.525 0 0 1-.393-.288L8.001 2.223 8 2.226v9.8z">
-                                                    </path>
-                                                </svg>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                    <div class="flex items-center">
-                                        <div class="flex mr-3 text-sm text-gray-700 dark:text-gray-400">
-                                            <a href="#"><svg xmlns="http://www.w3.org/2000/svg" width="16"
-                                                    height="16" fill="currentColor"
-                                                    class="w-4 h-4 mr-1 text-blue-400 bi bi-hand-thumbs-up-fill"
-                                                    viewBox="0 0 16 16">
-                                                    <path
-                                                        d="M6.956 1.745C7.021.81 7.908.087 8.864.325l.261.066c.463.116.874.456 1.012.965.22.816.533 2.511.062 4.51a9.84 9.84 0 0 1 .443-.051c.713-.065 1.669-.072 2.516.21.518.173.994.681 1.2 1.273.184.532.16 1.162-.234 1.733.058.119.103.242.138.363.077.27.113.567.113.856 0 .289-.036.586-.113.856-.039.135-.09.273-.16.404.169.387.107.819-.003 1.148a3.163 3.163 0 0 1-.488.901c.054.152.076.312.076.465 0 .305-.089.625-.253.912C13.1 15.522 12.437 16 11.5 16H8c-.605 0-1.07-.081-1.466-.218a4.82 4.82 0 0 1-.97-.484l-.048-.03c-.504-.307-.999-.609-2.068-.722C2.682 14.464 2 13.846 2 13V9c0-.85.685-1.432 1.357-1.615.849-.232 1.574-.787 2.132-1.41.56-.627.914-1.28 1.039-1.639.199-.575.356-1.539.428-2.59z">
-                                                    </path>
-                                                </svg></a>
-                                            <span>12</span>
-                                        </div>
-                                        <div class="flex text-sm text-gray-700 dark:text-gray-400">
-                                            <a href="#"><svg xmlns="http://www.w3.org/2000/svg" width="16"
-                                                    height="16" fill="currentColor"
-                                                    class="w-4 h-4 mr-1 text-blue-400 bi bi-chat"
-                                                    viewBox="0 0 16 16">
-                                                    <path
-                                                        d="M2.678 11.894a1 1 0 0 1 .287.801 10.97 10.97 0 0 1-.398 2c1.395-.323 2.247-.697 2.634-.893a1 1 0 0 1 .71-.074A8.06 8.06 0 0 0 8 14c3.996 0 7-2.807 7-6 0-3.192-3.004-6-7-6S1 4.808 1 8c0 1.468.617 2.83 1.678 3.894zm-.493 3.905a21.682 21.682 0 0 1-.713.129c-.2.032-.352-.176-.273-.362a9.68 9.68 0 0 0 .244-.637l.003-.01c.248-.72.45-1.548.524-2.319C.743 11.37 0 9.76 0 8c0-3.866 3.582-7 8-7s8 3.134 8 7-3.582 7-8 7a9.06 9.06 0 0 1-2.347-.306c-.52.263-1.639.742-3.468 1.105z">
-                                                    </path>
-                                                </svg></a>
-                                            <span>8</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <p class="mt-3 text-sm text-gray-700 dark:text-gray-400">
-                                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem
-                                Ipsum
-                                has been the industry's standard dummy text ever since the 1500s, when an unknown
-                                printer took a galley of type and scrambled it to make a type specimen book. It has
-                                survived not only five centuries,
-                            </p>
-                        </div>
-                    </div>
-                </div>
-                <div
-                    class="p-3 mb-4 border border-gray-200 rounded-md bg-gray-50 lg:p-6 dark:bg-gray-700 dark:border-gray-700">
-                    <div class=" md:block lg:flex">
-                        <img class="object-cover w-16 h-16 mr-4 rounded-full shadow"
-                            src="https://i.postimg.cc/m2c3hQNk/pexels-andrea-piacquadio-3760373.jpg" alt="avatar">
-                        <div>
-                            <div class="flex flex-wrap items-center justify-between mb-1">
-                                <div class="mb-2 md:mb-0">
-                                    <h2 class="mb-1 text-lg font-semibold text-gray-900 dark:text-gray-400">
-                                        John William
-                                    </h2>
-                                    <p class="text-xs text-gray-600 dark:text-gray-400">Joined 12 SEP 2012. </p>
-                                </div>
-                                <div>
-                                    <ul class="flex items-center pb-1 mb-2">
-                                        <li>
-                                            <a href="#">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                                    fill="currentColor"
-                                                    class="w-4 mr-1 text-blue-500 dark:text-blue-400 bi bi-star-fill"
-                                                    viewBox="0 0 16 16">
-                                                    <path
-                                                        d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z">
-                                                    </path>
-                                                </svg>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="#">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                                    fill="currentColor"
-                                                    class="w-4 mr-1 text-blue-500 dark:text-blue-400 bi bi-star-fill"
-                                                    viewBox="0 0 16 16">
-                                                    <path
-                                                        d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z">
-                                                    </path>
-                                                </svg>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="#">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                                    fill="currentColor"
-                                                    class="w-4 mr-1 text-blue-500 dark:text-blue-400 bi bi-star-fill"
-                                                    viewBox="0 0 16 16">
-                                                    <path
-                                                        d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z">
-                                                    </path>
-                                                </svg>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="#">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                                    fill="currentColor"
-                                                    class="w-4 mr-1 text-blue-500 dark:text-blue-400 bi bi-star-fill"
-                                                    viewBox="0 0 16 16">
-                                                    <path
-                                                        d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z">
-                                                    </path>
-                                                </svg>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="#">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                                    fill="currentColor"
-                                                    class="w-4 mr-1 text-blue-500 dark:text-blue-400 bi bi-star-half"
-                                                    viewBox="0 0 16 16">
-                                                    <path
-                                                        d="M5.354 5.119 7.538.792A.516.516 0 0 1 8 .5c.183 0 .366.097.465.292l2.184 4.327 4.898.696A.537.537 0 0 1 16 6.32a.548.548 0 0 1-.17.445l-3.523 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256a.52.52 0 0 1-.146.05c-.342.06-.668-.254-.6-.642l.83-4.73L.173 6.765a.55.55 0 0 1-.172-.403.58.58 0 0 1 .085-.302.513.513 0 0 1 .37-.245l4.898-.696zM8 12.027a.5.5 0 0 1 .232.056l3.686 1.894-.694-3.957a.565.565 0 0 1 .162-.505l2.907-2.77-4.052-.576a.525.525 0 0 1-.393-.288L8.001 2.223 8 2.226v9.8z">
-                                                    </path>
-                                                </svg>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                    <div class="flex items-center">
-                                        <div class="flex mr-3 text-sm text-gray-700 dark:text-gray-400">
-                                            <a href="#"><svg xmlns="http://www.w3.org/2000/svg" width="16"
-                                                    height="16" fill="currentColor"
-                                                    class="w-4 h-4 mr-1 text-blue-400 bi bi-hand-thumbs-up-fill"
-                                                    viewBox="0 0 16 16">
-                                                    <path
-                                                        d="M6.956 1.745C7.021.81 7.908.087 8.864.325l.261.066c.463.116.874.456 1.012.965.22.816.533 2.511.062 4.51a9.84 9.84 0 0 1 .443-.051c.713-.065 1.669-.072 2.516.21.518.173.994.681 1.2 1.273.184.532.16 1.162-.234 1.733.058.119.103.242.138.363.077.27.113.567.113.856 0 .289-.036.586-.113.856-.039.135-.09.273-.16.404.169.387.107.819-.003 1.148a3.163 3.163 0 0 1-.488.901c.054.152.076.312.076.465 0 .305-.089.625-.253.912C13.1 15.522 12.437 16 11.5 16H8c-.605 0-1.07-.081-1.466-.218a4.82 4.82 0 0 1-.97-.484l-.048-.03c-.504-.307-.999-.609-2.068-.722C2.682 14.464 2 13.846 2 13V9c0-.85.685-1.432 1.357-1.615.849-.232 1.574-.787 2.132-1.41.56-.627.914-1.28 1.039-1.639.199-.575.356-1.539.428-2.59z">
-                                                    </path>
-                                                </svg></a>
-                                            <span>12</span>
-                                        </div>
-                                        <div class="flex text-sm text-gray-700 dark:text-gray-400">
-                                            <a href="#"><svg xmlns="http://www.w3.org/2000/svg" width="16"
-                                                    height="16" fill="currentColor"
-                                                    class="w-4 h-4 mr-1 text-blue-400 bi bi-chat"
-                                                    viewBox="0 0 16 16">
-                                                    <path
-                                                        d="M2.678 11.894a1 1 0 0 1 .287.801 10.97 10.97 0 0 1-.398 2c1.395-.323 2.247-.697 2.634-.893a1 1 0 0 1 .71-.074A8.06 8.06 0 0 0 8 14c3.996 0 7-2.807 7-6 0-3.192-3.004-6-7-6S1 4.808 1 8c0 1.468.617 2.83 1.678 3.894zm-.493 3.905a21.682 21.682 0 0 1-.713.129c-.2.032-.352-.176-.273-.362a9.68 9.68 0 0 0 .244-.637l.003-.01c.248-.72.45-1.548.524-2.319C.743 11.37 0 9.76 0 8c0-3.866 3.582-7 8-7s8 3.134 8 7-3.582 7-8 7a9.06 9.06 0 0 1-2.347-.306c-.52.263-1.639.742-3.468 1.105z">
-                                                    </path>
-                                                </svg></a>
-                                            <span>8</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <p class="mt-3 text-sm text-gray-700 dark:text-gray-400">
-                                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem
-                                Ipsum
-                                has been the industry's standard dummy text ever since the 1500s, when an unknown
-                                printer took a galley of type and scrambled it to make a type specimen book. It has
-                                survived not only five centuries,
-                            </p>
-                        </div>
-                    </div>
-                </div>
+                <x-reviews.review title="Richard David" likes="12" comments="8" date="Joined 12 SEP 2024.">
+                    
+                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem
+                         Ipsum
+                         has been the industry's standard dummy text ever since the 1500s, when an unknown
+                         printer took a galley of type and scrambled it to make a type specimen book. It has
+                         survived not only five centuries,
+                </x-reviews.review>
+                <x-reviews.review title="Richard David" likes="12" comments="8" date="Joined 12 SEP 2024.">
+                    
+                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem
+                         Ipsum
+                         has been the industry's standard dummy text ever since the 1500s, when an unknown
+                         printer took a galley of type and scrambled it to make a type specimen book. It has
+                         survived not only five centuries,
+             </x-reviews.review>
+                
             </div>
         </div>
     </div>
@@ -986,230 +368,22 @@
                 class="px-2 pb-2 mb-8 text-lg font-semibold border-b border-gray-300 dark:text-gray-300 dark:border-gray-700">
                 Reviews</h2>
             <div class="max-w-5xl px-2">
-                <div
-                    class="p-3 mb-4 border border-gray-200 rounded-md bg-gray-50 lg:p-6 dark:bg-gray-700 dark:border-gray-700">
-                    <div class="md:block lg:flex">
-                        <img class="object-cover w-16 h-16 mr-4 rounded-full shadow"
-                            src="https://i.postimg.cc/rF6G0Dh9/pexels-emmy-e-2381069.jpg" alt="avatar">
-                        <div>
-                            <div class="flex flex-wrap items-center justify-between mb-1">
-                                <div class="mb-2 md:mb-0">
-                                    <h2 class="mb-1 text-lg font-semibold text-gray-900 dark:text-gray-400">
-                                        Richard David
-                                    </h2>
-                                    <p class="text-xs text-gray-600 dark:text-gray-400">Joined 12 SEP 2024. </p>
-                                </div>
-                                <div>
-                                    <ul class="flex items-center pb-1 mb-2">
-                                        <li>
-                                            <a href="#">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                                    fill="currentColor"
-                                                    class="w-4 mr-1 text-blue-500 dark:text-blue-400 bi bi-star-fill"
-                                                    viewBox="0 0 16 16">
-                                                    <path
-                                                        d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z">
-                                                    </path>
-                                                </svg>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="#">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                                    fill="currentColor"
-                                                    class="w-4 mr-1 text-blue-500 dark:text-blue-400 bi bi-star-fill"
-                                                    viewBox="0 0 16 16">
-                                                    <path
-                                                        d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z">
-                                                    </path>
-                                                </svg>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="#">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                                    fill="currentColor"
-                                                    class="w-4 mr-1 text-blue-500 dark:text-blue-400 bi bi-star-fill"
-                                                    viewBox="0 0 16 16">
-                                                    <path
-                                                        d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z">
-                                                    </path>
-                                                </svg>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="#">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                                    fill="currentColor"
-                                                    class="w-4 mr-1 text-blue-500 dark:text-blue-400 bi bi-star-fill"
-                                                    viewBox="0 0 16 16">
-                                                    <path
-                                                        d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z">
-                                                    </path>
-                                                </svg>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="#">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                                    fill="currentColor"
-                                                    class="w-4 mr-1 text-blue-500 dark:text-blue-400 bi bi-star-half"
-                                                    viewBox="0 0 16 16">
-                                                    <path
-                                                        d="M5.354 5.119 7.538.792A.516.516 0 0 1 8 .5c.183 0 .366.097.465.292l2.184 4.327 4.898.696A.537.537 0 0 1 16 6.32a.548.548 0 0 1-.17.445l-3.523 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256a.52.52 0 0 1-.146.05c-.342.06-.668-.254-.6-.642l.83-4.73L.173 6.765a.55.55 0 0 1-.172-.403.58.58 0 0 1 .085-.302.513.513 0 0 1 .37-.245l4.898-.696zM8 12.027a.5.5 0 0 1 .232.056l3.686 1.894-.694-3.957a.565.565 0 0 1 .162-.505l2.907-2.77-4.052-.576a.525.525 0 0 1-.393-.288L8.001 2.223 8 2.226v9.8z">
-                                                    </path>
-                                                </svg>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                    <div class="flex items-center">
-                                        <div class="flex mr-3 text-sm text-gray-700 dark:text-gray-400">
-                                            <a href="#"><svg xmlns="http://www.w3.org/2000/svg" width="16"
-                                                    height="16" fill="currentColor"
-                                                    class="w-4 h-4 mr-1 text-blue-400 bi bi-hand-thumbs-up-fill"
-                                                    viewBox="0 0 16 16">
-                                                    <path
-                                                        d="M6.956 1.745C7.021.81 7.908.087 8.864.325l.261.066c.463.116.874.456 1.012.965.22.816.533 2.511.062 4.51a9.84 9.84 0 0 1 .443-.051c.713-.065 1.669-.072 2.516.21.518.173.994.681 1.2 1.273.184.532.16 1.162-.234 1.733.058.119.103.242.138.363.077.27.113.567.113.856 0 .289-.036.586-.113.856-.039.135-.09.273-.16.404.169.387.107.819-.003 1.148a3.163 3.163 0 0 1-.488.901c.054.152.076.312.076.465 0 .305-.089.625-.253.912C13.1 15.522 12.437 16 11.5 16H8c-.605 0-1.07-.081-1.466-.218a4.82 4.82 0 0 1-.97-.484l-.048-.03c-.504-.307-.999-.609-2.068-.722C2.682 14.464 2 13.846 2 13V9c0-.85.685-1.432 1.357-1.615.849-.232 1.574-.787 2.132-1.41.56-.627.914-1.28 1.039-1.639.199-.575.356-1.539.428-2.59z">
-                                                    </path>
-                                                </svg></a>
-                                            <span>12</span>
-                                        </div>
-                                        <div class="flex text-sm text-gray-700 dark:text-gray-400">
-                                            <a href="#"><svg xmlns="http://www.w3.org/2000/svg" width="16"
-                                                    height="16" fill="currentColor"
-                                                    class="w-4 h-4 mr-1 text-blue-400 bi bi-chat"
-                                                    viewBox="0 0 16 16">
-                                                    <path
-                                                        d="M2.678 11.894a1 1 0 0 1 .287.801 10.97 10.97 0 0 1-.398 2c1.395-.323 2.247-.697 2.634-.893a1 1 0 0 1 .71-.074A8.06 8.06 0 0 0 8 14c3.996 0 7-2.807 7-6 0-3.192-3.004-6-7-6S1 4.808 1 8c0 1.468.617 2.83 1.678 3.894zm-.493 3.905a21.682 21.682 0 0 1-.713.129c-.2.032-.352-.176-.273-.362a9.68 9.68 0 0 0 .244-.637l.003-.01c.248-.72.45-1.548.524-2.319C.743 11.37 0 9.76 0 8c0-3.866 3.582-7 8-7s8 3.134 8 7-3.582 7-8 7a9.06 9.06 0 0 1-2.347-.306c-.52.263-1.639.742-3.468 1.105z">
-                                                    </path>
-                                                </svg></a>
-                                            <span>8</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <p class="mt-3 text-sm text-gray-700 dark:text-gray-400">
-                                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem
-                                Ipsum
-                                has been the industry's standard dummy text ever since the 1500s, when an unknown
-                                printer took a galley of type and scrambled it to make a type specimen book. It has
-                                survived not only five centuries,
-                            </p>
-                        </div>
-                    </div>
-                </div>
-                <div
-                    class="p-3 mb-4 border border-gray-200 rounded-md bg-gray-50 lg:p-6 dark:bg-gray-700 dark:border-gray-700">
-                    <div class=" md:block lg:flex">
-                        <img class="object-cover w-16 h-16 mr-4 rounded-full shadow"
-                            src="https://i.postimg.cc/m2c3hQNk/pexels-andrea-piacquadio-3760373.jpg" alt="avatar">
-                        <div>
-                            <div class="flex flex-wrap items-center justify-between mb-1">
-                                <div class="mb-2 md:mb-0">
-                                    <h2 class="mb-1 text-lg font-semibold text-gray-900 dark:text-gray-400">
-                                        John William
-                                    </h2>
-                                    <p class="text-xs text-gray-600 dark:text-gray-400">Joined 12 SEP 2024. </p>
-                                </div>
-                                <div>
-                                    <ul class="flex items-center pb-1 mb-2">
-                                        <li>
-                                            <a href="#">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                                    fill="currentColor"
-                                                    class="w-4 mr-1 text-blue-500 dark:text-blue-400 bi bi-star-fill"
-                                                    viewBox="0 0 16 16">
-                                                    <path
-                                                        d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z">
-                                                    </path>
-                                                </svg>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="#">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                                    fill="currentColor"
-                                                    class="w-4 mr-1 text-blue-500 dark:text-blue-400 bi bi-star-fill"
-                                                    viewBox="0 0 16 16">
-                                                    <path
-                                                        d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z">
-                                                    </path>
-                                                </svg>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="#">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                                    fill="currentColor"
-                                                    class="w-4 mr-1 text-blue-500 dark:text-blue-400 bi bi-star-fill"
-                                                    viewBox="0 0 16 16">
-                                                    <path
-                                                        d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z">
-                                                    </path>
-                                                </svg>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="#">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                                    fill="currentColor"
-                                                    class="w-4 mr-1 text-blue-500 dark:text-blue-400 bi bi-star-fill"
-                                                    viewBox="0 0 16 16">
-                                                    <path
-                                                        d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z">
-                                                    </path>
-                                                </svg>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="#">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                                    fill="currentColor"
-                                                    class="w-4 mr-1 text-blue-500 dark:text-blue-400 bi bi-star-half"
-                                                    viewBox="0 0 16 16">
-                                                    <path
-                                                        d="M5.354 5.119 7.538.792A.516.516 0 0 1 8 .5c.183 0 .366.097.465.292l2.184 4.327 4.898.696A.537.537 0 0 1 16 6.32a.548.548 0 0 1-.17.445l-3.523 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256a.52.52 0 0 1-.146.05c-.342.06-.668-.254-.6-.642l.83-4.73L.173 6.765a.55.55 0 0 1-.172-.403.58.58 0 0 1 .085-.302.513.513 0 0 1 .37-.245l4.898-.696zM8 12.027a.5.5 0 0 1 .232.056l3.686 1.894-.694-3.957a.565.565 0 0 1 .162-.505l2.907-2.77-4.052-.576a.525.525 0 0 1-.393-.288L8.001 2.223 8 2.226v9.8z">
-                                                    </path>
-                                                </svg>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                    <div class="flex items-center">
-                                        <div class="flex mr-3 text-sm text-gray-700 dark:text-gray-400">
-                                            <a href="#"><svg xmlns="http://www.w3.org/2000/svg" width="16"
-                                                    height="16" fill="currentColor"
-                                                    class="w-4 h-4 mr-1 text-blue-400 bi bi-hand-thumbs-up-fill"
-                                                    viewBox="0 0 16 16">
-                                                    <path
-                                                        d="M6.956 1.745C7.021.81 7.908.087 8.864.325l.261.066c.463.116.874.456 1.012.965.22.816.533 2.511.062 4.51a9.84 9.84 0 0 1 .443-.051c.713-.065 1.669-.072 2.516.21.518.173.994.681 1.2 1.273.184.532.16 1.162-.234 1.733.058.119.103.242.138.363.077.27.113.567.113.856 0 .289-.036.586-.113.856-.039.135-.09.273-.16.404.169.387.107.819-.003 1.148a3.163 3.163 0 0 1-.488.901c.054.152.076.312.076.465 0 .305-.089.625-.253.912C13.1 15.522 12.437 16 11.5 16H8c-.605 0-1.07-.081-1.466-.218a4.82 4.82 0 0 1-.97-.484l-.048-.03c-.504-.307-.999-.609-2.068-.722C2.682 14.464 2 13.846 2 13V9c0-.85.685-1.432 1.357-1.615.849-.232 1.574-.787 2.132-1.41.56-.627.914-1.28 1.039-1.639.199-.575.356-1.539.428-2.59z">
-                                                    </path>
-                                                </svg></a>
-                                            <span>12</span>
-                                        </div>
-                                        <div class="flex text-sm text-gray-700 dark:text-gray-400">
-                                            <a href="#"><svg xmlns="http://www.w3.org/2000/svg" width="16"
-                                                    height="16" fill="currentColor"
-                                                    class="w-4 h-4 mr-1 text-blue-400 bi bi-chat"
-                                                    viewBox="0 0 16 16">
-                                                    <path
-                                                        d="M2.678 11.894a1 1 0 0 1 .287.801 10.97 10.97 0 0 1-.398 2c1.395-.323 2.247-.697 2.634-.893a1 1 0 0 1 .71-.074A8.06 8.06 0 0 0 8 14c3.996 0 7-2.807 7-6 0-3.192-3.004-6-7-6S1 4.808 1 8c0 1.468.617 2.83 1.678 3.894zm-.493 3.905a21.682 21.682 0 0 1-.713.129c-.2.032-.352-.176-.273-.362a9.68 9.68 0 0 0 .244-.637l.003-.01c.248-.72.45-1.548.524-2.319C.743 11.37 0 9.76 0 8c0-3.866 3.582-7 8-7s8 3.134 8 7-3.582 7-8 7a9.06 9.06 0 0 1-2.347-.306c-.52.263-1.639.742-3.468 1.105z">
-                                                    </path>
-                                                </svg></a>
-                                            <span>8</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <p class="mt-3 text-sm text-gray-700 dark:text-gray-400">
-                                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem
-                                Ipsum
-                                has been the industry's standard dummy text ever since the 1500s, when an unknown
-                                printer took a galley of type and scrambled it to make a type specimen book. It has
-                                survived not only five centuries,
-                            </p>
-                        </div>
-                    </div>
-                </div>
+                <x-reviews.review title="Richard David" likes="12" comments="8" date="Joined 12 SEP 2024.">
+                    
+                       Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem
+                            Ipsum
+                            has been the industry's standard dummy text ever since the 1500s, when an unknown
+                            printer took a galley of type and scrambled it to make a type specimen book. It has
+                            survived not only five centuries,
+                </x-reviews.review>
+                <x-reviews.review title="John William" likes="12" comments="8" date="Joined 12 SEP 2012.">
+                    
+                       Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem
+                            Ipsum
+                            has been the industry's standard dummy text ever since the 1500s, when an unknown
+                            printer took a galley of type and scrambled it to make a type specimen book. It has
+                            survived not only five centuries,
+                </x-reviews.review>
             </div>
         </div>
     </div>

@@ -70,7 +70,7 @@ Route::post('/bedrijf', [RegisteredUserController::class, 'store']);
 
 Route::middleware('auth', 'verified')->group(function () {
     //De route index is voor het weergeven van het dashboard van het bedrijf
- Route::get('bedrijf/index', [BedrijfController::class, 'index'])->name('bedrijf.index');
+ Route::get('bedrijf/index', [VacatureController::class, 'index'])->name('vacature.index');
     //De route create is voor het weergeven van het formulier om een nieuwe medewerker toe te voegen
     Route::get('bedrijf/team', [BedrijfController::class, 'create'])->name('bedrijf.team');
     //De route store is voor het verwerken van het formulier om een nieuwe medewerker toe te voegen
