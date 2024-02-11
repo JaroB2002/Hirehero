@@ -6,8 +6,10 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\EmployeeController;
+use App\Http\Controllers\NotFoundController;
 use App\Http\Controllers\SelectieController;
 use App\Http\Controllers\VacatureController;
+use App\Http\Controllers\SollicitatieController;
 use App\Http\Controllers\Auth\PasswordController;
 use App\Http\Controllers\BedrijfRegisterController;
 use App\Http\Controllers\BedrijfsProfielController;
@@ -20,7 +22,6 @@ use App\Http\Controllers\Auth\ConfirmablePasswordController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Auth\EmailVerificationPromptController;
 use App\Http\Controllers\Auth\EmailVerificationNotificationController;
-use App\Http\Controllers\NotFoundController;
 
 /*
 |--------------------------------------------------------------------------
@@ -103,6 +104,16 @@ Route::middleware('auth', 'verified')->group(function () {
     Route::get('bedrijf/project/{projectName}', [ProjectController::class, 'show']);
 
     //edit de gehele vacature
+    Route::get('bedrijf/vacature/{vacature:id}/edit', [VacatureController::class, 'edit']);
+    Route::put('bedrijf/vacature/{vacature:id}/edit', [VacatureController::class, 'update']);
+    Route::delete('bedrijf/vacature/{vacature:id}/destroy', [VacatureController::class, 'destroyVacature']);
+
+    //Routes voor sollicitaties
+    Route::get('bedrijf/vacature/{vacature_id}', [SollicitatieController::class, 'index'])->name('sollicitatie.index');
+    Route::patch('bedrijf/vacature/{vacature_id}', [SollicitatieController::class, 'updateStatus']);
+
+
+
 
     //welke soorten routes zijn er allemaal?
     //get, post, put, patch, delete

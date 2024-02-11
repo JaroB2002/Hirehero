@@ -336,58 +336,30 @@
         <div class="mt-10">
             <h2
                 class="px-2 pb-2 mb-8 text-lg font-semibold border-b border-gray-300 dark:text-gray-300 dark:border-gray-700">
-                Comments</h2>
+                Reviews</h2>
             <div class="max-w-5xl px-2">
-                <x-reviews.review title="Richard David" likes="12" comments="8" date="Joined 12 SEP 2024.">
+              @foreach($reviews as $r)
                     
-                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem
-                         Ipsum
-                         has been the industry's standard dummy text ever since the 1500s, when an unknown
-                         printer took a galley of type and scrambled it to make a type specimen book. It has
-                         survived not only five centuries,
+              <x-reviews.review title="{{$r->voornaam . ' ' . $r->familienaam}}" likes="{{count($r->likes)}}" comments="{{count($r->comments)}}" date="{{$r->created_at->format('d-m-Y')}}" rating="{{$r->rating}}">
+                  
+                  {{$r->review}}
+              
                 </x-reviews.review>
-                <x-reviews.review title="Richard David" likes="12" comments="8" date="Joined 12 SEP 2024.">
-                    
-                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem
-                         Ipsum
-                         has been the industry's standard dummy text ever since the 1500s, when an unknown
-                         printer took a galley of type and scrambled it to make a type specimen book. It has
-                         survived not only five centuries,
-             </x-reviews.review>
+
+                @foreach($r->comments as $c)
+                <x-reviews.comment title="{{$c->voornaam . ' ' . $c->familienaam}}" date="{{$c->created_at}}">
+                  {{$c->comment}}
+                </x-reviews.comment>
+                @endforeach
+
+              
+              @endforeach
                 
             </div>
         </div>
     </div>
 </section><script src="https://cdn.tailwindcss.com?plugins=forms,typography,aspect-ratio,line-clamp"></script>
-<section class="py-10 lg:py-4 bg-gray-100 font-poppins dark:bg-gray-800">
-    <div class="max-w-6xl px-4 py-6 mx-auto lg:py-4 md:px-6">
-       
-    <!--Reviews-->
-        <div class="mt-0">
-            <h2
-                class="px-2 pb-2 mb-8 text-lg font-semibold border-b border-gray-300 dark:text-gray-300 dark:border-gray-700">
-                Reviews</h2>
-            <div class="max-w-5xl px-2">
-                <x-reviews.review title="Richard David" likes="12" comments="8" date="Joined 12 SEP 2024.">
-                    
-                       Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem
-                            Ipsum
-                            has been the industry's standard dummy text ever since the 1500s, when an unknown
-                            printer took a galley of type and scrambled it to make a type specimen book. It has
-                            survived not only five centuries,
-                </x-reviews.review>
-                <x-reviews.review title="John William" likes="12" comments="8" date="Joined 12 SEP 2012.">
-                    
-                       Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem
-                            Ipsum
-                            has been the industry's standard dummy text ever since the 1500s, when an unknown
-                            printer took a galley of type and scrambled it to make a type specimen book. It has
-                            survived not only five centuries,
-                </x-reviews.review>
-            </div>
-        </div>
-    </div>
-</section>
+
 
 
 </x-selectie._layout>

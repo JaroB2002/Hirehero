@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Like;
+use App\Models\Review;
+use App\Models\Comment;
 use App\Models\Company;
 use App\Models\Project;
 use App\Models\Employee;
@@ -61,10 +64,52 @@ class BedrijfsProfielController extends Controller
         //We nemen de projecten van het bedrijf op basis van de company_id
         $projects = Project::where('company_id', $company_id)->get();
 
+        //Toon alle reviews van de company_id
+
+        $reviews = Review::where('company_id', $company_id)->get();
+        //Toon de voornaam, familienaam van de student aan de hand van de student_id en de usertable
+
+        foreach ($reviews as $review) {
+            $student = $review->student;
+            $review->student->voornaam = $student->voornaam;
+            $review->student->familienaam = $student->familienaam;
+            $review->student->profielfoto = $student->profielfoto;
+        }
+
+        //Toon de comments van de review
+
+        $comments = Comment::where('review_id', $review->id)->get();
+
+        //Toon de voornaam, familienaam van de user aan de hand van de user_id en de usertable
+
+        foreach ($comments as $comment) {
+            $user = $comment->user;
+            $comment->user->voornaam = $user->voornaam;
+            $comment->user->familienaam = $user->familienaam;
+
+        }
+
+
+        $likes = Like::where('review_id', $review->id)->get();
+
+        //Haal de review_id op en kijk of de user_id van de like gelijk is aan de ingelogde user_id
+        //Als dat zo is, dan is de like van de ingelogde user
+
+        foreach ($likes as $like) {
+            $like->user_id = $like->user->id;
+            $like->review_id = $like->review->id;
+            $like->like = $like->like;
+        }
+
+
+
+
+
+
 
 
         //We geven de informatie van het bedrijf, de vacatures, de werknemers, de bedrijfsprofiel, de gallerij en de projecten mee naar de view
-        return view('bedrijf.profiel', compact('company', 'vacatures', 'employees', 'bedrijfsprofiel', 'galleries', 'projects'));
+        return view('bedrijf.profiel', compact('company', 'vacatures', 'employees', 'bedrijfsprofiel', 'galleries', 'projects', 'reviews', 'comments', 'likes'));
 
 
     }

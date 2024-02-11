@@ -46,6 +46,18 @@ class Company extends Model
         'oprichtingsdatum' => 'datetime',
     ];
 
+    public function reviews()
+    {
+        return $this->hasMany(Review::class);
+    }
+
+    public function sollicitaties()
+    {
+        return $this->hasMany(Sollicitatie::class);
+    }
+
+    
+
     
 
 

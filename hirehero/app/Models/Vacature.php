@@ -34,4 +34,9 @@ class Vacature extends Model
     protected $casts = [
         'endDate' => 'datetime'
     ];
+
+    public function sollicitaties()
+    {
+        return $this->hasMany(Sollicitatie::class);
+    }
 }
