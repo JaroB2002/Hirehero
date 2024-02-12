@@ -325,7 +325,32 @@
 <section class="py-10 lg:py-16 bg-gray-100 font-poppins dark:bg-gray-800">
     <div class="max-w-6xl px-4 py-6 mx-auto lg:py-4 md:px-6">
 
-                    <x-reviews.average score="4.5" firstPercentage="91" secondPercentage="45" thirdPercentage="14" fourthPercentage="1">
+        @php
+
+        $company_id = $company->id;
+
+
+        $averageRating = App\Models\Review::where('company_id', $company_id)->avg('rating');
+        //De rating moet met 2 decimalen worden weergegeven
+        $averageRating = number_format($averageRating, 1);
+
+
+        //Kijk hoeveel procent van de reviews een rating van 5 heeft op basis van het totaal aantal reviews van het bedrijf en zet het om naar een percentage
+
+        $totalReviews = App\Models\Review::where('company_id', $company_id)->count();
+
+        $fiveStarReviews = App\Models\Review::where('company_id', $company_id)->where('rating', 5)->count() * 100 / $totalReviews;
+
+        $fourStarReviews = App\Models\Review::where('company_id', $company_id)->where('rating', 4)->count() * 100 / $totalReviews;
+
+        $threeStarReviews = App\Models\Review::where('company_id', $company_id)->where('rating', 3)->count() * 100 / $totalReviews;
+
+        $twoStarReviews = App\Models\Review::where('company_id', $company_id)->where('rating', 2)->count() * 100 / $totalReviews;
+
+        $oneStarReviews = App\Models\Review::where('company_id', $company_id)->where('rating', 1)->count() * 100 / $totalReviews;
+        @endphp
+
+                    <x-reviews.average score="{{$averageRating}}" firstPercentage="{{$fiveStarReviews}}" secondPercentage="{{$fourStarReviews}}" thirdPercentage="{{$threeStarReviews}}" fourthPercentage="{{$twoStarReviews}}" fifthPercentage="{{$oneStarReviews}}">
                     </x-reviews.average>
         <div class="mt-10">
           
@@ -335,15 +360,18 @@
                 Reviews</h2>
                 <div class="max-w-5xl px-2">
                   @foreach($reviews as $r)
+
                     
                     <x-reviews.review title="{{$r->voornaam . ' ' . $r->familienaam}}" likes="{{count($r->likes)}}" comments="{{count($r->comments)}}" date="{{$r->created_at->format('d-m-Y')}}" rating="{{$r->rating}}">
                         
                         {{$r->review}}
+
+                        <button class="openComments" data-review-id = {{$r->id}}>Bekijk je comments</button>
                     
                       </x-reviews.review>
 
                       @foreach($r->comments as $c)
-                      <x-reviews.comment title="{{$c->voornaam . ' ' . $c->familienaam}}" date="{{$c->created_at}}">
+                      <x-reviews.comment title="{{$c->voornaam . ' ' . $c->familienaam}}" date="{{$c->created_at}}" :shouldBeHidden="false">
                         {{$c->comment}}
                       </x-reviews.comment>
                       @endforeach
@@ -354,39 +382,33 @@
         </div>
     </div>
 </section><script src="https://cdn.tailwindcss.com?plugins=forms,typography,aspect-ratio,line-clamp"></script>
-<section class="py-10 lg:py-4 bg-gray-100 font-poppins dark:bg-gray-800">
-    <div class="max-w-6xl px-4 py-6 mx-auto lg:py-4 md:px-6">
-       
-              
-        <div class="mt-0">
-            <h2
-                class="px-2 pb-2 mb-8 text-lg font-semibold border-b border-gray-300 dark:text-gray-300 dark:border-gray-700">
-                Reviews</h2>
-            <div class="max-w-5xl px-2">
-              
-                <x-reviews.review title="Richard David" likes="12" comments="8" date="Joined 12 SEP 2024.">
-                    
-                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem
-                         Ipsum
-                         has been the industry's standard dummy text ever since the 1500s, when an unknown
-                         printer took a galley of type and scrambled it to make a type specimen book. It has
-                         survived not only five centuries,
-             </x-reviews.review>
-             <x-reviews.review title="John William" likes="12" comments="8" date="Joined 12 SEP 2012.">
-                 
-                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem
-                         Ipsum
-                         has been the industry's standard dummy text ever since the 1500s, when an unknown
-                         printer took a galley of type and scrambled it to make a type specimen book. It has
-                         survived not only five centuries,
-             </x-reviews.review>
-         </div>
-            </div>
-        </div>
-    </div>
-</section>
 
 
+</main>
+
+
+<script>
+
+//Comments worden pas weergegeven als er op de knop "bekijk reacties" wordt geklikt
+
+let openComments = document.querySelectorAll('.openComments');
+
+openComments.forEach((button) => {
+    button.addEventListener('click', (e) => {
+
+      let reviewId = button.dataset.reviewId;
+      let comments = document.querySelectorAll(`[data-review-id="${reviewId}"]`);
+
+      comments.forEach((comment) => {
+        //toggle de hidden class
+
+        comment.classList.toggle('hidden');
+      })
+    })
+})
+
+
+</script>
 
 
 

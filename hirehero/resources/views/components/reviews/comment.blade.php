@@ -1,7 +1,7 @@
-@props(['title', 'date', 'rating', 'likes', 'comments'])
+@props(['title', 'date', 'rating', 'likes', 'comments', 'shouldBeHidden' => false])
 
 <div
-                    class="p-3 mb-4 border border-gray-200 rounded-md bg-gray-50 lg:p-6 dark:bg-gray-700 dark:border-gray-700">
+                    class="p-3 mb-4 border border-gray-200 rounded-md bg-gray-50 lg:p-6 dark:bg-gray-700 dark:border-gray-700 {{$shouldBeHidden ? 'hidden' : ''}}">
                     <div class="md:block lg:flex">
                         <img class="object-cover w-16 h-16 mr-4 rounded-full shadow"
                             src="https://i.postimg.cc/rF6G0Dh9/pexels-emmy-e-2381069.jpg" alt="avatar">

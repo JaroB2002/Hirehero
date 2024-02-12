@@ -1,4 +1,4 @@
-@props(['score', 'firstPercentage', 'secondPercentage', 'thirdPercentage', 'fourthPercentage'])
+@props(['score', 'firstPercentage', 'secondPercentage', 'thirdPercentage', 'fourthPercentage', 'fifthPercentage'])
 <div >
     <h2
         class="px-2 pb-2 mb-8 text-lg font-semibold border-b border-gray-300 dark:text-gray-300 dark:border-gray-700">
@@ -31,6 +31,9 @@
                 </x-percentage>
                 <x-percentage widthPercentage="{{$fourthPercentage}}">
                     {{$fourthPercentage}}%
+                </x-percentage>
+                <x-percentage widthPercentage="{{$fifthPercentage}}">
+                    {{$fifthPercentage}}%
                 </x-percentage>
 
             </div>

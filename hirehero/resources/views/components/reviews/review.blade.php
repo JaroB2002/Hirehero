@@ -19,7 +19,7 @@
                                         {{--De hoeveelheid sterren hangt af van de rating op 5--}}
                                         {{--Deze rating wordt niet afgerond, als er een rating is van 3/5 dan worden er maar 3 weergegeven--}}
                                         @php 
-                                            $rating = 4.5;
+                                            $rating = $rating ?? 0;
                                             $wholeStars = floor($rating);
                                             $hasHalfStar = $rating - $wholeStars > 0;
                                         

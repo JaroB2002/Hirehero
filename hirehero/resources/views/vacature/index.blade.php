@@ -89,7 +89,9 @@
                         <span
                         class="px-2 py-1 font-medium leading-tight text-blue-600 bg-blue-100 rounded-full dark:bg-blue-700 dark:text-blue-100"
                       >
+                      <a href="/bedrijf/vacature/{{$vacature->id}}/sollicitaties">
                       26
+                    </a>
                       </span>                      
                     </td>
                     <td class="px-4 py-3 text-sm">
@@ -99,7 +101,7 @@
                         </div>
                     </td>
                     </tr>
-
+                    
 @endforeach                    
                   </tbody>
                 </table>

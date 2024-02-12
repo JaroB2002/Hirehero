@@ -50,8 +50,10 @@ class ReviewController extends Controller
         $review->student->familienaam = $student->familienaam;
         $review->student->profielfoto = $student->profielfoto;
 
+        $averageRating = Review::where('company_id', $request->company_id)->avg('rating');
+
         
-        return view('bedrijf/profiel', [ 'reviews' => $reviews]);
+        return view('bedrijf/profiel', [ 'reviews' => $reviews], ['averageRating' => $averageRating]);
 
 
 

@@ -39,6 +39,7 @@
                       <th class="px-4 py-3">Status sollicatie</th>
                       <th class="px-4 py-3">Datum sollicitatie</th>
                       <th class="px-4 py-3">Sollicitatie</th>
+                      <th class="px-4 py-3">Feedback</th>
                         <th class="px-4 py-3">Acties</th>
                     </tr>
                   </thead>
@@ -62,17 +63,18 @@
                       <td class="px-4 py-3 text-xs">
                         <span>
                         
-                    <form action="{{url('/bedrijf/vacature/' . $sollicitatie->vacature_id)}}" method="POST" class="statusForm ">
+                    <form action="{{'/bedrijf/vacature/' . $id = $sollicitatie->vacature_id . '/sollicitaties'}}" method="POST" class="statusForm ">
                                 @csrf
                                 @method('PATCH')
                                 <input type="hidden" name="sollicitatie_id" value="{{$sollicitatie->id}}">
+                                
 
                                 <select name="status" id="" class="px-2 py-1 font-semibold leading-tight text-green-700 bg-green-100 rounded-full dark:bg-green-700 dark:text-green-100">
-                                    <option value="inReview" {{$sollicitatie->status === "In review" ? 'selected' :''}}>In Review</option>
-                                    <option value="Shortlist" {{$sollicitatie->status === "Shortlist" ? 'selected' :''}}>Shortlist</option>
-                                    <option value="Match" {{$sollicitatie->status === "Match" ? 'selected' :''}}>Match</option>  
-                                    <option value="declined" {{$sollicitatie->status === "Declined" ? 'selected' :''}}>Declined</option> 
-                                    <option value="hired" {{$sollicitatie->status === "Hired" ? 'selected' :''}}>Hired</option>  
+                                    <option value="in review" {{$sollicitatie->status === "in review" ? 'selected' :''}}>In Review</option>
+                                    <option value="shortlist" {{$sollicitatie->status === "shortlist" ? 'selected' :''}}>Shortlist</option>
+                                    <option value="match" {{$sollicitatie->status === "match" ? 'selected' :''}}>Match</option>  
+                                    <option value="declined" {{$sollicitatie->status === "declined" ? 'selected' :''}}>Declined</option> 
+                                    <option value="hired" {{$sollicitatie->status === "hired" ? 'selected' :''}}>Hired</option>  
                                    </select>
 
 
@@ -90,6 +92,14 @@
                       {{$sollicitaties->count()}}
                       </span>                      
                     </td>
+
+                    <td class="px-4 py-3 text-sm">
+                      <span
+                      class="px-2 py-1 font-medium leading-tight text-blue-600 bg-blue-100 rounded-full dark:bg-blue-700 dark:text-blue-100"
+                    >
+                    {{$sollicitatie->feedback}}
+                    </span>                      
+                  </td>
                     <td class="px-4 py-3 text-sm">
                         <div style="display: flex; align-items: center;">
                             <img src="/images/eye.svg" alt="Oogicoon" style="margin-right: 5px;">

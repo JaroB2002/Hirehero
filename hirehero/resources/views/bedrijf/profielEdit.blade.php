@@ -334,12 +334,14 @@
         
         <!--Comments-->
         <div class="mt-10">
-            <h2
-                class="px-2 pb-2 mb-8 text-lg font-semibold border-b border-gray-300 dark:text-gray-300 dark:border-gray-700">
-                Reviews</h2>
-            <div class="max-w-5xl px-2">
-              @foreach($reviews as $r)
-                    
+          <h2
+
+          class="px-2 pb-2 mb-8 text-lg font-semibold border-b border-gray-300 dark:text-gray-300 dark:border-gray-700">
+          Reviews</h2>
+          <div class="max-w-5xl px-2">
+            @foreach($reviews as $r)
+
+              
               <x-reviews.review title="{{$r->voornaam . ' ' . $r->familienaam}}" likes="{{count($r->likes)}}" comments="{{count($r->comments)}}" date="{{$r->created_at->format('d-m-Y')}}" rating="{{$r->rating}}">
                   
                   {{$r->review}}

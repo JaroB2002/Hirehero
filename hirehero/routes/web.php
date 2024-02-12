@@ -109,8 +109,8 @@ Route::middleware('auth', 'verified')->group(function () {
     Route::delete('bedrijf/vacature/{vacature:id}/destroy', [VacatureController::class, 'destroyVacature']);
 
     //Routes voor sollicitaties
-    Route::get('bedrijf/vacature/{vacature_id}', [SollicitatieController::class, 'index'])->name('sollicitatie.index');
-    Route::patch('bedrijf/vacature/{vacature_id}', [SollicitatieController::class, 'updateStatus']);
+    Route::get('bedrijf/vacature/{vacature_id}/sollicitaties', [SollicitatieController::class, 'index'])->name('sollicitatie.index');
+    Route::patch('bedrijf/vacature/{vacature_id}/sollicitaties', [SollicitatieController::class, 'updateStatus']);
 
 
 

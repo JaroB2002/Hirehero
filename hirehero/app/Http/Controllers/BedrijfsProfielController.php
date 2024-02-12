@@ -76,6 +76,10 @@ class BedrijfsProfielController extends Controller
             $review->student->profielfoto = $student->profielfoto;
         }
 
+        //Toon de gemiddelde rating van de reviews van het bedrijf
+
+        $averageRating = Review::where('company_id', $company)->avg('rating');
+
         //Toon de comments van de review
 
         $comments = Comment::where('review_id', $review->id)->get();
