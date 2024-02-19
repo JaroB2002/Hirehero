@@ -32,6 +32,11 @@ class VacatureController extends Controller
         return view('vacature.create');
     }
 
+    public function create2()
+    {
+        return view('vacature.create2');
+    }
+
     public function store(Request $request)
 
     
@@ -93,6 +98,67 @@ class VacatureController extends Controller
         $vacature->save();
         return redirect(route('vacature.index'))->with('success', 'Vacature is opgeslagen');
     }   
+
+    public function store2(Request $request)
+    
+    {
+        dd($request->get('minimumSkills'));
+
+        $user = auth()->user();
+        $company_id = Company::where('user_id', $user->id)->first()->id;
+        $company = Company::where('id', $company_id)->first();
+
+        if($company == null)
+        {
+            return redirect(route('vacature.create'))->with('error', 'Bedrijf bestaat niet');
+        }
+
+        $request->validate([
+            'title' => 'required|max:255|string',
+            'description' => 'required|max:1500|string',
+            'minimumSkills' => 'required|max:255|string',
+            'nicetoHaveSkills' => 'sometimes|max:255|string',
+            'persoonlijkheid' => 'sometimes|max:255|string',
+            'categorie' => 'required|max:255|string',
+            'aantalPlaatsen' => 'required|integer',
+            'sollicitatieType' => 'required|max:255|string',
+            'status' => 'max:255|string'
+        ]);
+
+        //de company_id moet nog worden toegevoegd
+
+        $vacature = new Vacature([
+            'title' => $request->get('title'),
+            'description' => $request->get('description'),
+            'minimumSkills' => $request->get('minimumSkills'),
+            'nicetoHaveSkills' => $request->get('nicetoHaveSkills'),
+            'persoonlijkheid' => $request->get('persoonlijkheid'),
+            'categorie' => $request->get('categorie'),
+            'aantalPlaatsen' => $request->get('aantalPlaatsen'),
+            'sollicitatieType' => $request->get('sollicitatieType'),
+            'company_id' => $company_id,
+            'status' => $request->get('status')
+        ]);
+
+        $vacature->save();
+
+        return redirect(route('vacature.index'))->with('success', 'Vacature is opgeslagen');
+        
+
+
+
+
+
+    }
+    
+    
+
+
+
+
+
+
+
 
     public function show($id)
     {

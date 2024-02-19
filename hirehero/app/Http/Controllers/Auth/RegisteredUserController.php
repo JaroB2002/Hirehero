@@ -133,18 +133,24 @@ class RegisteredUserController extends Controller
         
         //Valideer de input van de gebruiker
         $attributes = request()->validate([
-            
             'interesse'=> 'required|string|max:255',
             'interesse2'=> 'required|string|max:255',
             'desinteresse1'=> 'required|string|max:255',
             'desinteresse2'=> 'required|string|max:255',
             'stageBegin'=> 'required|string|max:255',
             'stageEinde'=> 'required|string|max:255',
-            'cv'=> 'file|max:255'|'mimes:pdf,doc,docx'|'max:2048',
+            'cv'=> ['nullable', 'file', 'mimes:pdf', 'max:2048']
         ]);
-
-        $attributes['cv'] = request()->file('cv')->store('cv');
-
+         
+        //De attribuut CV wordt enkel opgeslagen als CV niet null is
+        if(request()->hasFile('cv') == true) 
+        {
+            $attributes['cv'] = request()->file('cv')->store('cv');
+        }
+        else
+        {
+            $attributes['cv'] = "";
+        }
         //Haal de user en student uit de session
 
         //Voeg de nieuwe input toe aan de student in de session
@@ -175,7 +181,7 @@ class RegisteredUserController extends Controller
             'persoonlijkheid.*' => ['required', 'string', 'max:255']
         ]);
 
-        $persoonlijkheidString = json_encode($attributes['persoonlijkheid']);
+        $persoonlijkheidString = implode(' ', $attributes['persoonlijkheid']);
         session(['characterdata' => ['persoonlijkheid' => $persoonlijkheidString]]);
         $data1 = session('student');
         $data2 = session('characterdata');

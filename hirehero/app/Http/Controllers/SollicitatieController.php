@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Student;
 use App\Models\Vacature;
 use App\Models\Sollicitatie;
-use function Ramsey\Uuid\v1;
 
+use function Ramsey\Uuid\v1;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Pagination\LengthAwarePaginator;
 
 class SollicitatieController extends Controller
 {
@@ -34,19 +36,69 @@ class SollicitatieController extends Controller
     {
         //vind de vacature_id, die staat in de url 
 
+        $vacature_id = $request->vacature_id;
 
         //De vacature Id staat in de url, haal de sollicitaties op die bij de vacature horen
+        $sollicitaties = Sollicitatie::with('student')->where('vacature_id',$vacature_id)->get();
         
-    
-
-        $sollicitaties = Sollicitatie::where('vacature_id', $request->vacature_id)->paginate(5);
-
-
-
-
-        //verdeel de sollicitaties in verschillende pagina's
         
-        return view('sollicitatie.index', ['sollicitaties' => $sollicitaties]);
+
+        //Krijg de minimum skills van de vacature
+        $vacature = Vacature::where('id', $request->vacature_id)->first();
+        $persoonlijkheden = $vacature->persoonlijkheid;
+
+        //Persoonlijkheden worden opgeslagen in de database als een string, zet deze om naar een array
+
+        $persoonlijkheden = explode(' ', $persoonlijkheden);
+        $persoonlijkheden = array_map('strtolower', $persoonlijkheden);
+
+        $overeenkomstenArray = [];
+
+
+
+        //Krijg de studenten die gesolliciteerd hebben
+
+        foreach($sollicitaties as $sollicitatie)
+        {   
+            //Krijg de persoonlijkheden van de sollicitant
+            $sollicitatiePersoonlijkheid = $sollicitatie->student->persoonlijkheid;
+
+            //Sla de persoonlijkheden op in een array
+            $sollicitatiePersoonlijkheid = explode(',', $sollicitatiePersoonlijkheid);
+
+            //Zet de persoonlijkheden om naar lowercase
+
+            $sollicitatiePersoonlijkheid = array_map('strtolower', $sollicitatiePersoonlijkheid);
+
+            //Krijg de overeenkomsten tussen de vacature en de sollicitant
+
+            $overeenkomsten = array_intersect($persoonlijkheden, $sollicitatiePersoonlijkheid);
+
+            //Sla de overeenkomsten op in een array
+
+            $overeenkomstenArray[] = count($overeenkomsten);
+
+
+        }        
+
+
+        //Sorteer de sollicitaties op basis van de overeenkomsten
+
+        
+        $sollicitaties = collect($sollicitaties)->sortByDesc('overeenkomsten');
+
+        $perPage = 5;
+        $currentPage = LengthAwarePaginator::resolveCurrentPage();
+        $currentItems = $sollicitaties->slice(($currentPage - 1) * $perPage, $perPage)->all();
+        $sollicitaties = new LengthAwarePaginator($currentItems, count($sollicitaties), $perPage, $currentPage, ['path' => $request->url(), 'query' => $request->query()]);
+
+
+
+
+     
+
+        
+        return view('sollicitatie.index', ['sollicitaties' => $sollicitaties], ['vacature' => $vacature]);
     }
 
     public function updateStatus(Request $request)

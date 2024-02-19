@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\stageController;
 use App\Http\Controllers\BedrijfController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProjectController;
@@ -51,16 +52,25 @@ Route::get('/student/update', [RegisteredUserController::class, 'editStudent'])-
 Route::post('/student/update', [RegisteredUserController::class, 'updateStudent']);
 Route::get('/student/persoonlijk', [RegisteredUserController::class, 'persoonlijkStudent'])->name('student.persoonlijk');
 Route::post('/student/persoonlijk', [RegisteredUserController::class, 'storePersoonlijkStudent']);
-/*Route::get('verify-email', EmailVerificationPromptController::class)
-->name('verification.notice');
-Route::get('verify-email/{id}/{hash}', VerifyEmailController::class)
-->middleware(['signed', 'throttle:6,1'])
-->name('verification.verify');
 
-Route::post('email/verification-notification', [EmailVerificationNotificationController::class, 'store'])
-->middleware('throttle:6,1')
-->name('verification.send');*/
+//Hier komen de routes van de studenten wanneer ze ingelogd zijn
+Route::middleware('auth', 'verified')->group(function() {
 
+
+Route::get('/student/stage', [stageController::class, 'index'])->name('stage.index');
+Route::post('/student/stage/results', [stageController::class, 'search'])->name('stage.search');
+Route::get('/student/stage/results', [stageController::class, 'search'])->name('stage.results');
+Route::get('/student/stage/{vacature:id}', [stageController::class, 'show'])->name('stage.show');
+Route::get('/student/stage/{vacature:id}/solliciteren', [stageController::class, 'solliciteren'])->name('stage.solliciteren');
+Route::post('/student/stage/{vacature:id}/solliciteren', [stageController::class, 'storeSollicitatie'])->name('stage.storeSollicitatie');
+Route::get('/student/stages', [stageController::class, 'showSollicitaties'])->name('studentSollicitatie.index');
+
+
+
+
+
+
+});
 
 
 
@@ -111,6 +121,8 @@ Route::middleware('auth', 'verified')->group(function () {
     //Routes voor sollicitaties
     Route::get('bedrijf/vacature/{vacature_id}/sollicitaties', [SollicitatieController::class, 'index'])->name('sollicitatie.index');
     Route::patch('bedrijf/vacature/{vacature_id}/sollicitaties', [SollicitatieController::class, 'updateStatus']);
+    //Route::get('bedrijf/vacature/', [VacatureController::class, 'create2'])->name('vacature.create2');
+    //Route::post('bedrijf/vacature/', [VacatureController::class, 'store2'])->name('vacature.store2');
 
 
 
