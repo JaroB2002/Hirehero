@@ -1,0 +1,341 @@
+<!doctype html>
+<html lang="en">
+   <head>
+<!-- Theme CSS -->
+<link rel="stylesheet" href="theme.min.css">
+ 
+      <!-- Required meta tags -->
+      <meta charset="utf-8" />
+      <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+      <meta name="viewport" content="width=device-width" />
+      <meta name="description" content="Settings - Hirehero" />
+
+      <title>Settings - Hirehero</title>
+   </head>
+   <body>
+      <main>
+         <!-- start general settings -->
+         <!-- app layout -->
+         <div id="app-layout" class="overflow-x-hidden flex">
+            <!-- start navbar -->
+            <!-- app layout content -->
+            <div id="app-layout-content" class="min-h-screen w-full min-w-[100vw] md:min-w-0 ml-[15.625rem] [transition:margin_0.25s_ease-out]">
+
+               <div class="p-6">
+                  <div class="flex items-center mb-4 border-b border-gray-300 pb-4">
+                     <!-- title -->
+                     <h1 class="inline-block text-xl font-semibold leading-6">Instellingen</h1>
+                  </div>
+
+                  <div class="mb-8 grid grid-cols-1 gap-x-6 gap-y-6 sm:grid-cols-2 lg:grid-cols-4">
+                     <div class="mb-lg-0 col-span-1">
+                        <h4 class="mb-1">Persoonlijke instellingen</h4>
+                        <p class="text-gray-600">Hier kan je je instellingen aanpassen en opnieuw 
+                           bekijken, ook je inschrijvingsbewijs uploaden.
+                           Hoe meer je invult op je profiel, hoe beter we je kunnen matchen.</p>
+                     </div>
+                     <!-- card -->
+                     <div class="card shadow col-span-3">
+                        <!-- card body -->
+                        <div class="card-body">
+                           <div class="mb-6">
+                              <!-- title -->
+                              <h4 class="mb-1">Algemene instellingen</h4>
+                           </div>
+                           <div class="mb-6 inline-flex md:flex md:items-center gap-3 flex-col md:flex-row w-full">
+                              <div class="flex-1 text-gray-800 font-semibold">
+                                 <h5 class="mb-0">Avatar</h5>
+                              </div>
+                              <div class="flex-[3]">
+                                 <div class="flex items-center">
+                                    <!-- image -->
+                                    <div class="me-3">
+                                       <img src="" class="rounded-full w-16 h-16" alt="Profielfoto" />
+                                    </div>
+                                    <div>
+                                       <!-- button -->
+                                       <button
+                                          type="button"
+                                          class="btn gap-x-2 bg-white text-gray-800 border-gray-300 disabled:opacity-50 disabled:pointer-events-none hover:text-white hover:bg-gray-700 hover:border-gray-700 active:bg-gray-700 active:border-gray-700 focus:outline-none focus:ring-4 focus:ring-gray-300">
+                                          Wijzig
+                                       </button>
+                                       <!-- button -->
+                                       <button
+                                          type="button"
+                                          class="btn gap-x-2 bg-white text-gray-800 border-gray-300 disabled:opacity-50 disabled:pointer-events-none hover:text-white hover:bg-gray-700 hover:border-gray-700 active:bg-gray-700 active:border-gray-700 focus:outline-none focus:ring-4 focus:ring-gray-300">
+                                          Verwijder
+                                       </button>
+                                    </div>
+                                 </div>
+                              </div>
+                           </div>
+                           <!-- col -->
+                           <div class="mb-6 inline-flex md:flex md:items-center gap-3 flex-col md:flex-row w-full">
+                              <div class="flex-1 text-gray-800 font-semibold">
+                                 <!-- heading -->
+                                 <h5 class="mb-0">Bannerafbeelding</h5>
+                              </div>
+                              <div class="flex-[3]">
+                                 <!-- dropzone input -->
+                                 <div id="my-dropzone" class="dropzone mt-4 border-dashed border-gray-300 rounded-2 min-h-0"></div>
+                              </div>
+                           </div>
+                           <div>
+                              <!-- border -->
+                              <div class="mb-6">
+                                 <h4 class="mb-1">Basic information</h4>
+                              </div>
+                              <form>
+                                 <!-- input -->
+
+                                 <div class="mb-6 inline-flex md:flex md:items-center gap-3 flex-col md:flex-row w-full">
+                                    <label for="fullName" class="flex-1 text-gray-800 font-semibold">Volledige naam</label>
+                                    <div class="flex-[3] w-full grid grid-cols-1 md:grid-cols-2 gap-6">
+                                       <input
+                                          type="text"
+                                          class="border border-gray-300 text-gray-900 rounded focus:ring-indigo-600 focus:border-indigo-600 block w-full p-2 px-3 disabled:opacity-50 disabled:pointer-events-none"
+                                          placeholder="Voornaam"
+                                          id="fullName"
+                                          required="" />
+
+                                       <input
+                                          type="text"
+                                          class="border border-gray-300 text-gray-900 rounded focus:ring-indigo-600 focus:border-indigo-600 block w-full p-2 px-3 disabled:opacity-50 disabled:pointer-events-none"
+                                          placeholder="Achternaam"
+                                          id="lastName"
+                                          required="" />
+                                    </div>
+                                 </div>
+
+                                 <!-- input -->
+                                 <div class="mb-6 inline-flex md:flex md:items-center gap-3 flex-col md:flex-row w-full">
+                                    <label for="email" class="flex-1 text-gray-800 font-semibold">Email</label>
+                                    <div class="flex-[3] w-full">
+                                       <input
+                                          type="email"
+                                          class="border border-gray-300 text-gray-900 rounded focus:ring-indigo-600 focus:border-indigo-600 block w-full p-2 px-3 disabled:opacity-50 disabled:pointer-events-none"
+                                          placeholder="Email"
+                                          id="email"
+                                          required="" />
+                                    </div>
+                                 </div>
+                                 <!-- input -->
+                                 <div class="mb-6 inline-flex md:flex md:items-center gap-3 flex-col md:flex-row w-full">
+                                    <label for="phone" class="flex-1 text-gray-800 font-semibold">
+                                       Telefoonnummer
+                                       <span>(Optioneel)</span>
+                                    </label>
+                                    <div class="flex-[3] w-full">
+                                       <input
+                                          type="text"
+                                          class="border border-gray-300 text-gray-900 rounded focus:ring-indigo-600 focus:border-indigo-600 block w-full p-2 px-3 disabled:opacity-50 disabled:pointer-events-none"
+                                          placeholder="Phone"
+                                          id="phone"
+                                          required="" />
+                                    </div>
+                                 </div>
+                                 <!-- input -->
+                                 <div class="mb-6 inline-flex md:flex md:items-center gap-3 flex-col md:flex-row w-full">
+                                    <label for="location" class="flex-1 text-gray-800 font-semibold">Locatie</label>
+
+                                    <div class="flex-[3] w-full">
+                                       <select
+                                          class="text-base border border-gray-300 rounded focus:ring-indigo-600 focus:border-indigo-600 block w-full p-2 px-3 disabled:opacity-50 disabled:pointer-events-none"
+                                          id="location">
+                                          <option selected="">Selecteer land</option>
+                                          <option value="1">België</option>
+                                          <option value="2">Nederland</option>
+                                       </select>
+                                    </div>
+                                 </div>
+                                 <!-- input -->
+                                 <div class="mb-6 inline-flex md:flex md:items-center gap-3 flex-col md:flex-row w-full">
+                                    <label for="addressLine" class="flex-1 text-gray-800 font-semibold">Adres regel 1</label>
+
+                                    <div class="flex-[3] w-full">
+                                       <input
+                                          type="text"
+                                          class="border border-gray-300 text-gray-900 rounded focus:ring-indigo-600 focus:border-indigo-600 block w-full p-2 px-3 disabled:opacity-50 disabled:pointer-events-none"
+                                          placeholder="placeholder"
+                                          id="addressLine"
+                                          required="" />
+                                    </div>
+                                 </div>
+                                 <!-- input -->
+                                 <div class="mb-6 inline-flex md:flex md:items-center gap-3 flex-col md:flex-row w-full">
+                                    <label for="addressLineTwo" class="flex-1 text-gray-800 font-semibold">Adres regel 2</label>
+                                    <div class="flex-[3] w-full">
+                                       <input
+                                          type="text"
+                                          class="border border-gray-300 text-gray-900 rounded focus:ring-indigo-600 focus:border-indigo-600 block w-full p-2 px-3 disabled:opacity-50 disabled:pointer-events-none"
+                                          placeholder="placeholder"
+                                          id="addressLineTwo"
+                                          required="" />
+                                    </div>
+                                 </div>
+                                 <!-- input -->
+                                 <div class="mb-6 inline-flex md:flex md:items-center gap-3 flex-col md:flex-row w-full">
+                                    <label for="zipcode" class="flex-1 text-gray-800 font-semibold">Postcode</label>
+
+                                    <div class="flex-[3]">
+                                       <input
+                                          type="text"
+                                          class="border border-gray-300 text-gray-900 rounded focus:ring-indigo-600 focus:border-indigo-600 block w-full p-2 px-3 disabled:opacity-50 disabled:pointer-events-none"
+                                          placeholder="placeholder"
+                                          id="zipcode"
+                                          required="" />
+                                    </div>
+                                 </div>
+                                 <div class="mb-6 inline-flex md:flex md:items-center gap-3 flex-col md:flex-row w-full">
+                                    <div class="flex-1 text-gray-800 font-semibold"></div>
+                                    <div class="flex-[3]">
+                                       <button
+                                          type="submit"
+                                          class="btn bg-indigo-600 text-white border-indigo-600 hover:bg-indigo-800 hover:border-indigo-800 active:bg-indigo-800 active:border-indigo-800 focus:outline-none focus:ring-4 focus:ring-indigo-300">
+                                          Sla op
+                                       </button>
+                                    </div>
+                                 </div>
+                              </form>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="mb-8 grid grid-cols-1 gap-x-6 gap-y-6 sm:grid-cols-2 lg:grid-cols-4">
+                     <div class="col-span-1">
+                        <h4 class="mb-1">Email</h4>
+                        <p class="text-gray-600">Voeg hier email instellingen toe.</p>
+                     </div>
+                     <!-- card -->
+                     <div class="card shadow col-span-3">
+                        <div class="card-body">
+                           <div class="mb-6">
+                              <h4 class="mb-1">Email</h4>
+                           </div>
+                           <div>
+                              <!-- form -->
+                              <form>
+                                 <!-- input -->
+                                 <div class="mb-3 inline-flex md:flex md:items-center gap-3 flex-col md:flex-row w-full">
+                                    <label for="newEmail" class="flex-1 text-gray-800 font-semibold">Nieuwe email</label>
+                                    <div class="flex-[3] w-full">
+                                       <input
+                                          type="email"
+                                          class="border border-gray-300 text-gray-900 rounded focus:ring-indigo-600 focus:border-indigo-600 block w-full p-2 px-3 disabled:opacity-50 disabled:pointer-events-none"
+                                          placeholder="Voer hier je email in"
+                                          id="newEmail"
+                                          required="" />
+                                    </div>
+                                 </div>
+                                 <!-- input -->
+                                 <div class="mb-6 inline-flex md:flex md:items-center gap-3 flex-col md:flex-row w-full">
+                                    <div class="flex-1 text-gray-800 font-semibold"></div>
+                                    <div class="flex-[3]">
+                                       <button
+                                          type="submit"
+                                          class="btn bg-indigo-600 text-white border-indigo-600 hover:bg-indigo-800 hover:border-indigo-800 active:bg-indigo-800 active:border-indigo-800 focus:outline-none focus:ring-4 focus:ring-indigo-300">
+                                          Sla op
+                                       </button>
+                                    </div>
+                                 </div>
+                                 <div class="mb-6">
+                                    <h4 class="mb-1">Verander je wachtwoord</h4>
+                                 </div>
+                                 <!-- input -->
+                                 <div class="mb-6 inline-flex md:flex md:items-center gap-3 flex-col md:flex-row w-full">
+                                    <label for="password" class="flex-1 text-gray-800 font-semibold">Huidig wachtwoord</label>
+                                    <div class="flex-[3] w-full">
+                                       <input
+                                          type="password"
+                                          class="border border-gray-300 text-gray-900 rounded focus:ring-indigo-600 focus:border-indigo-600 block w-full p-2 px-3 disabled:opacity-50 disabled:pointer-events-none"
+                                          placeholder="Voer je huidig wachtwoord in"
+                                          id="password"
+                                          required="" />
+                                    </div>
+                                 </div>
+                                 <!-- input -->
+                                 <div class="mb-6 inline-flex md:flex md:items-center gap-3 flex-col md:flex-row w-full">
+                                    <label for="newPassword" class="flex-1 text-gray-800 font-semibold">Nieuw wachtwoord</label>
+                                    <div class="flex-[3] w-full">
+                                       <input
+                                          type="password"
+                                          class="border border-gray-300 text-gray-900 rounded focus:ring-indigo-600 focus:border-indigo-600 block w-full p-2 px-3 disabled:opacity-50 disabled:pointer-events-none"
+                                          placeholder="Voeg nieuw wachtwoord toe"
+                                          id="newPassword"
+                                          required="" />
+                                    </div>
+                                 </div>
+                                 <!-- input -->
+                                 <div class="mb-6 inline-flex md:flex md:items-center gap-3 flex-col md:flex-row w-full">
+                                    <label for="confirmedPassword" class="flex-1 text-gray-800 font-semibold">Bevestig nieuw wachtwoord</label>
+                                    <div class="flex-[3] w-full">
+                                       <input
+                                          type="password"
+                                          class="border border-gray-300 text-gray-900 rounded focus:ring-indigo-600 focus:border-indigo-600 block w-full p-2 px-3 disabled:opacity-50 disabled:pointer-events-none"
+                                          placeholder="Bevestig nieuw wahctwoord"
+                                          id="confirmedPassword"
+                                          required="" />
+                                    </div>
+                                 </div>
+                                 <div class="mb-6 inline-flex md:flex md:items-center gap-3 flex-col md:flex-row w-full">
+                                    <div class="flex-1 text-gray-800 font-semibold"></div>
+                                    <div class="flex-[3]">
+                                       <div>
+                                          <h5 class="mb-1">Password requirements:</h5>
+                                          <p>Ensure that these requirements are met:</p>
+                                          <!-- list -->
+                                          <ul class="list-disc list-inside my-4">
+                                             <li>Minimum 8 characters long the more, the better</li>
+                                             <li>At least one lowercase character</li>
+                                             <li>At least one uppercase character</li>
+                                             <li>At least one number, symbol, or whitespace character</li>
+                                          </ul>
+                                       </div>
+                                       <!-- button -->
+                                       <button
+                                          type="submit"
+                                          class="btn bg-indigo-600 text-white border-indigo-600 hover:bg-indigo-800 hover:border-indigo-800 active:bg-indigo-800 active:border-indigo-800 focus:outline-none focus:ring-4 focus:ring-indigo-300">
+                                          Sla op
+                                       </button>
+                                    </div>
+                                 </div>
+                                 <!-- row -->
+                              </form>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+                  
+                  </div>
+                  <div class="mb-8 grid grid-cols-1 gap-x-6 gap-y-6 sm:grid-cols-2 lg:grid-cols-4">
+                     <div class="col-span-1">
+                        <!-- content -->
+                        <h4 class="mb-1">Verwijder account</h4>
+                     </div>
+                     <!-- card -->
+                     <div class="card shadow col-span-3">
+                        <!-- card body -->
+                        <div class="card-body">
+                           <h4 class="mb-1">Danger zone</h4>
+                           <p class="mb-4">Delete any and all content you have, such as articles, comments, your reading list or chat messages. Allow your username to become available to anyone.</p>
+                           <button
+                              type="submit"
+                              class="btn bg-indigo-600 text-white border-indigo-600 hover:bg-indigo-800 hover:border-indigo-800 active:bg-indigo-800 active:border-indigo-800 focus:outline-none focus:ring-4 focus:ring-indigo-300">
+                              Delete Account
+                           </button>
+                           <p class="mb-0 mt-3">
+                              Feel free to contact with any
+                              <a href="#" class="text-indigo-600">hello.hirehero@outlook.com</a>
+                              questions.
+                           </p>
+                        </div>
+                        <div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </main>
+   </body>
+</html>
