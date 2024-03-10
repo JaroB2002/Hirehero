@@ -10,6 +10,10 @@
     .tag {
       cursor: pointer;
       margin: 0.5rem; /* voeg marge toe aan alle zijden van de tags */
+      transition: background-color 0.3s; /* voeg een overgang toe voor een soepele kleurverandering */
+    }
+    .tag:hover {
+      background-color: #9080FC; /* verander de achtergrondkleur bij hover naar #9080FC */
     }
     .tag.selected {
       background-color: #4F46E5;
@@ -92,7 +96,7 @@
 
         <div class="border-t border-gray-200 bg-white">
           <header class="flex items-center justify-between p-4">
-            <span class="text-sm text-gray-700"> Kies hier een stageperiode </span>
+            <span class="text-sm text-gray-700"> The highest price is $600 </span>
             <button type="button" class="text-sm text-gray-900 underline underline-offset-4">
               Reset
             </button>
