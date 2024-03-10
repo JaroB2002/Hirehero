@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Centered Content</title>
+  <!-- Include Tailwind CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <style>
+    .tag {
+      cursor: pointer;
+    }
+    .tag.selected {
+      background-color: #4F46E5;
+      color: white;
+    }
+  </style>
+</head>
+<body class="bg-gray-100">
+
+<div class="flex justify-center items-center min-h-screen">
+  <div class="space-y-2 max-w-lg w-full">
+    <div class="max-w-md mx-auto">
+
+      <details
+        class="overflow-hidden rounded border border-gray-300 [&_summary::-webkit-details-marker]:hidden"
+      >
+        <summary
+          class="flex cursor-pointer items-center justify-between gap-2 bg-white p-4 text-gray-900 transition"
+        >
+          <span class="text-sm font-medium"> Locatie </span>
+          <span class="transition group-open:-rotate-180">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke-width="1.5"
+              stroke="currentColor"
+              class="h-4 w-4"
+            >
+              <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+            </svg>
+          </span>
+        </summary>
+
+        <div class="border-t border-gray-200 bg-white">
+          <header class="flex items-center justify-between p-4">
+            <span class="text-sm text-gray-700"> 0 Geselecteerd </span>
+            <button type="button" class="text-sm text-gray-900 underline underline-offset-4">
+              Reset
+            </button>
+          </header>
+
+          <div class="space-x-2 p-4">
+            <span class="tag rounded-full px-2 py-1 bg-gray-200 hover:bg-gray-300">Antwerpen</span>
+            <span class="tag rounded-full px-2 py-1 bg-gray-200 hover:bg-gray-300">Brugge</span>
+            <span class="tag rounded-full px-2 py-1 bg-gray-200 hover:bg-gray-300">Brussel</span>
+            <span class="tag rounded-full px-2 py-1 bg-gray-200 hover:bg-gray-300">Gent</span>
+            <span class="tag rounded-full px-2 py-1 bg-gray-200 hover:bg-gray-300">Hasselt</span>
+            <span class="tag rounded-full px-2 py-1 bg-gray-200 hover:bg-gray-300">Herentals</span>
+            <span class="tag rounded-full px-2 py-1 bg-gray-200 hover:bg-gray-300">Hofstade</span>
+            <span class="tag rounded-full px-2 py-1 bg-gray-200 hover:bg-gray-300">Hoogstraten</span>
+            <span class="tag rounded-full px-2 py-1 bg-gray-200 hover:bg-gray-300">Leuven</span>
+            <span class="tag rounded-full px-2 py-1 bg-gray-200 hover:bg-gray-300">Mechelen</span>
+            <span class="tag rounded-full px-2 py-1 bg-gray-200 hover:bg-gray-300">Oostende</span>
+
+          </div>
+        </div>
+      </details>
+
+      <details
+        class="overflow-hidden rounded border border-gray-300 [&_summary::-webkit-details-marker]:hidden"
+      >
+        <summary
+          class="flex cursor-pointer items-center justify-between gap-2 bg-white p-4 text-gray-900 transition"
+        >
+          <span class="text-sm font-medium"> Semester </span>
+          <span class="transition group-open:-rotate-180">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke-width="1.5"
+              stroke="currentColor"
+              class="h-4 w-4"
+            >
+              <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+            </svg>
+          </span>
+        </summary>
+
+        <div class="border-t border-gray-200 bg-white">
+          <header class="flex items-center justify-between p-4">
+            <span class="text-sm text-gray-700"> The highest price is $600 </span>
+            <button type="button" class="text-sm text-gray-900 underline underline-offset-4">
+              Reset
+            </button>
+          </header>
+
+          <div class="space-x-2 p-4">
+            <span class="tag rounded-full px-2 py-1 bg-gray-200 hover:bg-gray-300">sep-dec</span>
+            <span class="tag rounded-full px-2 py-1 bg-gray-200 hover:bg-gray-300">feb-mei</span>
+            <span class="tag rounded-full px-2 py-1 bg-gray-200 hover:bg-gray-300">andere</span>
+          </div>
+        </div>
+      </details>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
