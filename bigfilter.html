@@ -9,6 +9,7 @@
   <style>
     .tag {
       cursor: pointer;
+      margin: 0.5rem; /* voeg marge toe aan alle zijden van de tags */
     }
     .tag.selected {
       background-color: #4F46E5;
@@ -51,7 +52,7 @@
             </button>
           </header>
 
-          <div class="space-x-2 p-4">
+          <div class="flex flex-wrap p-4"> <!-- vervang de class tag-container door flex en flex-wrap hier -->
             <span class="tag rounded-full px-2 py-1 bg-gray-200 hover:bg-gray-300">Antwerpen</span>
             <span class="tag rounded-full px-2 py-1 bg-gray-200 hover:bg-gray-300">Brugge</span>
             <span class="tag rounded-full px-2 py-1 bg-gray-200 hover:bg-gray-300">Brussel</span>
@@ -91,13 +92,13 @@
 
         <div class="border-t border-gray-200 bg-white">
           <header class="flex items-center justify-between p-4">
-            <span class="text-sm text-gray-700"> The highest price is $600 </span>
+            <span class="text-sm text-gray-700"> Kies hier een stageperiode </span>
             <button type="button" class="text-sm text-gray-900 underline underline-offset-4">
               Reset
             </button>
           </header>
 
-          <div class="space-x-2 p-4">
+          <div class="flex flex-wrap p-4"> <!-- vervang de class tag-container door flex en flex-wrap hier -->
             <span class="tag rounded-full px-2 py-1 bg-gray-200 hover:bg-gray-300">sep-dec</span>
             <span class="tag rounded-full px-2 py-1 bg-gray-200 hover:bg-gray-300">feb-mei</span>
             <span class="tag rounded-full px-2 py-1 bg-gray-200 hover:bg-gray-300">andere</span>
